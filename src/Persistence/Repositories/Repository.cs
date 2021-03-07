@@ -1,4 +1,4 @@
-﻿using CNode.Application.Data.Database;
+﻿using CNode.Application.Data.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CNode.Persistence.Repositories
 {
-    class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly DbContext _db;
 
