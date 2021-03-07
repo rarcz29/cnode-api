@@ -1,8 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8B88CF96-F689-4B50-9F83-858631C248B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{08B49FF1-9F6D-445A-86A4-CB2EBDA705F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "src\WebAPI\WebAPI.csproj", "{19393598-ECE3-42D5-ACBD-18FE3A1900DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,7 +18,27 @@ Global
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Debug|x64.Build.0 = Debug|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Debug|x86.Build.0 = Debug|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Release|x64.ActiveCfg = Release|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Release|x64.Build.0 = Release|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Release|x86.ActiveCfg = Release|Any CPU
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19393598-ECE3-42D5-ACBD-18FE3A1900DF} = {8B88CF96-F689-4B50-9F83-858631C248B3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88BA63A2-C282-446F-AD09-BFA25BAB2156}
 	EndGlobalSection
 EndGlobal
