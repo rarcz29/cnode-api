@@ -1,3 +1,4 @@
+using CNode.ExternalAPIs;
 using CNode.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +21,7 @@ namespace CNode.WebAPI
         {
             services
                 .AddWebAPI()
+                .AddExteranlAPIs()
                 .AddPersistence(Configuration);
         }
 
