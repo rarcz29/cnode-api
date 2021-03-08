@@ -8,6 +8,8 @@ namespace CNode.ExternalAPIs
         public static IServiceCollection AddExteranlAPIs(this IServiceCollection services)
         {
             services.AddSingleton<IAppHttpClient, AppHttpClient>();
+            // TODO: singleton?
+            services.AddScoped<IProcessorsProvider, ProcessorsProvider>();
             return services;
         }
     }
