@@ -5,8 +5,8 @@ namespace CNode.Application.Data.Database
 {
     public interface IUnitOfWork : IDisposable
     {
-        int Commit();
+        int SaveChanges();
 
-        Task<int> CommitAsync();
+        Task<int> SaveChangesAsync();
     }
 }

@@ -10,8 +10,8 @@ namespace CNode.ExternalAPIs
         {
             ApiClient ??= new HttpClient();
             ApiClient.DefaultRequestHeaders.Accept.Clear();
-            ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+            ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             ApiClient.DefaultRequestHeaders.UserAgent.TryParseAdd("cnode");
         }
 

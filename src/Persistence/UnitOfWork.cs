@@ -12,7 +12,7 @@ namespace CNode.Persistence
             _db = db;
         }
 
-        public int Commit()
+        public int SaveChanges()
         {
             try
             {
@@ -24,7 +24,7 @@ namespace CNode.Persistence
             }
         }
 
-        public async Task<int> CommitAsync()
+        public async Task<int> SaveChangesAsync()
         {
             try
             {
