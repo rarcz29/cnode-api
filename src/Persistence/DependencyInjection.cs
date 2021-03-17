@@ -24,7 +24,7 @@ namespace CNode.Persistence
                     .UseSnakeCaseNamingConvention();
             });
             // TODO: singleton?
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

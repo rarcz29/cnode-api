@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CNode.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace CNode.Persistence
@@ -6,6 +7,8 @@ namespace CNode.Persistence
     class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions options) : base(options) { }
+
+        public DbSet<GitAccount> GitAccounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

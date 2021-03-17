@@ -1,10 +1,13 @@
-﻿using System;
+﻿using CNode.Application.Common.Data.Database.Repositories;
+using System;
 using System.Threading.Tasks;
 
 namespace CNode.Application.Common.Data.Database
 {
     public interface IUnitOfWork : IDisposable
     {
+        public IGitAccountRepository GitAccounts { get; }
+
         int SaveChanges();
 
         Task<int> SaveChangesAsync();

@@ -1,4 +1,6 @@
 ﻿using CNode.Application.Common.Data.Database;
+using CNode.Application.Common.Data.Database.Repositories;
+using CNode.Persistence.Repositories;
 using System.Threading.Tasks;
 
 namespace CNode.Persistence
@@ -10,7 +12,10 @@ namespace CNode.Persistence
         public UnitOfWork(AppDbContext db)
         {
             _db = db;
+            GitAccounts ??= new GitAccountRepository(db);
         }
+
+        public IGitAccountRepository GitAccounts { get; private set; };
 
         public int SaveChanges()
         {
