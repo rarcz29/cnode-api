@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using CNode.Application.Identity;
+using CNode.WebAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -54,6 +56,7 @@ namespace CNode.WebAPI
                     ValidateAudience = false
                 };
             });
+            services.AddSingleton<IUserManager, UserManager>();
             return services;
         }
     }

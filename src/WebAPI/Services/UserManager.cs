@@ -5,15 +5,15 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace CNode.Identity
+namespace CNode.WebAPI.Services
 {
-    class UserManager : IUserManager
+    internal class UserManager : IUserManager
     {
         private readonly string _key;
 
         public UserManager()
         {
-            _key = "mykey";
+            _key = "mykeyyfasgt9a87sgdofbhasg78aosd8fhbioasdgf87asogf";
         }
 
         public string Authenticate(string email, string password)
