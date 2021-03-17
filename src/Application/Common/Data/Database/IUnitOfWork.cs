@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace CNode.Application.Data.Database
+namespace CNode.Application.Common.Data.Database
 {
     public interface IUnitOfWork : IDisposable
     {

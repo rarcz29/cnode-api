@@ -1,4 +1,4 @@
-﻿using CNode.Application.Data.ExternalAPIs;
+﻿using CNode.Application.Common.Data.ExternalAPIs;
 using System.Net.Http;
 using System.Net.Http.Headers;
 

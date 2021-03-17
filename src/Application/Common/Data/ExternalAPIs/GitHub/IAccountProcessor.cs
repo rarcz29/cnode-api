@@ -1,7 +1,7 @@
 ﻿using CNode.Domain.Models;
 using System.Threading.Tasks;
 
-namespace CNode.Application.Data.ExternalAPIs.GitHub
+namespace CNode.Application.Common.Data.ExternalAPIs.GitHub
 {
     public interface IAccountProcessor
     {

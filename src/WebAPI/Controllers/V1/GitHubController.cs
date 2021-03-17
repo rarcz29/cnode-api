@@ -1,14 +1,17 @@
-﻿using CNode.Application.Data.ExternalAPIs;
+﻿using CNode.Application.Common.Data.ExternalAPIs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace CNode.WebAPI.Controllers.V1
 {
+    // TODO: move to the application layer
     public class CodeRequestDto
     {
         public string Code { get; set; }
     }
 
+    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class GitHubController : ControllerBase
@@ -20,7 +23,7 @@ namespace CNode.WebAPI.Controllers.V1
             _processors = processors;
         }
 
-        [HttpPost("account")]
+        [HttpPost("auth/account")]
         public async Task<IActionResult> SaveTokenAsync([FromBody] CodeRequestDto request)
         {
             var token = await _processors.Account.GetTokenAsync(request.Code);

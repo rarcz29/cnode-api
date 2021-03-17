@@ -1,6 +1,6 @@
-﻿using CNode.Application.Data.ExternalAPIs.GitHub;
+﻿using CNode.Application.Common.Data.ExternalAPIs.GitHub;
 
-namespace CNode.Application.Data.ExternalAPIs
+namespace CNode.Application.Common.Data.ExternalAPIs
 {
     public interface IProcessorsProvider
     {

@@ -1,5 +1,5 @@
-﻿using CNode.Application.Data.ExternalAPIs;
-using CNode.Application.Data.ExternalAPIs.GitHub;
+﻿using CNode.Application.Common.Data.ExternalAPIs;
+using CNode.Application.Common.Data.ExternalAPIs.GitHub;
 using CNode.Domain.Exceptions;
 using CNode.Domain.Models;
 using CNode.ExternalAPIs.Common;

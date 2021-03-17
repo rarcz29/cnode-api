@@ -1,4 +1,4 @@
-﻿using CNode.Application.Data.ExternalAPIs;
+﻿using CNode.Application.Common.Data.ExternalAPIs;
 
 namespace CNode.ExternalAPIs.Common
 {

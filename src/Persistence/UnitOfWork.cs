@@ -1,4 +1,4 @@
-﻿using CNode.Application.Data.Database;
+﻿using CNode.Application.Common.Data.Database;
 using System.Threading.Tasks;
 
 namespace CNode.Persistence

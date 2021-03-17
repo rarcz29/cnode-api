@@ -1,4 +1,4 @@
-﻿using CNode.Application.Data.Database;
+﻿using CNode.Application.Common.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

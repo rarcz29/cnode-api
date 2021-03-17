@@ -1,4 +1,4 @@
-﻿using CNode.Application.Data.ExternalAPIs;
+﻿using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

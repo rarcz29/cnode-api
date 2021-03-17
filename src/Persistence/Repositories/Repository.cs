@@ -1,4 +1,4 @@
-﻿using CNode.Application.Data.Database.Repositories;
+﻿using CNode.Application.Common.Data.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
