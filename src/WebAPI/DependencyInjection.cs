@@ -15,6 +15,7 @@ namespace CNode.WebAPI
         {
             services.AddControllers();
             services.AddRouting(options => options.LowercaseUrls = true);
+            services.AddHttpContextAccessor();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CNode", Version = "v1" });
@@ -52,7 +53,7 @@ namespace CNode.WebAPI
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(
                         // TODO: key
-                        Encoding.ASCII.GetBytes("1234")),
+                        Encoding.ASCII.GetBytes("mykeyyfasgt9a87sgdofbhasg78aosd8fhbioasdgf87asogf")),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };

@@ -46,7 +46,7 @@ namespace CNode.WebAPI.Controllers.V1
             _unitOfWork.GitAccounts.Add(newAccount);
             var affected = await _unitOfWork.SaveChangesAsync();
             return affected == 1
-                // TODO: return value
+                // TODO: dto
                 ? Ok(new { UserId = newAccount.Id, Login = user.login })
                 : BadRequest();
         }
