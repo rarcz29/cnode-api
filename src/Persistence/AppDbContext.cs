@@ -4,11 +4,13 @@ using System.Reflection;
 
 namespace CNode.Persistence
 {
-    class AppDbContext : DbContext
+    internal class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<GitAccount> GitAccounts { get; set; }
+
+        public DbSet<GitTool> GitTools { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

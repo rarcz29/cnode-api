@@ -9,13 +9,25 @@ namespace CNode.Persistence.Configurations
         public void Configure(EntityTypeBuilder<GitAccount> builder)
         {
             builder
-                .Property(ga => ga.UserId)
+                .Property(a => a.UserId)
                 .IsRequired();
 
             builder
-                .Property(ga => ga.Token)
+                .Property(ga => ga.GitUserId)
+                .IsRequired();
+
+            builder
+                .Property(a => a.Token)
                 .HasMaxLength(100)
                 .IsRequired();
+
+            builder
+                .Property(a => a.GitToolId)
+                .IsRequired();
+
+            builder
+                .HasIndex(a => new { a.GitUserId, a.GitToolId })
+                .IsUnique();
         }
     }
 }
