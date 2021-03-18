@@ -8,6 +8,12 @@ namespace CNode.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<GitAccount> builder)
         {
+            // TODO: remove
+            //builder
+            //    .HasOne(a => a.GitTool)
+            //    .WithMany(t => t.GitUsers)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
             builder
                 .Property(a => a.UserId)
                 .IsRequired();

@@ -13,7 +13,7 @@ namespace CNode.Persistence
             services.AddDbContext<AppDbContext>(options =>
             {
                 options
-                    .UseNpgsql(configuration.GetConnectionString("Default"))
+                    .UseNpgsql(configuration.GetConnectionString("LocalDb"))
                     .UseLoggerFactory(
                         LoggerFactory
                             .Create(builder => builder.AddConsole()
@@ -24,7 +24,7 @@ namespace CNode.Persistence
                     .UseSnakeCaseNamingConvention();
             });
             // TODO: singleton?
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
