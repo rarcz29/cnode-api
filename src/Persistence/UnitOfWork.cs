@@ -15,7 +15,7 @@ namespace CNode.Persistence
             GitAccounts ??= new GitAccountRepository(db);
         }
 
-        public IGitAccountRepository GitAccounts { get; private set; };
+        public IGitAccountRepository GitAccounts { get; private set; }
 
         public int SaveChanges()
         {
