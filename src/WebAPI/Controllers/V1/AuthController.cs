@@ -19,6 +19,7 @@ namespace CNode.WebAPI.Controllers.V1
         {
             var token = _userManager.Authenticate(email, password);
             return token != null
+                // TODO: create dto's
                 ? Ok(new { Token = token, Type = "bearer" })
                 : Unauthorized(new { Message = "Wrong email or password"});
         }

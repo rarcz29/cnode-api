@@ -1,4 +1,5 @@
-﻿using CNode.Application.Identity;
+﻿using CNode.Application.Common.Identity;
+using CNode.Application.Identity;
 using CNode.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,6 +58,7 @@ namespace CNode.WebAPI
                 };
             });
             services.AddSingleton<IUserManager, UserManager>();
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
             return services;
         }
     }

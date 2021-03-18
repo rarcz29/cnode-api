@@ -23,7 +23,6 @@ namespace CNode.Persistence
                     .EnableSensitiveDataLogging()
                     .UseSnakeCaseNamingConvention();
             });
-            // TODO: singleton?
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }

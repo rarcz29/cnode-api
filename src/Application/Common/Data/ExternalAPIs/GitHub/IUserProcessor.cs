@@ -5,6 +5,6 @@ namespace CNode.Application.Common.Data.ExternalAPIs.GitHub
 {
     public interface IUserProcessor
     {
-        Task<GitUser> GetUserAsync(string username);
+        Task<GitUser> GetUserAsync(string token);
     }
 }

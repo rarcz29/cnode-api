@@ -3,6 +3,8 @@ using CNode.Application.Common.Data.ExternalAPIs.GitHub;
 using CNode.Domain.Exceptions;
 using CNode.Domain.Models;
 using CNode.ExternalAPIs.Common;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace CNode.ExternalAPIs.GitHub
@@ -11,9 +13,11 @@ namespace CNode.ExternalAPIs.GitHub
     {
         public UserProcessor(IAppHttpClient client) : base(client) { }
 
-        public async Task<GitUser> GetUserAsync(string username)
+        public async Task<GitUser> GetUserAsync(string token)
         {
-            using var response = await _client.ApiClient.GetAsync($"https://api.github.com/users/{username}");
+            using var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/users");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {

@@ -8,6 +8,8 @@ namespace CNode.Application.Common.Data.Database
     {
         public IGitAccountRepository GitAccounts { get; }
 
+        public IGitToolRepository GitTools { get; }
+
         int SaveChanges();
 
         Task<int> SaveChangesAsync();

@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="V1\" />
-  </ItemGroup>
-
 </Project>

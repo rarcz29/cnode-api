@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace CNode.ExternalAPIs.GitHub
 {
-    class AccountProcessor : ProcessorBase, IAccountProcessor
+    internal class AccountProcessor : ProcessorBase, IAccountProcessor
     {
         public AccountProcessor(IAppHttpClient client) : base(client) { }
 
         public async Task<AuthToken> GetTokenAsync(string code)
         {
+            // TODO: Create model and pass it as a parameter
             var json = JsonConvert.SerializeObject(new { code = code, client_secret = "", client_id = "" });
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 

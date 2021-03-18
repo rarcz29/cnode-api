@@ -1,6 +1,8 @@
-﻿namespace CNode.ExternalAPIs.GitHub
+﻿using CNode.Application.Common.Data.ExternalAPIs.GitHub;
+
+namespace CNode.ExternalAPIs.GitHub
 {
-    class RepoProcessor
+    internal class RepoProcessor : IRepoProcessor
     {
     }
 }

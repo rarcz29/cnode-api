@@ -1,6 +1,6 @@
 ﻿namespace CNode.Application.Common.Data.ExternalAPIs.GitHub
 {
-    interface IRepoProcessor
+    public interface IRepoProcessor
     {
     }
 }

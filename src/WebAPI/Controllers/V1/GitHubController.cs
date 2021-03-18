@@ -1,33 +1,54 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
+﻿using CNode.Application.Common.Data.Database;
+using CNode.Application.Common.Data.ExternalAPIs;
+using CNode.Application.Common.Identity;
+using CNode.Application.V1.GitHub;
+using CNode.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace CNode.WebAPI.Controllers.V1
 {
-    // TODO: move to the application layer
-    public class CodeRequestDto
-    {
-        public string Code { get; set; }
-    }
-
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class GitHubController : ControllerBase
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IProcessorsProvider _processors;
+        private readonly ICurrentUserService _currentUser;
 
-        public GitHubController(IProcessorsProvider processors)
+        public GitHubController(IUnitOfWork unitOfWork,
+                                IProcessorsProvider processors,
+                                ICurrentUserService currentUser)
         {
+            _unitOfWork = unitOfWork;
             _processors = processors;
+            _currentUser = currentUser;
         }
 
         [HttpPost("auth/account")]
-        public async Task<IActionResult> SaveTokenAsync([FromBody] CodeRequestDto request)
+        public async Task<IActionResult> SaveTokenAsync([FromBody] AuthRequestDto request)
         {
+            var userId = int.Parse(_currentUser.UserId);
             var token = await _processors.Account.GetTokenAsync(request.Code);
-            return Ok(token);
+            var github = await _unitOfWork.GitTools.GetByNameAsync("GitHub");
+            var user = await _processors.Users.GetUserAsync(token.access_token);
+
+            var newAccount = new GitAccount
+            {
+                GitUserId = user.id,
+                UserId = userId,
+                Token = token.access_token,
+                GitToolId = github.Id
+            };
+
+            _unitOfWork.GitAccounts.Add(newAccount);
+            var affected = await _unitOfWork.SaveChangesAsync();
+            return affected == 1
+                // TODO: return value
+                ? Ok(new { UserId = newAccount.Id, Login = user.login })
+                : BadRequest();
         }
     }
 }
