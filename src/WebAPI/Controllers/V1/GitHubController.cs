@@ -56,7 +56,8 @@ namespace CNode.WebAPI.Controllers.V1
         {
             var userId = int.Parse(_currentUser.UserId);
             var token = await GetUserTokenAsync(userId, request.Username);
-            return BadRequest();
+            await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, token);
+            return Ok();
         }
 
         private async Task<string> GetUserTokenAsync(int userId, string username)

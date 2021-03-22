@@ -9,8 +9,11 @@ namespace CNode.ExternalAPIs
         public ProcessorsProvider(IAppHttpClient client)
         {
             Users ??= new UserProcessor(client);
+            Repositories ??= new RepoProcessor(client);
         }
 
         public IUserProcessor Users { get; private set; }
+
+        public IRepoProcessor Repositories { get; private set; }
     }
 }

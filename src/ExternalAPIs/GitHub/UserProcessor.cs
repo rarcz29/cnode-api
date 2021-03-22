@@ -18,7 +18,7 @@ namespace CNode.ExternalAPIs.GitHub
         public async Task<GitUser> GetUserAsync(string token)
         {
             using var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/user");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("token", token);
             var response = await _client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
@@ -41,7 +41,7 @@ namespace CNode.ExternalAPIs.GitHub
             }
             else
             {
-                throw new ExternalApiException(response.ReasonPhrase);
+                throw new ExternalApiException(response.StatusCode.ToString());
             }
         }
 
@@ -49,8 +49,7 @@ namespace CNode.ExternalAPIs.GitHub
         {
             // TODO: Create model and pass it as a parameter
             var json = JsonConvert.SerializeObject(new { code = code, client_secret = "5f0c6b9abef2d9e019b78b755e8b7f2e59f71914", client_id = "b0c52d45a05e47cf8e5f" });
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-
+            using var data = new StringContent(json, Encoding.UTF8, "application/json");
             using var response = await _client.ApiClient.PostAsync("https://github.com/login/oauth/access_token", data);
 
             if (response.IsSuccessStatusCode)
