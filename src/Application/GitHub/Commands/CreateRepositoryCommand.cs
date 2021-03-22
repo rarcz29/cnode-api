@@ -1,6 +1,8 @@
-﻿namespace CNode.Application.V1.GitHub
+﻿using MediatR;
+
+namespace CNode.Application.GitHub.Commands
 {
-    public class CreateRepositoryDto
+    public class CreateRepositoryCommand : IRequest
     {
         public string Username { get; set; }
         public string RepoName { get; set; }

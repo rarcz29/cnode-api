@@ -1,5 +1,4 @@
 ﻿using CNode.Application.Auth.Queries.GetToken;
-using CNode.Application.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

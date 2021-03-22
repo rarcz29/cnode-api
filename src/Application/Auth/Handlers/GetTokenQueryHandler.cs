@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CNode.Application.Auth.Handlers
 {
-    public class GetTokenHandler : IRequestHandler<GetTokenQuery, AuthTokenDto>
+    public class GetTokenQueryHandler : IRequestHandler<GetTokenQuery, AuthTokenDto>
     {
         private readonly IUserManager _userManager;
 
-        public GetTokenHandler(IUserManager userManager)
+        public GetTokenQueryHandler(IUserManager userManager)
         {
             _userManager = userManager;
         }

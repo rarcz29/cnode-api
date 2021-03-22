@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace CNode.WebAPI.Services
+namespace CNode.Infrastructure
 {
     internal class UserManager : IUserManager
     {
@@ -13,6 +13,7 @@ namespace CNode.WebAPI.Services
 
         public UserManager()
         {
+            // TODO: move key to the configuration file
             _key = "mykeyyfasgt9a87sgdofbhasg78aosd8fhbioasdgf87asogf";
         }
 

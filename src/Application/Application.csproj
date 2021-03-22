@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GitHub\Commands\" />
-    <Folder Include="GitHub\Handlers\" />
+    <Folder Include="GitHub\Handlers\QueryHandlers\" />
     <Folder Include="GitHub\Queries\" />
   </ItemGroup>
 

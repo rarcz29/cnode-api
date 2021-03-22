@@ -58,7 +58,6 @@ namespace CNode.WebAPI
                     ValidateAudience = false
                 };
             });
-            services.AddSingleton<IUserManager, UserManager>();
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             return services;
         }
