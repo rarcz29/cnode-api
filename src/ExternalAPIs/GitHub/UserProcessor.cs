@@ -3,8 +3,10 @@ using CNode.Application.Common.Data.ExternalAPIs.GitHub;
 using CNode.Domain.Exceptions;
 using CNode.Domain.Models;
 using CNode.ExternalAPIs.Common;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CNode.ExternalAPIs.GitHub
@@ -22,6 +24,38 @@ namespace CNode.ExternalAPIs.GitHub
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadAsAsync<GitUser>();
+            }
+            else
+            {
+                throw new ExternalApiException(response.ReasonPhrase);
+            }
+        }
+
+        public async Task<GitUser> GetUserByUsernameAsync(string username)
+        {
+            using var response = await _client.ApiClient.GetAsync($"https://api.github.com/users/{username}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<GitUser>();
+            }
+            else
+            {
+                throw new ExternalApiException(response.ReasonPhrase);
+            }
+        }
+
+        public async Task<AuthToken> GetTokenAsync(string code)
+        {
+            // TODO: Create model and pass it as a parameter
+            var json = JsonConvert.SerializeObject(new { code = code, client_secret = "5f0c6b9abef2d9e019b78b755e8b7f2e59f71914", client_id = "b0c52d45a05e47cf8e5f" });
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using var response = await _client.ApiClient.PostAsync("https://github.com/login/oauth/access_token", data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<AuthToken>();
             }
             else
             {

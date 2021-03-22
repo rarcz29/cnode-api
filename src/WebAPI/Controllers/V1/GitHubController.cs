@@ -31,7 +31,7 @@ namespace CNode.WebAPI.Controllers.V1
         public async Task<IActionResult> SaveTokenAsync([FromBody] AuthRequestDto request)
         {
             var userId = int.Parse(_currentUser.UserId);
-            var token = await _processors.Account.GetTokenAsync(request.Code);
+            var token = await _processors.Users.GetTokenAsync(request.Code);
             var github = await _unitOfWork.GitTools.GetByNameAsync("GitHub");
             var user = await _processors.Users.GetUserAsync(token.access_token);
 
@@ -49,6 +49,22 @@ namespace CNode.WebAPI.Controllers.V1
                 // TODO: dto
                 ? Ok(new { UserId = newAccount.Id, Login = user.login })
                 : BadRequest();
+        }
+
+        [HttpPost("repository")]
+        public async Task<IActionResult> CreateRepository([FromBody] CreateRepositoryDto request)
+        {
+            var userId = int.Parse(_currentUser.UserId);
+            var token = await GetUserTokenAsync(userId, request.Username);
+            return BadRequest();
+        }
+
+        private async Task<string> GetUserTokenAsync(int userId, string username)
+        {
+            var github = await _unitOfWork.GitTools.GetByNameAsync("GitHub");
+            var user = await _processors.Users.GetUserByUsernameAsync(username);
+            var token = await _unitOfWork.GitAccounts.GetTokenAsync(userId, github.Id, user.id);
+            return token;
         }
     }
 }

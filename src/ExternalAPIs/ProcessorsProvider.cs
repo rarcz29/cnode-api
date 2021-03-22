@@ -8,11 +8,8 @@ namespace CNode.ExternalAPIs
     {
         public ProcessorsProvider(IAppHttpClient client)
         {
-            Account ??= new AccountProcessor(client);
             Users ??= new UserProcessor(client);
         }
-
-        public IAccountProcessor Account { get; private set; }
 
         public IUserProcessor Users { get; private set; }
     }
