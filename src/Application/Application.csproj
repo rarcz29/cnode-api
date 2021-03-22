@@ -13,4 +13,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GitHub\Commands\" />
+    <Folder Include="GitHub\Handlers\" />
+    <Folder Include="GitHub\Queries\" />
+  </ItemGroup>
+
 </Project>
