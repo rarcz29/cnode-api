@@ -18,7 +18,7 @@ namespace CNode.ExternalAPIs.GitHub
         public async Task<GitUser> GetUserAsync(string token)
         {
             using var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/user");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("token", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)

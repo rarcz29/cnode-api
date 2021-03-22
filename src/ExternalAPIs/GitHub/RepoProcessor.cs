@@ -21,7 +21,7 @@ namespace CNode.ExternalAPIs.GitHub
             using var data = new StringContent(json, Encoding.UTF8, "application/json");
 
             using var requestMessage = new HttpRequestMessage(HttpMethod.Post, "https://api.github.com/user/repos");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("token", token);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = data;
 
             var response = await _client.ApiClient.SendAsync(requestMessage);

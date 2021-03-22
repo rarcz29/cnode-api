@@ -1,3 +1,4 @@
+using CNode.Application;
 using CNode.ExternalAPIs;
 using CNode.Persistence;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,7 @@ namespace CNode.WebAPI
             services
                 .AddWebAPI()
                 .AddExteranlAPIs()
+                .AddApplication()
                 .AddPersistence(Configuration);
         }
 
