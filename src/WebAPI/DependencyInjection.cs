@@ -1,5 +1,4 @@
 ﻿using CNode.Application.Common.Identity;
-using CNode.Application.Identity;
 using CNode.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;

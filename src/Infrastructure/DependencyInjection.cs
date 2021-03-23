@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CNode.Infrastructure
 {
-    internal static class DependencyInjection
+    public static class DependencyInjection
     {
-        public static IServiceCollection AddWebAPI(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddSingleton<IUserManager, UserManager>();
             return services;
