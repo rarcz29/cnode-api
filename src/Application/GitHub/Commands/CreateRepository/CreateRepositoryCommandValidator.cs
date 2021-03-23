@@ -2,7 +2,7 @@
 
 namespace CNode.Application.GitHub.Commands.CreateRepository
 {
-    class CreateRepositoryCommandValidator : AbstractValidator<CreateRepositoryCommand>
+    public class CreateRepositoryCommandValidator : AbstractValidator<CreateRepositoryCommand>
     {
         public CreateRepositoryCommandValidator()
         {
