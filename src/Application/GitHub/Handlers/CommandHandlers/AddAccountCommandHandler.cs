@@ -1,7 +1,7 @@
 ﻿using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Identity;
-using CNode.Application.GitHub.Commands;
+using CNode.Application.GitHub.Commands.AddAccount;
 using CNode.Domain.Entities;
 using MediatR;
 using System.Threading;

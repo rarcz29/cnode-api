@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CNode.Application.GitHub.Commands
+namespace CNode.Application.GitHub.Commands.CreateRepository
 {
     public class CreateRepositoryCommand : IRequest
     {
