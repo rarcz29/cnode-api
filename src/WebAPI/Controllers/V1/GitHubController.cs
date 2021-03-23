@@ -20,10 +20,10 @@ namespace CNode.WebAPI.Controllers.V1
         }
 
         [HttpPost("auth/account")]
-        public async Task<IActionResult> SaveTokenAsync([FromBody] AddAccountCommand command)
+        public async Task<IActionResult> AddAccountAsync([FromBody] AddAccountCommand command)
         {
             await _mediator.Send(command);
-            return Ok(); // TODO: return success info
+            return Ok();
         }
 
         [HttpPost("repository")]

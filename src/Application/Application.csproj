@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Behaviors\" />
     <Folder Include="GitHub\Handlers\QueryHandlers\" />
     <Folder Include="GitHub\Queries\" />
   </ItemGroup>
