@@ -12,9 +12,23 @@ namespace CNode.Persistence
         public UnitOfWork(AppDbContext db)
         {
             _db = db;
+            Accounts ??= new AccountRepository(db);
+            Platforms ??= new PlatformRepository(db);
+            Repositories ??= new RepositoryRepository(db);
+            Technologies ??= new TechnologyRepository(db);
+            TechnologyTypes ??= new TechnologyTypeRepository(db);
+            Users ??= new UserRepository(db);
+
             GitAccounts ??= new GitAccountRepository(db);
             GitTools ??= new GitToolRepository(db);
         }
+
+        public IAccountRepository Accounts { get; private set; }
+        public IPlatformRepository Platforms { get; private set; }
+        public IRepositoryRepository Repositories { get; private set; }
+        public ITechnologyRepository Technologies { get; private set; }
+        public ITechnologyTypeRepository TechnologyTypes { get; private set; }
+        public IUserRepository Users { get; private set; }
 
         public IGitAccountRepository GitAccounts { get; private set; }
 
