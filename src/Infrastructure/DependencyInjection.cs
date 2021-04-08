@@ -7,7 +7,7 @@ namespace CNode.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddSingleton<IUserManager, UserManager>();
+            services.AddTransient<IUserManager, UserManager>();
             return services;
         }
     }
