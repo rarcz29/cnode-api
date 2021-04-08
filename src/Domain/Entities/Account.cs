@@ -15,6 +15,6 @@ namespace CNode.Domain.Entities
         public int PlatformId { get; set; }
         public Platform Platform { get; set; }
 
-        public ICollection<Account> MyProperty { get; set; }
+        public ICollection<Repository> Repositories { get; set; }
     }
 }
