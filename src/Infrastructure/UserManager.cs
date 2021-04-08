@@ -23,11 +23,9 @@ namespace CNode.Infrastructure
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<string> AuthenticateAsync(string username, string email, string password)
+        public async Task<string> AuthenticateAsync(string usernameOrEmail, string password)
         {
-            // TODO:
-            //var user = new { Id = 1, Username = "myusername", Email = "test@email.com", Password = "password1234" };
-            var users = await _unitOfWork.Users.FindAsync(u => u.Username == username || u.Email == email);
+            var users = await _unitOfWork.Users.FindAsync(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
 
             if (users != null && users.Count() == 1)
             {
