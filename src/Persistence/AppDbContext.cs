@@ -8,8 +8,14 @@ namespace CNode.Persistence
     {
         public AppDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<GitAccount> GitAccounts { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Platform> Platforms { get; set; }
+        public DbSet<Repository> Repositories { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
+        public DbSet<TechnologyType> TechnologyTypes { get; set; }
+        public DbSet<User> Users { get; set; }
 
+        public DbSet<GitAccount> GitAccounts { get; set; }
         public DbSet<GitTool> GitTools { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
