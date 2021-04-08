@@ -1,0 +1,30 @@
+﻿using CNode.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CNode.Persistence.Configurations
+{
+    internal class AccountConfiguration : IEntityTypeConfiguration<Account>
+    {
+        public void Configure(EntityTypeBuilder<Account> builder)
+        {
+            builder
+                .Property(a => a.Username)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            builder
+                .Property(a => a.Token)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder
+                .Property(a => a.UserId)
+                .IsRequired();
+
+            builder
+                .Property(a => a.PlatformId)
+                .IsRequired();
+        }
+    }
+}
