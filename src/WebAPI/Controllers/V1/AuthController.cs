@@ -1,4 +1,5 @@
 ﻿using CNode.Application.Auth.Commands.Login;
+using CNode.Application.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,9 +28,10 @@ namespace CNode.WebAPI.Controllers.V1
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync()
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterCommand command)
         {
-            throw new NotImplementedException();
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [HttpDelete("logout")]

@@ -17,7 +17,7 @@ namespace CNode.Application.Auth.Handlers.CommandHandlers
 
         public async Task<AuthTokenDto> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var token = await _userManager.Authenticate(request.Username, request.Email, request.Password);
+            var token = await _userManager.AuthenticateAsync(request.Username, request.Email, request.Password);
             // TODO: use automapper
             return new AuthTokenDto { Token = token, Type = "bearer" };
         }

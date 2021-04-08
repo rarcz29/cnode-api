@@ -23,7 +23,7 @@ namespace CNode.Infrastructure
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<string> Authenticate(string username, string email, string password)
+        public async Task<string> AuthenticateAsync(string username, string email, string password)
         {
             // TODO:
             //var user = new { Id = 1, Username = "myusername", Email = "test@email.com", Password = "password1234" };
@@ -60,14 +60,15 @@ namespace CNode.Infrastructure
             return null;
         }
 
-        public async Task Register(string username, string email, string password, bool twoFactorEnabled = false)
+        public async Task RegisterAsync(string username, string email, string password, bool twoFactorEnabled = false)
         {
             var user = new User
             {
                 Username = username,
                 Email = email,
                 Password = password,
-                TwoFactorEnabled = twoFactorEnabled
+                TwoFactorEnabled = twoFactorEnabled,
+                CreatedAt = DateTime.UtcNow
             };
 
             _unitOfWork.Users.Add(user);
@@ -75,7 +76,7 @@ namespace CNode.Infrastructure
             // TODO: return value or exception when failured
         }
 
-        public async Task Remove(int userId)
+        public async Task RemoveAsync(int userId)
         {
             _unitOfWork.Users.Remove(userId);
             await _unitOfWork.SaveChangesAsync();
