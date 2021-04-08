@@ -18,15 +18,6 @@ namespace CNode.WebAPI.Controllers.V1
             _mediator = mediator;
         }
 
-        [HttpGet("token")]
-        public async Task<IActionResult> GetTokenAsync([FromQuery] GetTokenQuery query)
-        {
-            var result = await _mediator.Send(query);
-            return result?.Token != null
-                ? Ok(result)
-                : BadRequest();
-        }
-
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginCommand command)
         {

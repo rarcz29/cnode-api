@@ -10,7 +10,6 @@ namespace CNode.Persistence.Configurations
         {
             builder
                 .Property(a => a.OriginId)
-                .HasMaxLength(100)
                 .IsRequired();
 
             builder

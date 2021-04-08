@@ -15,9 +15,6 @@ namespace CNode.Persistence
         public DbSet<TechnologyType> TechnologyTypes { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public DbSet<GitAccount> GitAccounts { get; set; }
-        public DbSet<GitTool> GitTools { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetCallingAssembly());

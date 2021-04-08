@@ -18,9 +18,6 @@ namespace CNode.Persistence
             Technologies ??= new TechnologyRepository(db);
             TechnologyTypes ??= new TechnologyTypeRepository(db);
             Users ??= new UserRepository(db);
-
-            GitAccounts ??= new GitAccountRepository(db);
-            GitTools ??= new GitToolRepository(db);
         }
 
         public IAccountRepository Accounts { get; private set; }
@@ -29,10 +26,6 @@ namespace CNode.Persistence
         public ITechnologyRepository Technologies { get; private set; }
         public ITechnologyTypeRepository TechnologyTypes { get; private set; }
         public IUserRepository Users { get; private set; }
-
-        public IGitAccountRepository GitAccounts { get; private set; }
-
-        public IGitToolRepository GitTools { get; private set; }
 
         public int SaveChanges()
         {

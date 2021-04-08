@@ -29,18 +29,19 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
         {
             var userId = int.Parse(_currentUser.UserId);
             var token = await _processors.Users.GetTokenAsync(request.Code);
-            var github = await _unitOfWork.GitTools.GetByNameAsync("GitHub");
+            var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
             var user = await _processors.Users.GetUserAsync(token.access_token);
 
-            var newAccount = new GitAccount
+            var newAccount = new Account
             {
-                GitUserId = user.id,
+                OriginId = user.id,
                 UserId = userId,
-                Token = token.access_token,
-                GitToolId = github.Id
+                PlatformId = github.Id,
+                Username = user.login,
+                Token = token.access_token
             };
 
-            _unitOfWork.GitAccounts.Add(newAccount);
+            _unitOfWork.Accounts.Add(newAccount);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

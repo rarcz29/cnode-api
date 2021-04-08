@@ -26,9 +26,8 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
         public async Task<Unit> Handle(CreateRepositoryCommand request, CancellationToken cancellationToken)
         {
             var userId = int.Parse(_currentUser.UserId);
-            var github = await _unitOfWork.GitTools.GetByNameAsync("GitHub");
-            var user = await _processors.Users.GetUserByUsernameAsync(request.Username);
-            var token = await _unitOfWork.GitAccounts.GetTokenAsync(userId, github.Id, user.id);
+            var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
+            var token = await _unitOfWork.Accounts.GetTokenAsync(userId, github.Id, request.Username);
             await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, token);
             return Unit.Value;
         }

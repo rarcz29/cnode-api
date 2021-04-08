@@ -13,10 +13,6 @@ namespace CNode.Application.Common.Data.Database
         ITechnologyTypeRepository TechnologyTypes { get; }
         IUserRepository Users { get; }
 
-        public IGitAccountRepository GitAccounts { get; }
-
-        public IGitToolRepository GitTools { get; }
-
         int SaveChanges();
 
         Task<int> SaveChangesAsync();
