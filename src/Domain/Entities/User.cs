@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CNode.Domain.Entities
 {
@@ -10,5 +11,7 @@ namespace CNode.Domain.Entities
         public string Password { get; set; }
         public bool TwoFactorEnabled { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        public ICollection<Account> Accounts { get; set; }
     }
 }

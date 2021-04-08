@@ -1,4 +1,6 @@
-﻿namespace CNode.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace CNode.Domain.Entities
 {
     public class Account
     {
@@ -11,5 +13,7 @@
 
         public int PlatformId { get; set; }
         public Platform Platform { get; set; }
+
+        public ICollection<Account> MyProperty { get; set; }
     }
 }

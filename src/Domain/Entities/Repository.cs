@@ -1,4 +1,6 @@
-﻿namespace CNode.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace CNode.Domain.Entities
 {
     public class Repository
     {
@@ -13,5 +15,7 @@
 
         public int AccountId { get; set; }
         public Account Account { get; set; }
+
+        public ICollection<Technology> Technologies { get; set; }
     }
 }
