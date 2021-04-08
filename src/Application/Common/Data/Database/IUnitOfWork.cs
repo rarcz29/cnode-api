@@ -6,6 +6,13 @@ namespace CNode.Application.Common.Data.Database
 {
     public interface IUnitOfWork : IDisposable
     {
+        IAccountRepository Accounts { get; }
+        IPlatformRepository Platforms { get; }
+        IRepositoryRepository Repositories { get; }
+        ITechnologyRepository Technologies { get; }
+        ITechnologyTypeRepository TechnologyTypes { get; }
+        IUserRepository Users { get; }
+
         public IGitAccountRepository GitAccounts { get; }
 
         public IGitToolRepository GitTools { get; }
