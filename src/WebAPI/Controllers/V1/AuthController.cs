@@ -17,7 +17,7 @@ namespace CNode.WebAPI.Controllers.V1
         }
 
         [HttpGet("token")]
-        public async Task<IActionResult> GetToken([FromQuery] GetTokenQuery query)
+        public async Task<IActionResult> GetTokenAsync([FromQuery] GetTokenQuery query)
         {
             var result = await _mediator.Send(query);
             return result?.Token != null
