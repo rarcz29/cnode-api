@@ -4,21 +4,26 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CNode.Persistence.Configurations
 {
-    internal class TechnologyConfiguration : IEntityTypeConfiguration<Technology>
+    internal class TechnologyTypeConfigurationv : IEntityTypeConfiguration<TechnologyType>
     {
-        public void Configure(EntityTypeBuilder<Technology> builder)
+        public void Configure(EntityTypeBuilder<TechnologyType> builder)
         {
             builder
                 .Property(t => t.Name)
-                .HasMaxLength(50)
+                .HasMaxLength(30)
                 .IsRequired();
 
             builder
-                .Property(t => t.TechnologyTypeId)
+                .Property(t => t.Name)
+                .HasMaxLength(40)
                 .IsRequired();
 
             builder
                 .HasIndex(t => t.Name)
+                .IsUnique();
+
+            builder
+                .HasIndex(t => t.NamePlural)
                 .IsUnique();
         }
     }

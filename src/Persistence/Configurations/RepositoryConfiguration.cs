@@ -43,6 +43,10 @@ namespace CNode.Persistence.Configurations
             builder
                 .Property(r => r.AccountId)
                 .IsRequired();
+
+            builder
+                .HasIndex(r => new { r.Name, r.AccountId })
+                .IsUnique();
         }
     }
 }

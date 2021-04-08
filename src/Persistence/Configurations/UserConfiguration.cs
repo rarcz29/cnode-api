@@ -30,6 +30,14 @@ namespace CNode.Persistence.Configurations
             builder
                 .Property(u => u.CreatedAt)
                 .IsRequired();
+
+            builder
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
+            builder
+                .HasIndex(u => u.Email)
+                .IsUnique();
         }
     }
 }

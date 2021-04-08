@@ -12,6 +12,10 @@ namespace CNode.Persistence.Configurations
                 .Property(p => p.Name)
                 .HasMaxLength(20)
                 .IsRequired();
+
+            builder
+                .HasIndex(p => p.Name)
+                .IsUnique();
         }
     }
 }

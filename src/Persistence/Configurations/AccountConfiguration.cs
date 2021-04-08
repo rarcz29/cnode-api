@@ -9,6 +9,11 @@ namespace CNode.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Account> builder)
         {
             builder
+                .Property(a => a.OriginId)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            builder
                 .Property(a => a.Username)
                 .HasMaxLength(100)
                 .IsRequired();
@@ -25,6 +30,18 @@ namespace CNode.Persistence.Configurations
             builder
                 .Property(a => a.PlatformId)
                 .IsRequired();
+
+            builder
+                .HasIndex(a => new { a.OriginId, a.PlatformId })
+                .IsUnique();
+
+            builder
+                .HasIndex(a => new { a.Username, a.PlatformId })
+                .IsUnique();
+
+            builder
+                .HasIndex(a => new { a.Token, a.PlatformId })
+                .IsUnique();
         }
     }
 }
