@@ -57,6 +57,16 @@ namespace CNode.WebAPI
                     ValidateAudience = false
                 };
             });
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             return services;
         }
