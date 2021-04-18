@@ -2,6 +2,7 @@ using CNode.Application;
 using CNode.ExternalAPIs;
 using CNode.Infrastructure;
 using CNode.Persistence;
+using CNode.WebAPI.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,11 +22,12 @@ namespace CNode.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.InstallServicesInAssembly(Configuration);
+
             services
                 .AddExteranlAPIs()
                 .AddApplication()
                 .AddInfrastructure()
-                .AddWebAPI(Configuration)
                 .AddPersistence(Configuration);
         }
 

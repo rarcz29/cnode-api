@@ -5,44 +5,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
 
-namespace CNode.WebAPI
+namespace CNode.WebAPI.Installers
 {
-    internal static class DependencyInjection
+    public class AuthInstaller : IInstaller
     {
-        public static IServiceCollection AddWebAPI(this IServiceCollection services, IConfiguration configuration)
+        public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
-            services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddHttpContextAccessor();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CNode", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Please insert JWT with Bearer into field",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
-                });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        System.Array.Empty<string>()
-                    }
-                });
-            });
-
             var jwtOptions = new JwtOptions();
             configuration.GetSection(nameof(JwtOptions)).Bind(jwtOptions);
 
@@ -59,7 +29,7 @@ namespace CNode.WebAPI
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(
                         // TODO: key
-                        Encoding.ASCII.GetBytes("mykeyyfasgt9a87sgdofbhasg78aosd8fhbioasdgf87asogf")),
+                        Encoding.ASCII.GetBytes(jwtOptions.Secret)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -76,7 +46,6 @@ namespace CNode.WebAPI
             });
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IJwtService, JwtService>();
-            return services;
         }
     }
 }
