@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using CNode.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace CNode.Application.Identity
 {
     public interface IUserManager
     {
-        Task<string> AuthenticateAsync(string usernameOrEmail, string password);
+        Task<AuthenticationResult> AuthenticateAsync(string usernameOrEmail, string password);
+        Task<AuthenticationResult> RefreshAsync(string token, string refreshToken);
         Task RegisterAsync(string username, string email, string password, bool twoFactorEnabled = false);
         Task RemoveAsync(int userId);
     }

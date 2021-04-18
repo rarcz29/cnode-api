@@ -16,6 +16,17 @@ namespace CNode.WebAPI.Installers
             var jwtOptions = new JwtOptions();
             configuration.GetSection(nameof(JwtOptions)).Bind(jwtOptions);
 
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(jwtOptions.Secret)),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+
+            services.AddSingleton(tokenValidationParameters);
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -24,16 +35,9 @@ namespace CNode.WebAPI.Installers
             {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        // TODO: key
-                        Encoding.ASCII.GetBytes(jwtOptions.Secret)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
+                x.TokenValidationParameters = tokenValidationParameters;
             });
+
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -44,6 +48,7 @@ namespace CNode.WebAPI.Installers
                                .AllowAnyHeader();
                     });
             });
+
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IJwtService, JwtService>();
         }

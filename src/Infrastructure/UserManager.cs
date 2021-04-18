@@ -19,7 +19,7 @@ namespace CNode.Infrastructure
             _jwt = jwt;
         }
 
-        public async Task<string> AuthenticateAsync(string usernameOrEmail, string password)
+        public async Task<AuthenticationResult> AuthenticateAsync(string usernameOrEmail, string password)
         {
             var users = await _unitOfWork.Users.FindAsync(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
 
@@ -29,12 +29,17 @@ namespace CNode.Infrastructure
 
                 if (user.Password == password)
                 {
-                    return _jwt.CreateJwt(user);
+                    return new AuthenticationResult { Token = _jwt.CreateJwt(user) };
                 }
             }
 
             // Throw exception
             return null;
+        }
+
+        public Task<AuthenticationResult> RefreshAsync(string token, string refreshToken)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task RegisterAsync(string username, string email, string password, bool twoFactorEnabled = false)
