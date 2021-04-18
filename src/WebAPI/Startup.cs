@@ -22,10 +22,10 @@ namespace CNode.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddWebAPI()
                 .AddExteranlAPIs()
                 .AddApplication()
                 .AddInfrastructure()
+                .AddWebAPI(Configuration)
                 .AddPersistence(Configuration);
         }
 
@@ -41,6 +41,7 @@ namespace CNode.WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

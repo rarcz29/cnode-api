@@ -1,26 +1,22 @@
 ﻿using CNode.Application.Common.Data.Database;
+using CNode.Application.Common.Identity;
 using CNode.Application.Identity;
 using CNode.Domain.Entities;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CNode.Infrastructure
 {
     internal class UserManager : IUserManager
     {
-        private readonly string _key;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IJwtService _jwt;
 
-        public UserManager(IUnitOfWork unitOfWork)
+        public UserManager(IUnitOfWork unitOfWork, IJwtService jwt)
         {
-            // TODO: move key to the configuration file
-            _key = "mykeyyfasgt9a87sgdofbhasg78aosd8fhbioasdgf87asogf";
             _unitOfWork = unitOfWork;
+            _jwt = jwt;
         }
 
         public async Task<string> AuthenticateAsync(string usernameOrEmail, string password)
@@ -33,25 +29,8 @@ namespace CNode.Infrastructure
 
                 if (user.Password == password)
                 {
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var tokenKey = Encoding.ASCII.GetBytes(_key);
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(new Claim[]
-                        {
-                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                            new Claim(ClaimTypes.Name, user.Username),
-                            new Claim(ClaimTypes.Email, user.Email)
-                        }),
-                        Expires = DateTime.UtcNow.AddMinutes(60),
-                        SigningCredentials = new SigningCredentials(
-                            new SymmetricSecurityKey(tokenKey),
-                            SecurityAlgorithms.HmacSha256Signature)
-                    };
-                    var token = tokenHandler.CreateToken(tokenDescriptor);
-                    return tokenHandler.WriteToken(token);
+                    return _jwt.CreateJwt(user);
                 }
-
             }
 
             // Throw exception

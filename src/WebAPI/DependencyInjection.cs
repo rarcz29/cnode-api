@@ -1,6 +1,7 @@
 ﻿using CNode.Application.Common.Identity;
 using CNode.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -10,8 +11,11 @@ namespace CNode.WebAPI
 {
     internal static class DependencyInjection
     {
-        public static IServiceCollection AddWebAPI(this IServiceCollection services)
+        public static IServiceCollection AddWebAPI(this IServiceCollection services, IConfiguration configuuration)
         {
+            //var jwtOptions = new JwtOptions();
+            //configuration.GetSection(nameof(JwtOptions)).Bind(jwtOptions);
+
             services.AddControllers();
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddHttpContextAccessor();
@@ -68,6 +72,7 @@ namespace CNode.WebAPI
                     });
             });
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
+            services.AddSingleton<IJwtService, JwtService>();
             return services;
         }
     }
