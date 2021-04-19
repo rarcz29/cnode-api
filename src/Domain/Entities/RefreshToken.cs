@@ -9,7 +9,7 @@ namespace CNode.Domain.Entities
         public string JwtId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ExpiryDate { get; set; }
-        public bool IsUsed { get; set; }
+        public bool Used { get; set; }
         public bool Invalidated { get; set; }
 
         public int UserId { get; set; }

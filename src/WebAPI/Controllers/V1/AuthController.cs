@@ -44,8 +44,8 @@ namespace CNode.WebAPI.Controllers.V1
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshAsync([FromBody] RefreshCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }

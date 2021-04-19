@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
 
 namespace CNode.WebAPI.Installers
@@ -38,12 +39,12 @@ namespace CNode.WebAPI.Installers
                     });
             });
 
-            services.AddSingleton(CreateTokenValidationParameters(true, false, jwtOptions.Secret));
+            services.AddSingleton(CreateTokenValidationParameters(false, false, jwtOptions.Secret));
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IJwtService, JwtService>();
         }
 
-        private TokenValidationParameters CreateTokenValidationParameters(bool requireExpirationTime, bool validateLifeTime, string jwtSecret)
+        private static TokenValidationParameters CreateTokenValidationParameters(bool requireExpirationTime, bool validateLifeTime, string jwtSecret)
         {
             return new TokenValidationParameters
             {
@@ -53,7 +54,8 @@ namespace CNode.WebAPI.Installers
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 RequireExpirationTime = requireExpirationTime,
-                ValidateLifetime = validateLifeTime
+                ValidateLifetime = validateLifeTime,
+                ClockSkew = TimeSpan.Zero
             };
         }
     }

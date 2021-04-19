@@ -65,21 +65,24 @@ namespace CNode.Infrastructure
             if (storedRefreshToken == null
                 || DateTime.UtcNow > storedRefreshToken.ExpiryDate
                 || storedRefreshToken.Invalidated
-                || storedRefreshToken.IsUsed
+                || storedRefreshToken.Used
                 || storedRefreshToken.JwtId != jti)
             {
                 return null; // TODO: return error or throw an exception
             }
 
-            storedRefreshToken.IsUsed = true;
+            storedRefreshToken.Used = true;
             _unitOfWork.RefreshTokens.Update(storedRefreshToken);
             await _unitOfWork.SaveChangesAsync();
 
             var user = _unitOfWork.Users.Get(int.Parse(validatedToken.Claims.Single(x => x.Type == "id").Value)); // TODO: TryParse
-            var newRefreshToken = await SaveNewRefreshTokenAsync(user.Id, jti);
+            var newToken = _jwt.CreateJwt(user);
+            var newValidatedToken = GetPrincipalFromToken(newToken);
+            var newJti = newValidatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+            var newRefreshToken = await SaveNewRefreshTokenAsync(user.Id, newJti);
             return new AuthenticationResult
             {
-                Token = _jwt.CreateJwt(user),
+                Token = newToken,
                 RefreshToken = newRefreshToken
             };
         }
@@ -106,6 +109,12 @@ namespace CNode.Infrastructure
             await _unitOfWork.SaveChangesAsync();
             // TODO: return value or exception when failured
         }
+        private static bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
+        {
+            return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
+                jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+                                                   StringComparison.InvariantCultureIgnoreCase);
+        }
 
         private ClaimsPrincipal GetPrincipalFromToken(string token)
         {
@@ -126,13 +135,6 @@ namespace CNode.Infrastructure
             {
                 return null;
             }
-        }
-
-        private bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
-        {
-            return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
-                jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
-                                                   StringComparison.InvariantCultureIgnoreCase);
         }
 
         private async Task<string> SaveNewRefreshTokenAsync(int userId, string jti)
