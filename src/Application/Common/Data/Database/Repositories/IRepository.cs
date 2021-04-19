@@ -18,6 +18,8 @@ namespace CNode.Application.Common.Data.Database.Repositories
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
 
+        void Update(TEntity entity);
+
         void Remove(TEntity entity);
         void Remove(int id);
         void RemoveRange(IEnumerable<TEntity> entities);

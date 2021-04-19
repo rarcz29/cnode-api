@@ -57,6 +57,11 @@ namespace CNode.Persistence.Repositories
             _db.Set<TEntity>().AddRange(entities);
         }
 
+        public void Update(TEntity entity)
+        {
+            _db.Set<TEntity>().Update(entity);
+        }
+
         public void Remove(TEntity entity)
         {
             _db.Set<TEntity>().Remove(entity);

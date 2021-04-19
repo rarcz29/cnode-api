@@ -1,4 +1,5 @@
 ﻿using CNode.Application.Auth.Commands.Login;
+using CNode.Application.Auth.Commands.Refresh;
 using CNode.Application.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -41,9 +42,10 @@ namespace CNode.WebAPI.Controllers.V1
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshAsync()
+        public async Task<IActionResult> RefreshAsync([FromBody] RefreshCommand command)
         {
-            throw new NotImplementedException();
+            await _mediator.Send(command);
+            return Ok();
         }
     }
 }

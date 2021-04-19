@@ -12,6 +12,7 @@ namespace CNode.Application.Common.Data.Database
         ITechnologyRepository Technologies { get; }
         ITechnologyTypeRepository TechnologyTypes { get; }
         IUserRepository Users { get; }
+        IRefreshTokenRepository RefreshTokens { get; }
 
         int SaveChanges();
 

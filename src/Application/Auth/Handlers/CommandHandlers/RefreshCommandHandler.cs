@@ -17,9 +17,13 @@ namespace CNode.Application.Auth.Handlers.CommandHandlers
 
         public async Task<RefreshTokenDto> Handle(RefreshCommand request, CancellationToken cancellationToken)
         {
-            //var response = await _userManager.RefreshAsync(request.Token, request.RefreshToken);
+            var response = await _userManager.RefreshAsync(request.Token, request.RefreshToken);
             // TODO: use automapper
-            return new RefreshTokenDto { Token = "", RefreshToken = "" };
+            return new RefreshTokenDto
+            {
+                Token = response.Token,
+                RefreshToken = response.RefreshToken
+            };
         }
     }
 }

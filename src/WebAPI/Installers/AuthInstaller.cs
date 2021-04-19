@@ -16,17 +16,6 @@ namespace CNode.WebAPI.Installers
             var jwtOptions = new JwtOptions();
             configuration.GetSection(nameof(JwtOptions)).Bind(jwtOptions);
 
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.ASCII.GetBytes(jwtOptions.Secret)),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
-
-            services.AddSingleton(tokenValidationParameters);
-
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -35,7 +24,7 @@ namespace CNode.WebAPI.Installers
             {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
-                x.TokenValidationParameters = tokenValidationParameters;
+                x.TokenValidationParameters = CreateTokenValidationParameters(true, true, jwtOptions.Secret);
             });
 
             services.AddCors(options =>
@@ -49,8 +38,23 @@ namespace CNode.WebAPI.Installers
                     });
             });
 
+            services.AddSingleton(CreateTokenValidationParameters(true, false, jwtOptions.Secret));
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSingleton<IJwtService, JwtService>();
+        }
+
+        private TokenValidationParameters CreateTokenValidationParameters(bool requireExpirationTime, bool validateLifeTime, string jwtSecret)
+        {
+            return new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(jwtSecret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                RequireExpirationTime = requireExpirationTime,
+                ValidateLifetime = validateLifeTime
+            };
         }
     }
 }

@@ -2,8 +2,11 @@
 using CNode.Application.Common.Identity;
 using CNode.Application.Identity;
 using CNode.Domain.Entities;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CNode.Infrastructure
@@ -12,11 +15,13 @@ namespace CNode.Infrastructure
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtService _jwt;
+        private readonly TokenValidationParameters _tokenValidationParameters;
 
-        public UserManager(IUnitOfWork unitOfWork, IJwtService jwt)
+        public UserManager(IUnitOfWork unitOfWork, IJwtService jwt, TokenValidationParameters tokenValidationParameters)
         {
             _unitOfWork = unitOfWork;
             _jwt = jwt;
+            _tokenValidationParameters = tokenValidationParameters;
         }
 
         public async Task<AuthenticationResult> AuthenticateAsync(string usernameOrEmail, string password)
@@ -29,7 +34,15 @@ namespace CNode.Infrastructure
 
                 if (user.Password == password)
                 {
-                    return new AuthenticationResult { Token = _jwt.CreateJwt(user) };
+                    var jwt = _jwt.CreateJwt(user);
+                    var validatedToken = GetPrincipalFromToken(jwt);
+                    var jti = validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+                    var refreshToken = await SaveNewRefreshTokenAsync(user.Id, jti);
+                    return new AuthenticationResult
+                    {
+                        Token = jwt,
+                        RefreshToken = refreshToken
+                    };
                 }
             }
 
@@ -37,9 +50,38 @@ namespace CNode.Infrastructure
             return null;
         }
 
-        public Task<AuthenticationResult> RefreshAsync(string token, string refreshToken)
+        public async Task<AuthenticationResult> RefreshAsync(string token, string refreshToken)
         {
-            throw new NotImplementedException();
+            var validatedToken = GetPrincipalFromToken(token);
+
+            if (validatedToken == null)
+            {
+                return null; // TODO: return error or throw an exception
+            }
+
+            var jti = validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+            var storedRefreshToken = await _unitOfWork.RefreshTokens.GetByToken(refreshToken);
+
+            if (storedRefreshToken == null
+                || DateTime.UtcNow > storedRefreshToken.ExpiryDate
+                || storedRefreshToken.Invalidated
+                || storedRefreshToken.IsUsed
+                || storedRefreshToken.JwtId != jti)
+            {
+                return null; // TODO: return error or throw an exception
+            }
+
+            storedRefreshToken.IsUsed = true;
+            _unitOfWork.RefreshTokens.Update(storedRefreshToken);
+            await _unitOfWork.SaveChangesAsync();
+
+            var user = _unitOfWork.Users.Get(int.Parse(validatedToken.Claims.Single(x => x.Type == "id").Value)); // TODO: TryParse
+            var newRefreshToken = await SaveNewRefreshTokenAsync(user.Id, jti);
+            return new AuthenticationResult
+            {
+                Token = _jwt.CreateJwt(user),
+                RefreshToken = newRefreshToken
+            };
         }
 
         public async Task RegisterAsync(string username, string email, string password, bool twoFactorEnabled = false)
@@ -63,6 +105,50 @@ namespace CNode.Infrastructure
             _unitOfWork.Users.Remove(userId);
             await _unitOfWork.SaveChangesAsync();
             // TODO: return value or exception when failured
+        }
+
+        private ClaimsPrincipal GetPrincipalFromToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            try
+            {
+                var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
+
+                if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
+                {
+                    return null;
+                }
+
+                return principal;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
+        {
+            return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
+                jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+                                                   StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private async Task<string> SaveNewRefreshTokenAsync(int userId, string jti)
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Guid.NewGuid().ToString(),
+                JwtId = jti,
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow,
+                ExpiryDate = DateTime.UtcNow.AddMonths(6)
+            };
+
+            _unitOfWork.RefreshTokens.Add(refreshToken);
+            await _unitOfWork.SaveChangesAsync();
+            return refreshToken.Token;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace CNode.Persistence
             Technologies ??= new TechnologyRepository(db);
             TechnologyTypes ??= new TechnologyTypeRepository(db);
             Users ??= new UserRepository(db);
+            RefreshTokens ??= new RefreshTokenRepository(db);
         }
 
         public IAccountRepository Accounts { get; private set; }
@@ -26,6 +27,7 @@ namespace CNode.Persistence
         public ITechnologyRepository Technologies { get; private set; }
         public ITechnologyTypeRepository TechnologyTypes { get; private set; }
         public IUserRepository Users { get; private set; }
+        public IRefreshTokenRepository RefreshTokens { get; private set; }
 
         public int SaveChanges()
         {
