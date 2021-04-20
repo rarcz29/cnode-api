@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CNode.Application.Common.Exceptions;
+using FluentValidation;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace CNode.Application.Common.Behaviours
 
                 if (failures.Count != 0)
                 {
-                    throw new ValidationException(failures);
+                    throw new DataValidationException(failures);
                 }
             }
             return await next();

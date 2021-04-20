@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace CNode.WebAPI.Controllers.V1
+namespace CNode.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,6 +22,7 @@ namespace CNode.WebAPI.Controllers.V1
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginCommand command)
         {
+            throw new Exception("Exception test");
             var result = await _mediator.Send(command);
             return result?.Token != null
                 ? Ok(result)
@@ -35,11 +36,11 @@ namespace CNode.WebAPI.Controllers.V1
             return Ok();
         }
 
-        [HttpDelete("logout")]
-        public async Task<IActionResult> LogoutAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //[HttpDelete("logout")]
+        //public async Task<IActionResult> LogoutAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshAsync([FromBody] RefreshCommand command)

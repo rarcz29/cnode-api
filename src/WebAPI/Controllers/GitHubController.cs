@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace CNode.WebAPI.Controllers.V1
+namespace CNode.WebAPI.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class GitHubController : ControllerBase
     {
         private readonly IMediator _mediator;

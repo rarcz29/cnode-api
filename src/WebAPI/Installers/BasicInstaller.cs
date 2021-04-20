@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CNode.WebAPI.Filters;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -8,7 +9,8 @@ namespace CNode.WebAPI.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+                options.Filters.Add(new ApiExceptionFilterAttribute()));
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddHttpContextAccessor();
 

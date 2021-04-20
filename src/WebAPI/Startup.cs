@@ -35,9 +35,18 @@ namespace CNode.WebAPI
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
+                app.UseExceptionHandler("/api/v1error"); // TODO: remove from the development section
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
+
+            }
+            else
+            {
+                app.UseExceptionHandler("/api/v1/error");
+                // TODO: create a custom exception handler for multiple api versions
             }
 
             app.UseHttpsRedirection();
