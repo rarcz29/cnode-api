@@ -9,8 +9,7 @@ namespace CNode.WebAPI.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers(options =>
-                options.Filters.Add(new ApiExceptionFilterAttribute()));
+            services.AddControllers(options => options.Filters.Add(new ApiExceptionFilterAttribute()));
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddHttpContextAccessor();
 

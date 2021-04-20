@@ -1,6 +1,7 @@
 ﻿using CNode.Application.Auth.Commands.Login;
 using CNode.Application.Auth.Commands.Refresh;
 using CNode.Application.Auth.Commands.Register;
+using CNode.WebAPI.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +23,6 @@ namespace CNode.WebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginCommand command)
         {
-            throw new Exception("Exception test");
             var result = await _mediator.Send(command);
             return result?.Token != null
                 ? Ok(result)
