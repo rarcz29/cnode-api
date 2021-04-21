@@ -1,4 +1,5 @@
 ﻿using CNode.Application.Common.Exceptions;
+using CNode.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -18,6 +19,8 @@ namespace CNode.WebAPI.Filters
             {
                 { typeof(DataValidationException), HandleDataValidationException },
                 { typeof(AuthenticationException), HandleAuthenticationException },
+                { typeof(UserRegistrationException), HandleUserRegistrationException },
+                { typeof(InternalServerException), HandleInternalServerException },
             };
         }
 
@@ -62,7 +65,7 @@ namespace CNode.WebAPI.Filters
             var details = new ProblemDetails
             {
                 Status = StatusCodes.Status403Forbidden,
-                Title = "An authentication error occurred.",
+                Title = "An authentication error has occurred.",
                 Detail = exception.Message,
                 Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3",
             };
@@ -70,6 +73,46 @@ namespace CNode.WebAPI.Filters
             context.Result = new ObjectResult(details)
             {
                 StatusCode = StatusCodes.Status403Forbidden,
+            };
+
+            context.ExceptionHandled = true;
+        }
+        
+        private void HandleUserRegistrationException(ExceptionContext context)
+        {
+            var exception = context.Exception as UserRegistrationException;
+
+            var details = new ProblemDetails
+            {
+                Status = StatusCodes.Status403Forbidden,
+                Title = "An user registration failure has occurred.",
+                Detail = exception.Message,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3",
+            };
+
+            context.Result = new ObjectResult(details)
+            {
+                StatusCode = StatusCodes.Status403Forbidden,
+            };
+
+            context.ExceptionHandled = true;
+        }
+        
+        private void HandleInternalServerException(ExceptionContext context)
+        {
+            var exception = context.Exception as InternalServerException;
+
+            var details = new ProblemDetails
+            {
+                Status = StatusCodes.Status500InternalServerError,
+                Title = "An internal server error has occurred.",
+                Detail = exception.Message,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3",
+            };
+
+            context.Result = new ObjectResult(details)
+            {
+                StatusCode = StatusCodes.Status500InternalServerError,
             };
 
             context.ExceptionHandled = true;
