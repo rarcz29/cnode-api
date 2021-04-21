@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace CNode.Infrastructure
             {
                 var user = users.First();
 
-                if (user.Password == password)
+                if (user?.Password == password)
                 {
                     var jwt = _jwt.CreateJwt(user);
                     var validatedToken = GetPrincipalFromToken(jwt);
@@ -44,10 +45,11 @@ namespace CNode.Infrastructure
                         RefreshToken = refreshToken
                     };
                 }
+
+                throw new AuthenticationException("This password is incorrect.");
             }
 
-            // Throw exception
-            return null;
+            throw new AuthenticationException("User with that username doesn't exist.");
         }
 
         public async Task<AuthenticationResult> RefreshAsync(string token, string refreshToken)
@@ -56,7 +58,7 @@ namespace CNode.Infrastructure
 
             if (validatedToken == null)
             {
-                return null; // TODO: return error or throw an exception
+                throw new AuthenticationException("That token cannot be refreshed.");
             }
 
             var jti = validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
@@ -68,7 +70,7 @@ namespace CNode.Infrastructure
                 || storedRefreshToken.Used
                 || storedRefreshToken.JwtId != jti)
             {
-                return null; // TODO: return error or throw an exception
+                throw new AuthenticationException("That's not a valid refresh token.");
             }
 
             storedRefreshToken.Used = true;
@@ -80,6 +82,12 @@ namespace CNode.Infrastructure
             var newValidatedToken = GetPrincipalFromToken(newToken);
             var newJti = newValidatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
             var newRefreshToken = await SaveNewRefreshTokenAsync(user.Id, newJti);
+
+            if (newToken == null || newRefreshToken == null)
+            {
+                throw new AuthenticationException("There's a problem with creating new tokens.");
+            }
+
             return new AuthenticationResult
             {
                 Token = newToken,
@@ -99,15 +107,23 @@ namespace CNode.Infrastructure
             };
 
             _unitOfWork.Users.Add(user);
-            await _unitOfWork.SaveChangesAsync();
-            // TODO: return value or exception when failured
+            var affected = await _unitOfWork.SaveChangesAsync();
+
+            if (affected != 1)
+            {
+                throw new AuthenticationException("There's a problem with creating a new account.");
+            }
         }
 
         public async Task RemoveAsync(int userId)
         {
             _unitOfWork.Users.Remove(userId);
-            await _unitOfWork.SaveChangesAsync();
-            // TODO: return value or exception when failured
+            var affected = await _unitOfWork.SaveChangesAsync();
+
+            if (affected != 1)
+            {
+                throw new AuthenticationException("There's a problem with removing this account.");
+            }
         }
         private static bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
         {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
+using System.Security.Authentication;
 
 namespace CNode.WebAPI.Filters
 {
@@ -15,7 +16,8 @@ namespace CNode.WebAPI.Filters
         {
             _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>
             {
-                { typeof(DataValidationException), HandleValidationException },
+                { typeof(DataValidationException), HandleDataValidationException },
+                { typeof(AuthenticationException), HandleAuthenticationException },
             };
         }
 
@@ -39,7 +41,7 @@ namespace CNode.WebAPI.Filters
             base.OnException(context);
         }
 
-        private void HandleValidationException(ExceptionContext context)
+        private void HandleDataValidationException(ExceptionContext context)
         {
             var exception = context.Exception as DataValidationException;
 
@@ -49,6 +51,26 @@ namespace CNode.WebAPI.Filters
             };
 
             context.Result = new BadRequestObjectResult(details);
+
+            context.ExceptionHandled = true;
+        }
+
+        private void HandleAuthenticationException(ExceptionContext context)
+        {
+            var exception = context.Exception as AuthenticationException;
+
+            var details = new ProblemDetails
+            {
+                Status = StatusCodes.Status403Forbidden,
+                Title = "An authentication error occurred.",
+                Detail = exception.Message,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3",
+            };
+
+            context.Result = new ObjectResult(details)
+            {
+                StatusCode = StatusCodes.Status403Forbidden,
+            };
 
             context.ExceptionHandled = true;
         }

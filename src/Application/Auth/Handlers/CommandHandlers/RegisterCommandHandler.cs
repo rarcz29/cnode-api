@@ -15,7 +15,6 @@ namespace CNode.Application.Auth.Handlers.CommandHandlers
             _userManager = userManager;
         }
 
-        // TODO: vallidation
         public async Task<Unit> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             await _userManager.RegisterAsync(request.Username, request.Email, request.Password, request.TwoFactorEnabled);

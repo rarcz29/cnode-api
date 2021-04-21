@@ -24,7 +24,6 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             _processors = processors;
         }
 
-        // TODO: exceptions
         public async Task<Unit> Handle(AddAccountCommand request, CancellationToken cancellationToken)
         {
             var userId = int.Parse(_currentUser.UserId);
