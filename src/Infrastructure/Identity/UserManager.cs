@@ -12,7 +12,7 @@ using System.Security.Authentication;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace CNode.Infrastructure
+namespace CNode.Infrastructure.Identity
 {
     internal class UserManager : IUserManager
     {
@@ -129,7 +129,7 @@ namespace CNode.Infrastructure
         }
         private static bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
         {
-            return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
+            return validatedToken is JwtSecurityToken jwtSecurityToken &&
                 jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
                                                    StringComparison.InvariantCultureIgnoreCase);
         }
