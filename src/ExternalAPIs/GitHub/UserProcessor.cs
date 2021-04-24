@@ -48,7 +48,7 @@ namespace CNode.ExternalAPIs.GitHub
         public async Task<AuthToken> GetTokenAsync(string code)
         {
             // TODO: Create model and pass it as a parameter
-            var json = JsonConvert.SerializeObject(new { code = code, client_secret = "5f0c6b9abef2d9e019b78b755e8b7f2e59f71914", client_id = "b0c52d45a05e47cf8e5f" });
+            var json = JsonConvert.SerializeObject(new { code = code, client_secret = "", client_id = "008d4433666f7d02672d" });
             using var data = new StringContent(json, Encoding.UTF8, "application/json");
             using var response = await _client.ApiClient.PostAsync("https://github.com/login/oauth/access_token", data);
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CNode.Application.GitHub.Handlers.CommandHandlers
 {
-    public class AddAccountCommandHandler : IRequestHandler<AddAccountCommand>
+    public class AddAccountCommandHandler : IRequestHandler<AddAccountCommand, GitAccountDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUser;
@@ -24,8 +24,9 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             _processors = processors;
         }
 
-        public async Task<Unit> Handle(AddAccountCommand request, CancellationToken cancellationToken)
+        public async Task<GitAccountDto> Handle(AddAccountCommand request, CancellationToken cancellationToken)
         {
+            // exceptions
             var userId = int.Parse(_currentUser.UserId);
             var token = await _processors.Users.GetTokenAsync(request.Code);
             var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
@@ -42,7 +43,11 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
 
             _unitOfWork.Accounts.Add(newAccount);
             await _unitOfWork.SaveChangesAsync();
-            return Unit.Value;
+            return new GitAccountDto
+            {
+                Username = user.login,
+                Url = user.html_url
+            };
         }
     }
 }

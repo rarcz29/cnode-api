@@ -22,8 +22,8 @@ namespace CNode.WebAPI.Controllers
         [HttpPost("auth/account")]
         public async Task<IActionResult> AddAccountAsync([FromBody] AddAccountCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpPost("repository")]
