@@ -1,8 +1,12 @@
-﻿using CNode.Application.GitHub.Commands.AddAccount;
+﻿using CNode.Application.Common.Dtos;
+using CNode.Application.GitHub.Commands.AddAccount;
 using CNode.Application.GitHub.Commands.CreateRepository;
+using CNode.Application.GitHub.Queries.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CNode.WebAPI.Controllers
@@ -20,9 +24,16 @@ namespace CNode.WebAPI.Controllers
         }
 
         [HttpPost("auth/account")]
-        public async Task<IActionResult> AddAccountAsync([FromBody] AddAccountCommand command)
+        public async Task<ActionResult<GitAccountDto>> AddAccountAsync([FromBody] AddAccountCommand command)
         {
             var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PlatformAccountDto>>> GetAllData()
+        {
+            var result = await _mediator.Send(new GetAllQuery());
             return Ok(result);
         }
 

@@ -1,6 +1,7 @@
 ﻿using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Data.ExternalAPIs.GitHub;
 using CNode.Domain.Exceptions;
+using CNode.Domain.Models;
 using CNode.ExternalAPIs.Common;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -15,7 +16,7 @@ namespace CNode.ExternalAPIs.GitHub
         public RepoProcessor(IAppHttpClient client) : base(client) { }
 
         // TODO: return response
-        public async Task CreateNewRepoAsync(string reponame, string description, string token)
+        public async Task<GitRepository> CreateNewRepoAsync(string reponame, string description, string token)
         {
             var json = JsonConvert.SerializeObject(new { name = reponame, description = description });
             using var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -25,13 +26,16 @@ namespace CNode.ExternalAPIs.GitHub
             requestMessage.Content = data;
 
             var response = await _client.ApiClient.SendAsync(requestMessage);
-            var content = await response.Content.ReadAsStringAsync();
-            var code = response.StatusCode;
 
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<GitRepository>();
+            }
+            else
             {
                 throw new ExternalApiException(response.ReasonPhrase);
             }
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.Database.Repositories;
 using CNode.Persistence.Repositories;
+using System;
 using System.Threading.Tasks;
 
 namespace CNode.Persistence
@@ -47,7 +48,7 @@ namespace CNode.Persistence
             {
                 return await _db.SaveChangesAsync();
             }
-            catch
+            catch (Exception e)
             {
                 throw;
             }

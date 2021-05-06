@@ -15,9 +15,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="GitHub\Handlers\QueryHandlers\" />
-    <Folder Include="GitHub\Queries\" />
-  </ItemGroup>
-
 </Project>

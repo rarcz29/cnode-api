@@ -2,6 +2,7 @@
 using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Identity;
 using CNode.Application.GitHub.Commands.CreateRepository;
+using CNode.Domain.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,8 +28,24 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
         {
             var userId = int.Parse(_currentUser.UserId);
             var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
-            var token = await _unitOfWork.Accounts.GetTokenAsync(userId, github.Id, request.Username);
-            await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, token);
+            //var token = await _unitOfWork.Accounts.GetTokenAsync(userId, github.Id, request.Username);
+            var account = await _unitOfWork.Accounts.Get(userId, request.Username, github.Id);
+            var repository = await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, account.Token);
+
+            var newRepo = new Repository
+            {
+                Name = request.RepoName,
+                Description = request.Description,
+                Private = repository.@private,
+                Share = true, // TODO:
+                OriginId = repository.id.ToString(),
+                OriginName = repository.name,
+                OriginUrl = repository.html_url,
+                AccountId = account.Id
+            };
+
+            _unitOfWork.Repositories.Add(newRepo);
+            await _unitOfWork.SaveChangesAsync(); // TODO: exceptions
             return Unit.Value;
         }
     }
