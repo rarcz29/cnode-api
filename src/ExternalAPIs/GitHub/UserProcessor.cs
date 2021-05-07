@@ -1,5 +1,6 @@
 ﻿using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Data.ExternalAPIs.GitHub;
+using CNode.Application.Common.Interfaces;
 using CNode.Domain.Exceptions;
 using CNode.Domain.Models;
 using CNode.ExternalAPIs.Common;
@@ -13,7 +14,7 @@ namespace CNode.ExternalAPIs.GitHub
 {
     internal class UserProcessor : ProcessorBase, IUserProcessor
     {
-        public UserProcessor(IAppHttpClient client) : base(client) { }
+        public UserProcessor(IAppHttpClient client, IGitHubOAuthProvider options) : base(client, options) { }
 
         public async Task<GitUser> GetUserAsync(string token)
         {
@@ -48,7 +49,7 @@ namespace CNode.ExternalAPIs.GitHub
         public async Task<AuthToken> GetTokenAsync(string code)
         {
             // TODO: Create model and pass it as a parameter
-            var json = JsonConvert.SerializeObject(new { code = code, client_secret = "", client_id = "008d4433666f7d02672d" });
+            var json = JsonConvert.SerializeObject(new { code, client_secret = _github.Options.ClientSecret, client_id = _github.Options.ClientID });
             using var data = new StringContent(json, Encoding.UTF8, "application/json");
             using var response = await _client.ApiClient.PostAsync("https://github.com/login/oauth/access_token", data);
 
