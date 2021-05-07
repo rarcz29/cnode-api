@@ -1,10 +1,10 @@
-﻿using CNode.Domain.Models;
+﻿using CNode.Application.Common.Models;
 using System.Threading.Tasks;
 
 namespace CNode.Application.Common.Data.ExternalAPIs.GitHub
 {
     public interface IRepoProcessor
     {
-        Task<GitRepository> CreateNewRepoAsync(string reponame, string description, string token);
+        Task<PlatformRepository> CreateNewRepoAsync(string reponame, string description, string token);
     }
 }

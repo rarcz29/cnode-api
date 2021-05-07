@@ -1,4 +1,4 @@
-﻿using CNode.Application.Identity;
+﻿using CNode.Application.Common.Interfaces;
 using CNode.Infrastructure.Identity;
 using Microsoft.Extensions.DependencyInjection;
 

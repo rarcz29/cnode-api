@@ -1,14 +1,15 @@
 ﻿using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Data.ExternalAPIs.GitHub;
+using CNode.Application.Common.Interfaces;
 using CNode.ExternalAPIs.GitHub;
 
 namespace CNode.ExternalAPIs
 {
     class ProcessorsProvider : IProcessorsProvider
     {
-        public ProcessorsProvider(IAppHttpClient client)
+        public ProcessorsProvider(IAppHttpClient client, IGitHubOAuthProvider options)
         {
-            Users ??= new UserProcessor(client);
+            Users ??= new UserProcessor(client, options);
             Repositories ??= new RepoProcessor(client);
         }
 

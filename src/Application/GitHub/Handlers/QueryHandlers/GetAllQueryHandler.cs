@@ -1,6 +1,6 @@
 ﻿using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Dtos;
-using CNode.Application.Common.Identity;
+using CNode.Application.Common.Interfaces;
 using CNode.Application.GitHub.Queries.GetAll;
 using MediatR;
 using System.Collections.Generic;

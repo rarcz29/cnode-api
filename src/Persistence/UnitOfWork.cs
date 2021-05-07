@@ -48,7 +48,7 @@ namespace CNode.Persistence
             {
                 return await _db.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch
             {
                 throw;
             }

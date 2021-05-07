@@ -1,6 +1,6 @@
 ﻿using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Identity;
+using CNode.Application.Common.Interfaces;
 using CNode.Application.GitHub.Commands.AddAccount;
 using CNode.Domain.Entities;
 using MediatR;
@@ -30,23 +30,23 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             var userId = int.Parse(_currentUser.UserId);
             var token = await _processors.Users.GetTokenAsync(request.Code);
             var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
-            var user = await _processors.Users.GetUserAsync(token.access_token);
+            var user = await _processors.Users.GetUserAsync(token.AccessToken);
 
             var newAccount = new Account
             {
-                OriginId = user.id,
+                OriginId = user.Id,
                 UserId = userId,
                 PlatformId = github.Id,
-                Username = user.login,
-                Token = token.access_token
+                Username = user.Login,
+                Token = token.AccessToken
             };
 
             _unitOfWork.Accounts.Add(newAccount);
             await _unitOfWork.SaveChangesAsync();
-            return new GitAccountDto
+            return new GitAccountDto // TODO: automapper
             {
-                Username = user.login,
-                Url = user.html_url
+                Username = user.Login,
+                Url = user.Url
             };
         }
     }

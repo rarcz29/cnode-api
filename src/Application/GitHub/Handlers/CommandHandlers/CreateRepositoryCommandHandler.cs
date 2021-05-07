@@ -1,6 +1,6 @@
 ﻿using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Identity;
+using CNode.Application.Common.Interfaces;
 using CNode.Application.GitHub.Commands.CreateRepository;
 using CNode.Domain.Entities;
 using MediatR;
@@ -36,11 +36,11 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             {
                 Name = request.RepoName,
                 Description = request.Description,
-                Private = repository.@private,
+                Private = repository.Private,
                 Share = true, // TODO:
-                OriginId = repository.id.ToString(),
-                OriginName = repository.name,
-                OriginUrl = repository.html_url,
+                OriginId = repository.Id.ToString(),
+                OriginName = repository.Name,
+                OriginUrl = repository.Url,
                 AccountId = account.Id
             };
 

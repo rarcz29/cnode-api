@@ -1,4 +1,4 @@
-﻿using CNode.Application.Common.Identity;
+﻿using CNode.Application.Common.Interfaces;
 using CNode.WebAPI.Options;
 using CNode.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

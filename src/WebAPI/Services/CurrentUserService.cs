@@ -1,4 +1,4 @@
-﻿using CNode.Application.Common.Identity;
+﻿using CNode.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
@@ -13,6 +13,6 @@ namespace CNode.WebAPI.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string UserId => _httpContextAccessor.HttpContext?.User?.FindFirstValue("id");
+        public string UserId => _httpContextAccessor.HttpContext?.User?.FindFirstValue("id"); // TODO: Claim name
     }
 }

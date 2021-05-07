@@ -1,7 +1,6 @@
 ﻿using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Identity;
-using CNode.Application.Identity;
+using CNode.Application.Common.Interfaces;
 using CNode.Domain.Entities;
 using CNode.Domain.Exceptions;
 using Microsoft.IdentityModel.Tokens;

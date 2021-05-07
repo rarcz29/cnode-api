@@ -1,7 +1,7 @@
 ﻿using CNode.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace CNode.Application.Identity
+namespace CNode.Application.Common.Interfaces
 {
     public interface IUserManager
     {

@@ -1,4 +1,4 @@
-﻿using CNode.Application.Common.Identity;
+﻿using CNode.Application.Common.Interfaces;
 using CNode.Domain.Entities;
 using CNode.WebAPI.Options;
 using Microsoft.Extensions.Configuration;

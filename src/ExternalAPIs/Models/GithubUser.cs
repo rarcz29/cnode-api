@@ -1,12 +1,15 @@
-﻿namespace CNode.Domain.Models
+﻿namespace CNode.ExternalAPIs.Models
 {
-    public class GitUser
+    public class GithubUser
     {
-        // TODO: snake case
+#pragma warning disable IDE1006 // Naming Styles
+
         public int id { get; set; }
         public string login { get; set; }
         public string html_url { get; set; }
         public string name { get; set; }
         public string email { get; set; }
+
+#pragma warning restore IDE1006 // Naming Styles
     }
 }

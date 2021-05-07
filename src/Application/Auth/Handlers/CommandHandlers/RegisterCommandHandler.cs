@@ -1,5 +1,5 @@
 ﻿using CNode.Application.Auth.Commands.Register;
-using CNode.Application.Identity;
+using CNode.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
