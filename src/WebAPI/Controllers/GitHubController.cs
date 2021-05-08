@@ -23,7 +23,7 @@ namespace CNode.WebAPI.Controllers
         }
 
         [HttpPost("account")]
-        public async Task<ActionResult<GitAccountDto>> AddAccountAsync([FromBody] AddAccountCommand command)
+        public async Task<ActionResult<PlatformNewAccountDto>> AddAccountAsync([FromBody] AddAccountCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

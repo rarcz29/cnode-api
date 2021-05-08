@@ -1,9 +1,11 @@
-﻿namespace CNode.Application.Auth.Commands.Login
+﻿using CNode.Application.Common.Mappings;
+using CNode.Domain.Entities;
+
+namespace CNode.Application.Auth.Commands.Login
 {
-    public class AuthTokenDto
+    public class AuthTokenDto : IMapFrom<AuthenticationResult>
     {
         public string Token { get; set; }
         public string RefreshToken { get; set; }
-        public string Type { get; set; }
     }
 }

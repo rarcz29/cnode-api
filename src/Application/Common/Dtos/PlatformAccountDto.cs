@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using CNode.Application.Common.Mappings;
+using CNode.Application.Common.Models;
+using System.Collections.Generic;
 
 namespace CNode.Application.Common.Dtos
 {
-    public class PlatformAccountDto
+    public class PlatformAccountDto : PlatformNewAccountDto, IMapFrom<PlatformUser>
     {
-        public string Name { get; set; }
-        public IEnumerable<RepositoryDto> Repos { get; set; }
+        public IEnumerable<PlatformRepositoryDto> Repos { get; set; }
     }
 }

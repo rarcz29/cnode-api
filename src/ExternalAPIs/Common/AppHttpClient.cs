@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace CNode.ExternalAPIs
+namespace CNode.ExternalAPIs.Common
 {
     internal class AppHttpClient : IAppHttpClient
     {

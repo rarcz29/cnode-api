@@ -1,4 +1,5 @@
-﻿using CNode.Application.Common.Data.Database;
+﻿using AutoMapper;
+using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Dtos;
 using CNode.Application.Common.Interfaces;
 using CNode.Application.GitHub.Queries.GetAll;
@@ -13,11 +14,13 @@ namespace CNode.Application.GitHub.Handlers.QueryHandlers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUser;
+        private readonly IMapper _mapper;
 
-        public GetAllQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUser)
+        public GetAllQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUser, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<PlatformAccountDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
@@ -27,27 +30,20 @@ namespace CNode.Application.GitHub.Handlers.QueryHandlers
             var platform = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
             var accounts = await _unitOfWork.Accounts.FindAsync(x => x.PlatformId == platform.Id && x.UserId == userId);
             var dto = new List<PlatformAccountDto>();
-            var reposDto = new List<RepositoryDto>();
 
             foreach (var account in accounts)
             {
+                var reposDto = new List<PlatformRepositoryDto>();
                 var repositories = await _unitOfWork.Repositories.FindAsync(x => x.AccountId == account.Id);
 
                 foreach (var repo in repositories)
                 {
-                    // TODO: Automapper
-                    reposDto.Add(new RepositoryDto
-                    {
-                        Name = repo.Name,
-                        Descritption = repo.Description,
-                        OriginUrl = repo.OriginUrl,
-                        Private = repo.Private
-                    });
+                    reposDto.Add(_mapper.Map<PlatformRepositoryDto>(repo));
                 }
 
                 dto.Add(new PlatformAccountDto
                 {
-                    Name = account.Username,
+                    Login = account.Username,
                     Repos = reposDto
                 });
             }

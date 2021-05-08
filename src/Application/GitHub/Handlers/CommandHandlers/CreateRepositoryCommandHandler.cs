@@ -28,7 +28,6 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
         {
             var userId = int.Parse(_currentUser.UserId);
             var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
-            //var token = await _unitOfWork.Accounts.GetTokenAsync(userId, github.Id, request.Username);
             var account = await _unitOfWork.Accounts.Get(userId, request.Username, github.Id);
             var repository = await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, account.Token);
 

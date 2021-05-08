@@ -1,4 +1,5 @@
 ﻿using CNode.Application.Common.Data.ExternalAPIs;
+using CNode.ExternalAPIs.Common;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CNode.ExternalAPIs
@@ -8,8 +9,7 @@ namespace CNode.ExternalAPIs
         public static IServiceCollection AddExteranlAPIs(this IServiceCollection services)
         {
             services.AddSingleton<IAppHttpClient, AppHttpClient>();
-            // TODO: singleton?
-            services.AddScoped<IProcessorsProvider, ProcessorsProvider>();
+            services.AddSingleton<IProcessorsProvider, ProcessorsProvider>();
             return services;
         }
     }

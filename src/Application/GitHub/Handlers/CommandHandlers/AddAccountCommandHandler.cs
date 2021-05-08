@@ -1,5 +1,7 @@
-﻿using CNode.Application.Common.Data.Database;
+﻿using AutoMapper;
+using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
+using CNode.Application.Common.Dtos;
 using CNode.Application.Common.Interfaces;
 using CNode.Application.GitHub.Commands.AddAccount;
 using CNode.Domain.Entities;
@@ -9,22 +11,25 @@ using System.Threading.Tasks;
 
 namespace CNode.Application.GitHub.Handlers.CommandHandlers
 {
-    public class AddAccountCommandHandler : IRequestHandler<AddAccountCommand, GitAccountDto>
+    public class AddAccountCommandHandler : IRequestHandler<AddAccountCommand, PlatformNewAccountDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUser;
         private readonly IProcessorsProvider _processors;
+        private readonly IMapper _mapper;
 
         public AddAccountCommandHandler(IUnitOfWork unitOfWork,
                                         ICurrentUserService currentUser,
-                                        IProcessorsProvider processors)
+                                        IProcessorsProvider processors,
+                                        IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
             _processors = processors;
+            _mapper = mapper;
         }
 
-        public async Task<GitAccountDto> Handle(AddAccountCommand request, CancellationToken cancellationToken)
+        public async Task<PlatformNewAccountDto> Handle(AddAccountCommand request, CancellationToken cancellationToken)
         {
             // exceptions
             var userId = int.Parse(_currentUser.UserId);
@@ -43,11 +48,7 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
 
             _unitOfWork.Accounts.Add(newAccount);
             await _unitOfWork.SaveChangesAsync();
-            return new GitAccountDto // TODO: automapper
-            {
-                Username = user.Login,
-                Url = user.Url
-            };
+            return _mapper.Map<PlatformNewAccountDto>(user);
         }
     }
 }
