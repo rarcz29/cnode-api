@@ -14,10 +14,6 @@ namespace CNode.Persistence.Configurations
                 .IsRequired();
 
             builder
-                .Property(t => t.TechnologyTypeId)
-                .IsRequired();
-
-            builder
                 .HasIndex(t => t.Name)
                 .IsUnique();
         }

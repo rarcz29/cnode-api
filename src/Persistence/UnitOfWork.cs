@@ -17,7 +17,6 @@ namespace CNode.Persistence
             Platforms ??= new PlatformRepository(db);
             Repositories ??= new RepositoryRepository(db);
             Technologies ??= new TechnologyRepository(db);
-            TechnologyTypes ??= new TechnologyTypeRepository(db);
             Users ??= new UserRepository(db);
             RefreshTokens ??= new RefreshTokenRepository(db);
         }
@@ -26,7 +25,6 @@ namespace CNode.Persistence
         public IPlatformRepository Platforms { get; private set; }
         public IRepositoryRepository Repositories { get; private set; }
         public ITechnologyRepository Technologies { get; private set; }
-        public ITechnologyTypeRepository TechnologyTypes { get; private set; }
         public IUserRepository Users { get; private set; }
         public IRefreshTokenRepository RefreshTokens { get; private set; }
 

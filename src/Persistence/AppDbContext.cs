@@ -12,7 +12,6 @@ namespace CNode.Persistence
         public DbSet<Platform> Platforms { get; set; }
         public DbSet<Repository> Repositories { get; set; }
         public DbSet<Technology> Technologies { get; set; }
-        public DbSet<TechnologyType> TechnologyTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
