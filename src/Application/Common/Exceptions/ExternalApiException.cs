@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CNode.Domain.Exceptions
+namespace CNode.Application.Common.Exceptions
 {
     public class ExternalApiException : Exception
     {

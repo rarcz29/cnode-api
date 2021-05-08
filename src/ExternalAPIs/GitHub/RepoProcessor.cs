@@ -1,7 +1,7 @@
 ﻿using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Data.ExternalAPIs.GitHub;
+using CNode.Application.Common.Exceptions;
 using CNode.Application.Common.Models;
-using CNode.Domain.Exceptions;
 using CNode.ExternalAPIs.Common;
 using CNode.ExternalAPIs.Models;
 using Newtonsoft.Json;
