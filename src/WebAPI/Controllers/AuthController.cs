@@ -1,10 +1,8 @@
 ﻿using CNode.Application.Auth.Commands.Login;
 using CNode.Application.Auth.Commands.Refresh;
 using CNode.Application.Auth.Commands.Register;
-using CNode.WebAPI.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace CNode.WebAPI.Controllers
@@ -21,7 +19,7 @@ namespace CNode.WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync([FromBody] LoginCommand command)
+        public async Task<ActionResult<AuthTokenDto>> LoginAsync([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
             return result?.Token != null
@@ -43,7 +41,7 @@ namespace CNode.WebAPI.Controllers
         //}
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshAsync([FromBody] RefreshCommand command)
+        public async Task<ActionResult<RefreshTokenDto>> RefreshAsync([FromBody] RefreshCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
