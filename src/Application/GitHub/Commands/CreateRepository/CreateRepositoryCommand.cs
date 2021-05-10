@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Collections.Generic;
 
 namespace CNode.Application.GitHub.Commands.CreateRepository
 {
@@ -7,5 +8,6 @@ namespace CNode.Application.GitHub.Commands.CreateRepository
         public string Username { get; set; }
         public string RepoName { get; set; }
         public string Description { get; set; }
+        public IEnumerable<string> Technologies { get; set; }
     }
 }

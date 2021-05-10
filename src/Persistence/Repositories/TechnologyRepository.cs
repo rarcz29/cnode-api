@@ -19,8 +19,15 @@ namespace CNode.Persistence.Repositories
         public async Task<IEnumerable<Technology>> FindTechologiesAsync(string pattern)
         {
             var lower = pattern != null ? pattern.ToLower() : "";
-            var x = await _db.Technologies.Where(x => x.Name.ToLower().Contains(lower)).ToListAsync();
-            return x;
+            return await _db.Technologies.Where(x => x.Name.ToLower().Contains(lower)).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Technology>> GetTechnologiesAsync(IEnumerable<string> technologies)
+        {
+            // TODO: case sensitive
+            return technologies != null
+                ? await _db.Technologies.Where(x => technologies.Contains(x.Name)).ToListAsync()
+                : null;
         }
     }
 }

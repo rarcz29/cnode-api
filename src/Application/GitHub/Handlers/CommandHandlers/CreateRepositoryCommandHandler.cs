@@ -4,6 +4,7 @@ using CNode.Application.Common.Interfaces;
 using CNode.Application.GitHub.Commands.CreateRepository;
 using CNode.Domain.Entities;
 using MediatR;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,6 +31,7 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
             var account = await _unitOfWork.Accounts.Get(userId, request.Username, github.Id);
             var repository = await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, account.Token);
+            var technologies = await _unitOfWork.Technologies.GetTechnologiesAsync(request.Technologies);
 
             var newRepo = new Repository
             {
@@ -40,7 +42,8 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
                 OriginId = repository.Id.ToString(),
                 OriginName = repository.Name,
                 OriginUrl = repository.Url,
-                AccountId = account.Id
+                AccountId = account.Id,
+                Technologies = technologies?.ToList(),
             };
 
             _unitOfWork.Repositories.Add(newRepo);
