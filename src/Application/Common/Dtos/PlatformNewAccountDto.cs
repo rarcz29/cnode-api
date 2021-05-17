@@ -6,5 +6,6 @@ namespace CNode.Application.Common.Dtos
     public class PlatformNewAccountDto : IMapFrom<PlatformUser>
     {
         public string Login { get; set; }
+        public string OriginUrl { get; set; }
     }
 }

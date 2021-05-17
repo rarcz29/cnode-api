@@ -17,7 +17,7 @@ namespace CNode.Application.Auth.Handlers.CommandHandlers
 
         public async Task<Unit> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            await _userManager.RegisterAsync(request.Username, request.Email, request.Password, request.TwoFactorEnabled);
+            await _userManager.RegisterAsync(request.Username, request.Email, request.Password);
             return Unit.Value;
         }
     }

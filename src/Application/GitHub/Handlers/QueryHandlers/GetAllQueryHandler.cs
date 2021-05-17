@@ -41,9 +41,11 @@ namespace CNode.Application.GitHub.Handlers.QueryHandlers
                     reposDto.Add(_mapper.Map<PlatformRepositoryDto>(repo));
                 }
 
+                // Automapper
                 dto.Add(new PlatformAccountDto
                 {
                     Login = account.Username,
+                    OriginUrl = account.OriginUrl,
                     Repos = reposDto
                 });
             }

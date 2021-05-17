@@ -6,6 +6,7 @@ namespace CNode.Domain.Entities
     {
         public int Id { get; set; }
         public int OriginId { get; set; }
+        public string OriginUrl { get; set; }
         public string Username { get; set; }
         public string Token { get; set; }
 

@@ -40,6 +40,7 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             var newAccount = new Account
             {
                 OriginId = user.Id,
+                OriginUrl = user.Url,
                 UserId = userId,
                 PlatformId = github.Id,
                 Username = user.Login,

@@ -24,10 +24,6 @@ namespace CNode.Persistence.Configurations
                 .IsRequired();
 
             builder
-                .Property(u => u.TwoFactorEnabled)
-                .IsRequired();
-
-            builder
                 .Property(u => u.CreatedAt)
                 .IsRequired();
 

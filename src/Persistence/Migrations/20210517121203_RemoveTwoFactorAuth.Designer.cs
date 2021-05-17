@@ -3,15 +3,17 @@ using System;
 using CNode.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CNode.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210517121203_RemoveTwoFactorAuth")]
+    partial class RemoveTwoFactorAuth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +32,6 @@ namespace CNode.Persistence.Migrations
                     b.Property<int>("OriginId")
                         .HasColumnType("integer")
                         .HasColumnName("origin_id");
-
-                    b.Property<string>("OriginUrl")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("origin_url");
 
                     b.Property<int>("PlatformId")
                         .HasColumnType("integer")

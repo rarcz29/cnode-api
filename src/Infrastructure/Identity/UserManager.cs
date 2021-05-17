@@ -96,14 +96,13 @@ namespace CNode.Infrastructure.Identity
             };
         }
 
-        public async Task RegisterAsync(string username, string email, string password, bool twoFactorEnabled = false)
+        public async Task RegisterAsync(string username, string email, string password)
         {
             var user = new User
             {
                 Username = username,
                 Email = email,
                 Password = password,
-                TwoFactorEnabled = twoFactorEnabled,
                 CreatedAt = DateTime.UtcNow
             };
 

@@ -7,7 +7,7 @@ namespace CNode.Application.Common.Interfaces
     {
         Task<AuthenticationResult> AuthenticateAsync(string usernameOrEmail, string password);
         Task<AuthenticationResult> RefreshAsync(string token, string refreshToken);
-        Task RegisterAsync(string username, string email, string password, bool twoFactorEnabled = false);
+        Task RegisterAsync(string username, string email, string password);
         Task RemoveAsync(int userId);
     }
 }

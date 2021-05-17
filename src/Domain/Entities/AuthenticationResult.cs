@@ -1,5 +1,6 @@
 ﻿namespace CNode.Domain.Entities
 {
+    // TODO: move to the application layer
     public class AuthenticationResult
     {
         public string Token { get; set; }

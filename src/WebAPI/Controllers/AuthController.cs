@@ -22,9 +22,7 @@ namespace CNode.WebAPI.Controllers
         public async Task<ActionResult<AuthTokenDto>> LoginAsync([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
-            return result?.Token != null
-                ? Ok(result)
-                : BadRequest();
+            return Ok(result);
         }
 
         [HttpPost("register")]

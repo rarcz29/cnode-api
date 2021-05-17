@@ -13,6 +13,10 @@ namespace CNode.Persistence.Configurations
                 .IsRequired();
 
             builder
+                .Property(a => a.OriginUrl)
+                .IsRequired();
+
+            builder
                 .Property(a => a.Username)
                 .HasMaxLength(100)
                 .IsRequired();
