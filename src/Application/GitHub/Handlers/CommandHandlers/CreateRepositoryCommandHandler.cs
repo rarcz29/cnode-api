@@ -1,5 +1,6 @@
 ﻿using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
+using CNode.Application.Common.Dtos;
 using CNode.Application.Common.Interfaces;
 using CNode.Application.GitHub.Commands.CreateRepository;
 using CNode.Domain.Entities;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CNode.Application.GitHub.Handlers.CommandHandlers
 {
-    class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCommand>
+    class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCommand, PlatformRepositoryDto>
     {
         private readonly ICurrentUserService _currentUser;
         private readonly IUnitOfWork _unitOfWork;
@@ -25,18 +26,18 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             _processors = processors;
         }
 
-        public async Task<Unit> Handle(CreateRepositoryCommand request, CancellationToken cancellationToken)
+        public async Task<PlatformRepositoryDto> Handle(CreateRepositoryCommand request, CancellationToken cancellationToken)
         {
             var userId = int.Parse(_currentUser.UserId);
             var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
             var account = await _unitOfWork.Accounts.Get(userId, request.Username, github.Id);
-            var repository = await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, account.Token);
+            var repository = await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, request.Private, account.Token);
             var technologies = await _unitOfWork.Technologies.GetTechnologiesAsync(request.Technologies);
 
             var newRepo = new Repository
             {
-                Name = request.RepoName,
-                Description = request.Description,
+                Name = repository.Name,
+                Description = repository.Description,
                 Private = repository.Private,
                 Share = true, // TODO:
                 OriginId = repository.Id.ToString(),
@@ -48,7 +49,14 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
 
             _unitOfWork.Repositories.Add(newRepo);
             await _unitOfWork.SaveChangesAsync(); // TODO: exceptions
-            return Unit.Value;
+            // TODO: automapper
+            return new PlatformRepositoryDto
+            {
+                Name = newRepo.Name,
+                Description = newRepo.Description,
+                Private = newRepo.Private,
+                OriginUrl = newRepo.OriginUrl
+            };
         }
     }
 }

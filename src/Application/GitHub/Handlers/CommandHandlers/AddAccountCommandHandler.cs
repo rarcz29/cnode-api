@@ -49,7 +49,12 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
 
             _unitOfWork.Accounts.Add(newAccount);
             await _unitOfWork.SaveChangesAsync();
-            return _mapper.Map<PlatformNewAccountDto>(user);
+            // TODO: automapper
+            return new PlatformNewAccountDto
+            {
+                Login = newAccount.Username,
+                OriginUrl = newAccount.OriginUrl
+            };
         }
     }
 }

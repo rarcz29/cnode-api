@@ -16,9 +16,9 @@ namespace CNode.ExternalAPIs.GitHub
     {
         public RepoProcessor(IAppHttpClient client) : base(client) { }
 
-        public async Task<PlatformRepository> CreateNewRepoAsync(string reponame, string description, string token)
+        public async Task<PlatformRepository> CreateNewRepoAsync(string reponame, string description, bool isPrivate, string token)
         {
-            var json = JsonConvert.SerializeObject(new { name = reponame, description });
+            var json = JsonConvert.SerializeObject(new { name = reponame, description, @private = isPrivate });
             using var data = new StringContent(json, Encoding.UTF8, "application/json");
 
             using var requestMessage = new HttpRequestMessage(HttpMethod.Post, "https://api.github.com/user/repos");

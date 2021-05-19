@@ -39,8 +39,8 @@ namespace CNode.WebAPI.Controllers
         [HttpPost("repository")]
         public async Task<IActionResult> CreateRepositoryAsync([FromBody] CreateRepositoryCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }
