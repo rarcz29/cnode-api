@@ -2,13 +2,13 @@
 using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Dtos;
 using CNode.Application.Common.Interfaces;
-using CNode.Application.GitHub.Queries.GetAll;
+using CNode.Application.Platforms.Queries.GetAll;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CNode.Application.GitHub.Handlers.QueryHandlers
+namespace CNode.Application.Platforms.Handlers.QueryHandlers
 {
     public class GetAllQueryHandler : IRequestHandler<GetAllQuery, IEnumerable<PlatformAccountDto>>
     {
@@ -27,7 +27,7 @@ namespace CNode.Application.GitHub.Handlers.QueryHandlers
         {
             // TODO: exception handling
             var userId = int.Parse(_currentUser.UserId);
-            var platform = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
+            var platform = await _unitOfWork.Platforms.GetByNameAsync(request.Platform);
             var accounts = await _unitOfWork.Accounts.FindAsync(x => x.PlatformId == platform.Id && x.UserId == userId);
             var dto = new List<PlatformAccountDto>();
 

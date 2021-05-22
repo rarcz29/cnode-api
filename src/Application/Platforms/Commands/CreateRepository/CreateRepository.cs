@@ -1,10 +1,8 @@
-﻿using CNode.Application.Common.Dtos;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace CNode.Application.GitHub.Commands.CreateRepository
+namespace CNode.Application.Platforms.Commands.CreateRepository
 {
-    public class CreateRepositoryCommand : IRequest<PlatformRepositoryDto>
+    public class CreateRepository
     {
         public string Username { get; set; }
         public string RepoName { get; set; }

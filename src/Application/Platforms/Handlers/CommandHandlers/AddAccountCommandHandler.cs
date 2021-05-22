@@ -3,13 +3,13 @@ using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Dtos;
 using CNode.Application.Common.Interfaces;
-using CNode.Application.GitHub.Commands.AddAccount;
+using CNode.Application.Platforms.Commands.AddAccount;
 using CNode.Domain.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CNode.Application.GitHub.Handlers.CommandHandlers
+namespace CNode.Application.Platforms.Handlers.CommandHandlers
 {
     public class AddAccountCommandHandler : IRequestHandler<AddAccountCommand, PlatformNewAccountDto>
     {
@@ -34,7 +34,7 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
             // exceptions
             var userId = int.Parse(_currentUser.UserId);
             var token = await _processors.Users.GetTokenAsync(request.Code);
-            var github = await _unitOfWork.Platforms.GetByNameAsync("GitHub");
+            var platform = await _unitOfWork.Platforms.GetByNameAsync(request.Platform);
             var user = await _processors.Users.GetUserAsync(token.AccessToken);
 
             var newAccount = new Account
@@ -42,7 +42,7 @@ namespace CNode.Application.GitHub.Handlers.CommandHandlers
                 OriginId = user.Id,
                 OriginUrl = user.Url,
                 UserId = userId,
-                PlatformId = github.Id,
+                PlatformId = platform.Id,
                 Username = user.Login,
                 Token = token.AccessToken
             };
