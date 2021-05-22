@@ -1,4 +1,5 @@
-﻿using CNode.Application.Technologies.Queries.GetTechnologies;
+﻿using CNode.Application.Common.Dtos;
+using CNode.Application.Technologies.Queries.GetTechnologies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

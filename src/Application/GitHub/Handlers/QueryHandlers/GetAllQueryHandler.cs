@@ -34,11 +34,13 @@ namespace CNode.Application.GitHub.Handlers.QueryHandlers
             foreach (var account in accounts)
             {
                 var reposDto = new List<PlatformRepositoryDto>();
-                var repositories = await _unitOfWork.Repositories.FindAsync(x => x.AccountId == account.Id);
+                //var repositories = await _unitOfWork.Repositories.FindAsync(x => x.AccountId == account.Id);
+                var repositories = await _unitOfWork.Repositories.GetRepositoriesFullAsync(account.Id);
 
                 foreach (var repo in repositories)
                 {
-                    reposDto.Add(_mapper.Map<PlatformRepositoryDto>(repo));
+                    var tmpRepo = _mapper.Map<PlatformRepositoryDto>(repo);
+                    reposDto.Add(tmpRepo);
                 }
 
                 // Automapper

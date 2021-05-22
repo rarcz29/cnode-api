@@ -37,7 +37,7 @@ namespace CNode.WebAPI.Controllers
         }
 
         [HttpPost("repository")]
-        public async Task<IActionResult> CreateRepositoryAsync([FromBody] CreateRepositoryCommand command)
+        public async Task<ActionResult<PlatformRepositoryDto>> CreateRepositoryAsync([FromBody] CreateRepositoryCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

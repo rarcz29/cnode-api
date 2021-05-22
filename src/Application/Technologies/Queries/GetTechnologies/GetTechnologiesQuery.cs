@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using CNode.Application.Common.Dtos;
+using MediatR;
 using System.Collections.Generic;
 
 namespace CNode.Application.Technologies.Queries.GetTechnologies

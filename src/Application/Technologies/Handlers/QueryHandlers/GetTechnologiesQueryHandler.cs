@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CNode.Application.Common.Data.Database;
+using CNode.Application.Common.Dtos;
 using CNode.Application.Technologies.Queries.GetTechnologies;
 using MediatR;
 using System.Collections.Generic;
