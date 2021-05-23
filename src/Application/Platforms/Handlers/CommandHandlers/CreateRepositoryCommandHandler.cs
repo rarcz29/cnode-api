@@ -1,4 +1,5 @@
-﻿using CNode.Application.Common.Base;
+﻿using AutoMapper;
+using CNode.Application.Common.Base;
 using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Dtos;
@@ -7,6 +8,7 @@ using CNode.Application.Common.Interfaces;
 using CNode.Application.Platforms.Commands.CreateRepository;
 using CNode.Domain.Entities;
 using MediatR;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,14 +20,17 @@ namespace CNode.Application.Platforms.Handlers.CommandHandlers
     {
         private readonly ICurrentUserService _currentUser;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
         public CreateRepositoryCommandHandler(ICurrentUserService currentUser,
                                               IUnitOfWork unitOfWork,
-                                              IProcessorsProvider processors)
+                                              IProcessorsProvider processors,
+                                              IMapper mapper)
                                               : base(processors)
         {
             _currentUser = currentUser;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<PlatformRepositoryDto> Handle(CreateRepositoryCommand request, CancellationToken cancellationToken)
@@ -64,7 +69,8 @@ namespace CNode.Application.Platforms.Handlers.CommandHandlers
                 Name = newRepo.Name,
                 Description = newRepo.Description,
                 Private = newRepo.Private,
-                OriginUrl = newRepo.OriginUrl
+                OriginUrl = newRepo.OriginUrl,
+                Technologies = _mapper.Map<IEnumerable<TechnologyDto>>(technologies),
             };
         }
     }
