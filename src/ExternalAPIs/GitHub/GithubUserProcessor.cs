@@ -3,7 +3,6 @@ using CNode.Application.Common.Data.ExternalAPIs.GitHub;
 using CNode.Application.Common.Exceptions;
 using CNode.Application.Common.Interfaces;
 using CNode.Application.Common.Models;
-using CNode.Domain.Exceptions;
 using CNode.ExternalAPIs.Common;
 using CNode.ExternalAPIs.Models;
 using Newtonsoft.Json;
@@ -14,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace CNode.ExternalAPIs.GitHub
 {
-    internal class UserProcessor : GithubBase, IUserProcessor
+    internal class GithubUserProcessor : GithubBase, IUserProcessor
     {
         private readonly IGitHubOAuthProvider _github;
 
-        public UserProcessor(IAppHttpClient client, IGitHubOAuthProvider options) : base(client)
+        public GithubUserProcessor(IAppHttpClient client, IGitHubOAuthProvider options) : base(client)
         {
             _github = options;
         }

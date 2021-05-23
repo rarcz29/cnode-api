@@ -1,9 +1,9 @@
 ﻿using CNode.Application.Common.Interfaces;
 using FluentValidation;
 
-namespace CNode.Application.Common.Validation
+namespace CNode.Application.Common.Base
 {
-    public class ValidatorBase<T> : AbstractValidator<T> where T : IPlatform
+    public abstract class ValidatorBase<T> : AbstractValidator<T> where T : IPlatform
     {
         public ValidatorBase()
         {

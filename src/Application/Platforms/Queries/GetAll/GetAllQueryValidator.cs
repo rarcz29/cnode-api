@@ -1,4 +1,4 @@
-﻿using CNode.Application.Common.Validation;
+﻿using CNode.Application.Common.Base;
 
 namespace CNode.Application.Platforms.Queries.GetAll
 {

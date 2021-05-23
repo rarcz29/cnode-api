@@ -1,4 +1,4 @@
-﻿using CNode.Application.Common.Validation;
+﻿using CNode.Application.Common.Base;
 using FluentValidation;
 
 namespace CNode.Application.Platforms.Commands.AddAccount

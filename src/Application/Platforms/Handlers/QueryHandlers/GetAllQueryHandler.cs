@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using CNode.Application.Common.Base;
 using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Dtos;
+using CNode.Application.Common.Exceptions;
 using CNode.Application.Common.Interfaces;
 using CNode.Application.Platforms.Queries.GetAll;
 using MediatR;
@@ -10,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace CNode.Application.Platforms.Handlers.QueryHandlers
 {
-    public class GetAllQueryHandler : IRequestHandler<GetAllQuery, IEnumerable<PlatformAccountDto>>
+    public class GetAllQueryHandler : PlatformHandlerBase,
+        IRequestHandler<GetAllQuery, IEnumerable<PlatformAccountDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUser;
@@ -23,18 +26,24 @@ namespace CNode.Application.Platforms.Handlers.QueryHandlers
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<PlatformAccountDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<PlatformAccountDto>> Handle(GetAllQuery request,
+                                                                  CancellationToken cancellationToken)
         {
             // TODO: exception handling
             var userId = int.Parse(_currentUser.UserId);
             var platform = await _unitOfWork.Platforms.GetByNameAsync(request.Platform);
+
+            if (platform == null)
+            {
+                throw new UnknownPlatformException(BuildPlatformErrorMessage(request.Platform));
+            }
+
             var accounts = await _unitOfWork.Accounts.FindAsync(x => x.PlatformId == platform.Id && x.UserId == userId);
             var dto = new List<PlatformAccountDto>();
 
             foreach (var account in accounts)
             {
                 var reposDto = new List<PlatformRepositoryDto>();
-                //var repositories = await _unitOfWork.Repositories.FindAsync(x => x.AccountId == account.Id);
                 var repositories = await _unitOfWork.Repositories.GetRepositoriesFullAsync(account.Id);
 
                 foreach (var repo in repositories)

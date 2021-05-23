@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace CNode.ExternalAPIs.GitHub
 {
-    internal class RepoProcessor : GithubBase, IRepoProcessor
+    internal class GithubRepoProcessor : GithubBase, IRepoProcessor
     {
-        public RepoProcessor(IAppHttpClient client) : base(client) { }
+        public GithubRepoProcessor(IAppHttpClient client) : base(client) { }
 
         public async Task<PlatformRepository> CreateNewRepoAsync(string reponame, string description, bool isPrivate, string token)
         {

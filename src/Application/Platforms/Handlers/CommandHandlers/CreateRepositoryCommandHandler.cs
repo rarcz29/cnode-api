@@ -1,6 +1,8 @@
-﻿using CNode.Application.Common.Data.Database;
+﻿using CNode.Application.Common.Base;
+using CNode.Application.Common.Data.Database;
 using CNode.Application.Common.Data.ExternalAPIs;
 using CNode.Application.Common.Dtos;
+using CNode.Application.Common.Exceptions;
 using CNode.Application.Common.Interfaces;
 using CNode.Application.Platforms.Commands.CreateRepository;
 using CNode.Domain.Entities;
@@ -11,27 +13,34 @@ using System.Threading.Tasks;
 
 namespace CNode.Application.Platforms.Handlers.CommandHandlers
 {
-    class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCommand, PlatformRepositoryDto>
+    class CreateRepositoryCommandHandler : PlatformHandlerBase,
+        IRequestHandler<CreateRepositoryCommand, PlatformRepositoryDto>
     {
         private readonly ICurrentUserService _currentUser;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IProcessorsProvider _processors;
 
         public CreateRepositoryCommandHandler(ICurrentUserService currentUser,
                                               IUnitOfWork unitOfWork,
                                               IProcessorsProvider processors)
+                                              : base(processors)
         {
             _currentUser = currentUser;
             _unitOfWork = unitOfWork;
-            _processors = processors;
         }
 
         public async Task<PlatformRepositoryDto> Handle(CreateRepositoryCommand request, CancellationToken cancellationToken)
         {
+            var processor = GetProcessor(request.Platform);
             var userId = int.Parse(_currentUser.UserId);
-            var github = await _unitOfWork.Platforms.GetByNameAsync(request.Platform);
-            var account = await _unitOfWork.Accounts.Get(userId, request.Username, github.Id);
-            var repository = await _processors.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, request.Private, account.Token);
+            var platform = await _unitOfWork.Platforms.GetByNameAsync(request.Platform);
+
+            if (platform == null)
+            {
+                throw new UnknownPlatformException(BuildPlatformErrorMessage(request.Platform));
+            }
+
+            var account = await _unitOfWork.Accounts.Get(userId, request.Username, platform.Id);
+            var repository = await processor.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, request.Private, account.Token);
             var technologies = await _unitOfWork.Technologies.GetTechnologiesAsync(request.Technologies);
 
             var newRepo = new Repository
