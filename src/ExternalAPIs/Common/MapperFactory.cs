@@ -6,5 +6,7 @@ namespace CNode.ExternalAPIs.Common
     internal class MapperFactory
     {
         public static IGithubMapper CreateGithubMapper() => new GithubMapper();
+
+        public static IBitbucketMapper CreateBitbucketMapper() => new BitbucketMapper();
     }
 }

@@ -18,17 +18,14 @@ namespace CNode.Application.Platforms.Handlers.CommandHandlers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUser;
-        private readonly IMapper _mapper;
 
         public AddAccountCommandHandler(IUnitOfWork unitOfWork,
                                         ICurrentUserService currentUser,
-                                        IProcessorsProvider processors,
-                                        IMapper mapper)
+                                        IProcessorsProvider processors)
                                         : base(processors)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
-            _mapper = mapper;
         }
 
         public async Task<PlatformNewAccountDto> Handle(AddAccountCommand request,

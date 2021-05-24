@@ -26,6 +26,8 @@ namespace CNode.Application.Common.Base
             {
                 case "github":
                     return _processors.Github;
+                case "bitbucket":
+                    return _processors.Bitbucket;
                 default:
                     throw new UnknownPlatformException($"{platform} is not a valid platform name.");
             }

@@ -11,7 +11,9 @@ namespace CNode.WebAPI.Installers
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<GitHubOAuth>(configuration.GetSection(nameof(GitHubOAuth)));
+            services.Configure<BitbucketOAuth>(configuration.GetSection(nameof(BitbucketOAuth)));
             services.AddSingleton<IGitHubOAuthProvider, GitHubOAuthProvider>();
+            services.AddSingleton<IBitbucketOAuthProvider, BitbucketOAuthProvider>();
         }
     }
 
@@ -23,5 +25,15 @@ namespace CNode.WebAPI.Installers
         }
 
         public IGitHubOAuthOptions Options { get; }
+    }
+
+    internal class BitbucketOAuthProvider : IBitbucketOAuthProvider
+    {
+        public BitbucketOAuthProvider(IOptions<BitbucketOAuth> options)
+        {
+            Options = options.Value;
+        }
+
+        public IBitbucketOAuthOptions Options { get; }
     }
 }

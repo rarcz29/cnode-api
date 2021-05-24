@@ -3,5 +3,7 @@
     public interface IProcessorsProvider
     {
         IPlatformProvider Github { get; }
+
+        IPlatformProvider Bitbucket { get; }
     }
 }
