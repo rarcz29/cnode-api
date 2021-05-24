@@ -8,5 +8,7 @@ namespace CNode.ExternalAPIs.Common
         public static IGithubMapper CreateGithubMapper() => new GithubMapper();
 
         public static IBitbucketMapper CreateBitbucketMapper() => new BitbucketMapper();
+
+        public static IGitlabMapper CreateGitlabMapper() => new GitlabMapper();
     }
 }

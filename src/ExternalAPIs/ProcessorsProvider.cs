@@ -2,6 +2,7 @@
 using CNode.Application.Common.Interfaces;
 using CNode.ExternalAPIs.Bitbucket;
 using CNode.ExternalAPIs.GitHub;
+using CNode.ExternalAPIs.GitLab;
 
 namespace CNode.ExternalAPIs
 {
@@ -9,14 +10,18 @@ namespace CNode.ExternalAPIs
     {
         public ProcessorsProvider(IAppHttpClient client,
                                   IGitHubOAuthProvider githubOptions,
-                                  IBitbucketOAuthProvider bitbucketOptions)
+                                  IBitbucketOAuthProvider bitbucketOptions,
+                                  IGitLabOAuthProvider gitlabOptions)
         {
             Github ??= new GithubProvider(client, githubOptions);
             Bitbucket ??= new BitbucketProvider(client, bitbucketOptions);
+            Gitlab ??= new GitlabProvider(client, gitlabOptions);
         }
 
         public IPlatformProvider Github { get; }
 
         public IPlatformProvider Bitbucket { get; }
+
+        public IPlatformProvider Gitlab { get; }
     }
 }

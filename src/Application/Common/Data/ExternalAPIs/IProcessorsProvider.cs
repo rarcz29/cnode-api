@@ -5,5 +5,7 @@
         IPlatformProvider Github { get; }
 
         IPlatformProvider Bitbucket { get; }
+
+        IPlatformProvider Gitlab { get; }
     }
 }

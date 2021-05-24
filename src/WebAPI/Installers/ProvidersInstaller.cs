@@ -12,8 +12,10 @@ namespace CNode.WebAPI.Installers
         {
             services.Configure<GitHubOAuth>(configuration.GetSection(nameof(GitHubOAuth)));
             services.Configure<BitbucketOAuth>(configuration.GetSection(nameof(BitbucketOAuth)));
+            services.Configure<GitLabOAuth>(configuration.GetSection(nameof(GitLabOAuth)));
             services.AddSingleton<IGitHubOAuthProvider, GitHubOAuthProvider>();
             services.AddSingleton<IBitbucketOAuthProvider, BitbucketOAuthProvider>();
+            services.AddSingleton<IGitLabOAuthProvider, GitLabOAuthProvider>();
         }
     }
 
@@ -35,5 +37,15 @@ namespace CNode.WebAPI.Installers
         }
 
         public IBitbucketOAuthOptions Options { get; }
+    }
+
+    internal class GitLabOAuthProvider : IGitLabOAuthProvider
+    {
+        public GitLabOAuthProvider(IOptions<GitLabOAuth> options)
+        {
+            Options = options.Value;
+        }
+
+        public IGitLabOAuthOptions Options { get; }
     }
 }
