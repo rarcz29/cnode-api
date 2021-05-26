@@ -21,6 +21,7 @@ namespace CNode.WebAPI.Filters
                 { typeof(AuthenticationException), HandleAuthenticationException },
                 { typeof(UserRegistrationException), HandleUserRegistrationException },
                 { typeof(InternalServerException), HandleInternalServerException },
+                { typeof(UnknownPlatformException), HandleUnknownPlatformException },
             };
         }
 
@@ -106,6 +107,27 @@ namespace CNode.WebAPI.Filters
             {
                 Status = StatusCodes.Status500InternalServerError,
                 Title = "An internal server error has occurred.",
+                Detail = exception.Message,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3",
+            };
+
+            context.Result = new ObjectResult(details)
+            {
+                StatusCode = StatusCodes.Status500InternalServerError,
+            };
+
+            context.ExceptionHandled = true;
+        }
+
+        private void HandleUnknownPlatformException(ExceptionContext context)
+        {
+            var exception = context.Exception as UnknownPlatformException;
+
+            var details = new ProblemDetails
+            {
+                // TODO: error code
+                Status = StatusCodes.Status500InternalServerError,
+                Title = "An external platform error has occurred.",
                 Detail = exception.Message,
                 Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3",
             };

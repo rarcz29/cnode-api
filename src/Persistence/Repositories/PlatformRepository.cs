@@ -17,7 +17,7 @@ namespace CNode.Persistence.Repositories
 
         public async Task<Platform> GetByNameAsync(string name)
         {
-            return await _db.Platforms.Where(t => t.Name == name).FirstOrDefaultAsync();
+            return await _db.Platforms.Where(t => t.Name.ToLower() == name.ToLower()).FirstOrDefaultAsync();
         }
     }
 }

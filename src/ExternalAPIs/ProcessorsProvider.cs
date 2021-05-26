@@ -1,20 +1,27 @@
 ﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Data.ExternalAPIs.GitHub;
 using CNode.Application.Common.Interfaces;
+using CNode.ExternalAPIs.Bitbucket;
 using CNode.ExternalAPIs.GitHub;
+using CNode.ExternalAPIs.GitLab;
 
 namespace CNode.ExternalAPIs
 {
-    class ProcessorsProvider : IProcessorsProvider
+    internal class ProcessorsProvider : IProcessorsProvider
     {
-        public ProcessorsProvider(IAppHttpClient client, IGitHubOAuthProvider options)
+        public ProcessorsProvider(IAppHttpClient client,
+                                  IGitHubOAuthProvider githubOptions,
+                                  IBitbucketOAuthProvider bitbucketOptions,
+                                  IGitLabOAuthProvider gitlabOptions)
         {
-            Users ??= new UserProcessor(client, options);
-            Repositories ??= new RepoProcessor(client);
+            Github ??= new GithubProvider(client, githubOptions);
+            Bitbucket ??= new BitbucketProvider(client, bitbucketOptions);
+            Gitlab ??= new GitlabProvider(client, gitlabOptions);
         }
 
-        public IUserProcessor Users { get; private set; }
+        public IPlatformProvider Github { get; }
 
-        public IRepoProcessor Repositories { get; private set; }
+        public IPlatformProvider Bitbucket { get; }
+
+        public IPlatformProvider Gitlab { get; }
     }
 }

@@ -12,7 +12,7 @@ namespace CNode.ExternalAPIs.Common
             ApiClient.DefaultRequestHeaders.Accept.Clear();
             ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
             ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            ApiClient.DefaultRequestHeaders.UserAgent.TryParseAdd("cnode");
+            ApiClient.DefaultRequestHeaders.UserAgent.ParseAdd("gitnode");
         }
 
         public HttpClient ApiClient { get; private set; }

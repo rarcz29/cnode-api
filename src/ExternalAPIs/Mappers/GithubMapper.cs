@@ -8,11 +8,11 @@ namespace CNode.ExternalAPIs.Mappers
     {
         public PlatformUser Map(GithubUser model) => new()
         {
-            Id = model.id,
+            Id = model.id.ToString(),
             Login = model.login,
             Name = model.name,
             Url = model.html_url,
-            Email = model.email
+            //Email = model.email // TODO: remove
         };
 
         public PlatformRepository Map(GithubRepository model) => new()

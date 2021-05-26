@@ -1,0 +1,40 @@
+﻿using CNode.Application.Common.Data.ExternalAPIs;
+using CNode.Application.Common.Exceptions;
+using CNode.Domain.Exceptions;
+
+namespace CNode.Application.Common.Base
+{
+    public abstract class PlatformHandlerBase
+    {
+        private readonly IProcessorsProvider _processors;
+
+        public PlatformHandlerBase() { }
+
+        public PlatformHandlerBase(IProcessorsProvider processors)
+        {
+            _processors = processors;
+        }
+
+        protected IPlatformProvider GetProcessor(string platform)
+        {
+            if (_processors == null)
+            {
+                throw new InternalServerException("Platform is not specified");
+            }
+
+            switch (platform.ToLower())
+            {
+                case "github":
+                    return _processors.Github;
+                case "bitbucket":
+                    return _processors.Bitbucket;
+                case "gitlab":
+                    return _processors.Gitlab;
+                default:
+                    throw new UnknownPlatformException($"{platform} is not a valid platform name.");
+            }
+        }
+
+        protected string BuildPlatformErrorMessage(string platform) => $"Server cannot find the {platform} in the database";
+    }
+}
