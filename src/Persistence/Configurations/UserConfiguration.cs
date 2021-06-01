@@ -20,7 +20,7 @@ namespace CNode.Persistence.Configurations
 
             builder
                 .Property(u => u.Password)
-                .HasMaxLength(50)
+                .HasMaxLength(300)
                 .IsRequired();
 
             builder

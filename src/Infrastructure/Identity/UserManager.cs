@@ -17,12 +17,15 @@ namespace CNode.Infrastructure.Identity
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtService _jwt;
+        private readonly IPasswordHasher _passwordHasher;
         private readonly TokenValidationParameters _tokenValidationParameters;
 
-        public UserManager(IUnitOfWork unitOfWork, IJwtService jwt, TokenValidationParameters tokenValidationParameters)
+        public UserManager(IUnitOfWork unitOfWork, IJwtService jwt, IPasswordHasher passwordHasher,
+                           TokenValidationParameters tokenValidationParameters)
         {
             _unitOfWork = unitOfWork;
             _jwt = jwt;
+            _passwordHasher = passwordHasher;
             _tokenValidationParameters = tokenValidationParameters;
         }
 
@@ -34,7 +37,7 @@ namespace CNode.Infrastructure.Identity
             {
                 var user = users.First();
 
-                if (user?.Password == password)
+                if (_passwordHasher.ValidatePassword(password, user.Password))
                 {
                     var jwt = _jwt.CreateJwt(user);
                     var validatedToken = GetPrincipalFromToken(jwt);
@@ -102,7 +105,7 @@ namespace CNode.Infrastructure.Identity
             {
                 Username = username,
                 Email = email,
-                Password = password,
+                Password = _passwordHasher.CreateHash(password),
                 CreatedAt = DateTime.UtcNow
             };
 
