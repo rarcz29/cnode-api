@@ -32,12 +32,6 @@ namespace CNode.WebAPI.Controllers
             return Ok();
         }
 
-        //[HttpDelete("logout")]
-        //public async Task<IActionResult> LogoutAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         [HttpPost("refresh")]
         public async Task<ActionResult<RefreshTokenDto>> RefreshAsync([FromBody] RefreshCommand command)
         {
