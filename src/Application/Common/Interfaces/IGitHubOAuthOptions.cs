@@ -1,0 +1,8 @@
+﻿namespace CNode.Application.Common.Interfaces
+{
+    public interface IGitHubOAuthOptions
+    {
+        string ClientSecret { get; }
+        string ClientID { get; }
+    }
+}

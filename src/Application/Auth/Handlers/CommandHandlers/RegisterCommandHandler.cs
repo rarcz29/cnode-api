@@ -1,0 +1,24 @@
+﻿using CNode.Application.Auth.Commands.Register;
+using CNode.Application.Common.Interfaces;
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CNode.Application.Auth.Handlers.CommandHandlers
+{
+    public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
+    {
+        private readonly IUserManager _userManager;
+
+        public RegisterCommandHandler(IUserManager userManager)
+        {
+            _userManager = userManager;
+        }
+
+        public async Task<Unit> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        {
+            await _userManager.RegisterAsync(request.Username, request.Email, request.Password);
+            return Unit.Value;
+        }
+    }
+}
