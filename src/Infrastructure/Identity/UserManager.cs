@@ -138,22 +138,14 @@ namespace CNode.Infrastructure.Identity
         private ClaimsPrincipal GetPrincipalFromToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
+            var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
 
-            try
+            if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
             {
-                var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
-
-                if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
-                {
-                    return null;
-                }
-
-                return principal;
+                throw new AuthenticationException("Server has a problem with authenticating the user.");
             }
-            catch
-            {
-                return null;
-            }
+
+            return principal;
         }
 
         private async Task<string> SaveNewRefreshTokenAsync(int userId, string jti)

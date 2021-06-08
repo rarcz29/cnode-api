@@ -39,16 +39,12 @@ namespace CNode.ExternalAPIs.Bitbucket
                 var model = await response.Content.ReadAsAsync<BitbucketUser>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.ReasonPhrase);
-            }
+
+            throw new ExternalApiException(response.ReasonPhrase);
         }
 
         public async Task<PlatformUser> GetUserByUsernameAsync(string username)
         {
-            throw new NotImplementedException(); // TODO: implement
-
             using var response = await _client.ApiClient.GetAsync($"https://api.bitbucket.org/2.0/user");
 
             if (response.IsSuccessStatusCode)
@@ -56,10 +52,8 @@ namespace CNode.ExternalAPIs.Bitbucket
                 var model = await response.Content.ReadAsAsync<BitbucketUser>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.StatusCode.ToString());
-            }
+
+            throw new ExternalApiException(response.StatusCode.ToString());
         }
 
         public async Task<PlatformToken> GetTokenAsync(string code)
@@ -78,10 +72,8 @@ namespace CNode.ExternalAPIs.Bitbucket
                 var model = await response.Content.ReadAsAsync<BitbucketToken>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.ReasonPhrase);
-            }
+
+            throw new ExternalApiException(response.ReasonPhrase);
         }
     }
 }
