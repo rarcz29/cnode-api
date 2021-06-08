@@ -35,11 +35,8 @@ namespace CNode.ExternalAPIs.Bitbucket
                 var model = await response.Content.ReadAsAsync<BitbucketRepository>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.ReasonPhrase);
-            }
 
+            throw new ExternalApiException(response.ReasonPhrase);
         }
     }
 }

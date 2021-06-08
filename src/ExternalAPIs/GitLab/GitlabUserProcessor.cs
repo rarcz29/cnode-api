@@ -36,10 +36,8 @@ namespace CNode.ExternalAPIs.GitLab
                 var model = await response.Content.ReadAsAsync<GitlabUser>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.ReasonPhrase);
-            }
+
+            throw new ExternalApiException(response.ReasonPhrase);
         }
 
         public async Task<PlatformUser> GetUserByUsernameAsync(string username)
@@ -51,10 +49,8 @@ namespace CNode.ExternalAPIs.GitLab
                 var model = await response.Content.ReadAsAsync<GitlabUser>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.StatusCode.ToString());
-            }
+
+            throw new ExternalApiException(response.StatusCode.ToString());
         }
 
         public async Task<PlatformToken> GetTokenAsync(string code)
@@ -77,10 +73,8 @@ namespace CNode.ExternalAPIs.GitLab
                 var model = await response.Content.ReadAsAsync<GitlabToken>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.ReasonPhrase);
-            }
+
+            throw new ExternalApiException(response.ReasonPhrase);
         }
     }
 }

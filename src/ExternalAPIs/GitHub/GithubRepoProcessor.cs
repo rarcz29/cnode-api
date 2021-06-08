@@ -32,11 +32,8 @@ namespace CNode.ExternalAPIs.GitHub
                 var model = await response.Content.ReadAsAsync<GithubRepository>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.ReasonPhrase);
-            }
 
+            throw new ExternalApiException(response.ReasonPhrase);
         }
     }
 }
