@@ -38,11 +38,8 @@ namespace CNode.ExternalAPIs.GitLab
                 var model = await response.Content.ReadAsAsync<GitlabRepository>();
                 return _mapper.Map(model);
             }
-            else
-            {
-                throw new ExternalApiException(response.ReasonPhrase);
-            }
 
+            throw new ExternalApiException(response.ReasonPhrase);
         }
     }
 }
