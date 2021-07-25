@@ -31,7 +31,7 @@ namespace GitNode.Application.Platforms.Handlers.CommandHandlers
                                                         CancellationToken cancellationToken)
         {
             var processor = GetProcessor(request.Platform);
-            // exceptions
+            // TODO: exceptions
             var userId = int.Parse(_currentUser.UserId);
             var token = await processor.Users.GetTokenAsync(request.Code);
             var user = await processor.Users.GetUserAsync(token.AccessToken);
