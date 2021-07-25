@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using GitNode.Domain.Entities;
 
-namespace GitNode.Application.Common.Data.Database.Repositories
+namespace GitNode.Application.Common.Interfaces.Data.Database.Repositories
 {
     public interface IRepositoryRepository : IRepository<Repository>
     {

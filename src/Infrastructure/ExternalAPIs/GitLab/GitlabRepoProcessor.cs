@@ -2,8 +2,8 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using GitNode.Application.Common.Data.ExternalAPIs;
 using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Interfaces.Data.ExternalAPIs;
 using GitNode.Domain.Platforms;
 using GitNode.Infrastructure.ExternalAPIs.Common;
 using GitNode.Infrastructure.ExternalAPIs.Models;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GitNode.Application.Common.Data.Database.Repositories;
+using GitNode.Application.Common.Interfaces.Data.Database.Repositories;
 
-namespace GitNode.Application.Common.Data.Database
+namespace GitNode.Application.Common.Interfaces.Data.Database
 {
     public interface IUnitOfWork : IDisposable
     {

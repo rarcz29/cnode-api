@@ -1,4 +1,4 @@
-﻿namespace GitNode.Application.Common.Interfaces
+﻿namespace GitNode.Application.Common.Interfaces.OAuth
 {
     public interface IGitLabOAuthProvider
     {

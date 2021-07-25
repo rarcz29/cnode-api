@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using GitNode.Application.Common.Data.Database;
-using GitNode.Application.Common.Data.Database.Repositories;
+using GitNode.Application.Common.Interfaces.Data.Database;
+using GitNode.Application.Common.Interfaces.Data.Database.Repositories;
 using GitNode.Persistence.Repositories;
 
 namespace GitNode.Persistence

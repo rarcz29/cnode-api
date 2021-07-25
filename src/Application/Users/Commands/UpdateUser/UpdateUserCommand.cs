@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using GitNode.Application.Common.Data.Database;
 using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Common.Interfaces.Data.Database;
 using MediatR;
 
 namespace GitNode.Application.Users.Commands.UpdateUser

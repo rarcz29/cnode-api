@@ -1,5 +1,5 @@
-﻿using GitNode.Application.Common.Data.ExternalAPIs;
-using GitNode.Application.Common.Exceptions;
+﻿using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Interfaces.Data.ExternalAPIs;
 using GitNode.Domain.Exceptions;
 
 namespace GitNode.Application.Common.Base

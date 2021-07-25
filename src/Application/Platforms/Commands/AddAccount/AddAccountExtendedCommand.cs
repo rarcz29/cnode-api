@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using GitNode.Application.Common.Base;
-using GitNode.Application.Common.Data.Database;
-using GitNode.Application.Common.Data.ExternalAPIs;
 using GitNode.Application.Common.Dtos;
 using GitNode.Application.Common.Exceptions;
 using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Common.Interfaces.Data.Database;
+using GitNode.Application.Common.Interfaces.Data.ExternalAPIs;
 using GitNode.Application.Common.Mappings;
 using GitNode.Domain.Entities;
 using MediatR;

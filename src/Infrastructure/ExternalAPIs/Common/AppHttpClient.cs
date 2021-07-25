@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Headers;
-using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Interfaces.Data.ExternalAPIs;
 
 namespace GitNode.Infrastructure.ExternalAPIs.Common
 {

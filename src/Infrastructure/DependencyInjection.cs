@@ -1,5 +1,5 @@
-﻿using GitNode.Application.Common.Data.ExternalAPIs;
-using GitNode.Application.Common.Interfaces;
+﻿using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Common.Interfaces.Data.ExternalAPIs;
 using GitNode.Infrastructure.Cryptography;
 using GitNode.Infrastructure.ExternalAPIs;
 using GitNode.Infrastructure.ExternalAPIs.Common;

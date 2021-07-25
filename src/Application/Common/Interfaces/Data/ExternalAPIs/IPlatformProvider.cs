@@ -1,4 +1,4 @@
-﻿namespace GitNode.Application.Common.Data.ExternalAPIs
+﻿namespace GitNode.Application.Common.Interfaces.Data.ExternalAPIs
 {
     public interface IPlatformProvider
     {

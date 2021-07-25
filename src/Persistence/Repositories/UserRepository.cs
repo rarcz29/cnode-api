@@ -1,4 +1,4 @@
-﻿using GitNode.Application.Common.Data.Database.Repositories;
+﻿using GitNode.Application.Common.Interfaces.Data.Database.Repositories;
 using GitNode.Domain.Entities;
 
 namespace GitNode.Persistence.Repositories

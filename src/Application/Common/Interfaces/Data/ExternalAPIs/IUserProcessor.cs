@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GitNode.Domain.Platforms;
 
-namespace GitNode.Application.Common.Data.ExternalAPIs
+namespace GitNode.Application.Common.Interfaces.Data.ExternalAPIs
 {
     public interface IUserProcessor
     {
