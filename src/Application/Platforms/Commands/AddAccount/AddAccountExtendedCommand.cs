@@ -6,12 +6,27 @@ using GitNode.Application.Common.Data.ExternalAPIs;
 using GitNode.Application.Common.Dtos;
 using GitNode.Application.Common.Exceptions;
 using GitNode.Application.Common.Interfaces;
-using GitNode.Application.Platforms.Commands.AddAccount;
+using GitNode.Application.Common.Mappings;
 using GitNode.Domain.Entities;
 using MediatR;
 
-namespace GitNode.Application.Platforms.Handlers.CommandHandlers
+namespace GitNode.Application.Platforms.Commands.AddAccount
 {
+    public class AddAccountCommand : AddAccount,
+                                     IRequest<PlatformNewAccountDto>,
+                                     IMapFrom<AddAccount>,
+                                     IPlatform
+    {
+        public AddAccountCommand() { }
+
+        public AddAccountCommand(string platform)
+        {
+            Platform = platform;
+        }
+
+        public string Platform { get; set; }
+    }
+    
     public class AddAccountCommandHandler : PlatformHandlerBase,
         IRequestHandler<AddAccountCommand, PlatformNewAccountDto>
     {
@@ -19,16 +34,16 @@ namespace GitNode.Application.Platforms.Handlers.CommandHandlers
         private readonly ICurrentUserService _currentUser;
 
         public AddAccountCommandHandler(IUnitOfWork unitOfWork,
-                                        ICurrentUserService currentUser,
-                                        IProcessorsProvider processors)
-                                        : base(processors)
+            ICurrentUserService currentUser,
+            IProcessorsProvider processors)
+            : base(processors)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
         }
 
         public async Task<PlatformNewAccountDto> Handle(AddAccountCommand request,
-                                                        CancellationToken cancellationToken)
+            CancellationToken cancellationToken)
         {
             var processor = GetProcessor(request.Platform);
             // TODO: exceptions
