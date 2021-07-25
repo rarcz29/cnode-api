@@ -1,5 +1,8 @@
-﻿using GitNode.Application.Common.Interfaces;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Interfaces;
 using GitNode.Infrastructure.Cryptography;
+using GitNode.Infrastructure.ExternalAPIs;
+using GitNode.Infrastructure.ExternalAPIs.Common;
 using GitNode.Infrastructure.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +14,8 @@ namespace GitNode.Infrastructure
         {
             services.AddTransient<IUserManager, UserManager>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            services.AddSingleton<IAppHttpClient, AppHttpClient>();
+            services.AddSingleton<IProcessorsProvider, ProcessorsProvider>();
             return services;
         }
     }

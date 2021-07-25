@@ -1,5 +1,4 @@
 using GitNode.Application;
-using GitNode.ExternalAPIs;
 using GitNode.Infrastructure;
 using GitNode.Persistence;
 using GitNode.WebAPI.Installers;
@@ -18,14 +17,13 @@ namespace GitNode.WebAPI
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssembly(Configuration);
 
             services
-                .AddExteranlApIs()
                 .AddApplication()
                 .AddInfrastructure()
                 .AddPersistence(Configuration);
