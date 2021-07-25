@@ -1,4 +1,4 @@
-﻿using GitNode.Application.Common.Data.Database;
+﻿using GitNode.Application.Common.Interfaces.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

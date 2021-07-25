@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace GitNode.Application.Common.Data.Database.Repositories
+namespace GitNode.Application.Common.Interfaces.Data.Database.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
