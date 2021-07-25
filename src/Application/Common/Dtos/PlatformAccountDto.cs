@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using GitNode.Application.Common.Mappings;
-using GitNode.Application.Common.Models;
+using GitNode.Domain.Platforms;
 
 namespace GitNode.Application.Common.Dtos
 {

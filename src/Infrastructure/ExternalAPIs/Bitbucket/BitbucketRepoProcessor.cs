@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GitNode.Application.Common.Data.ExternalAPIs;
-using GitNode.Application.Common.Models;
+using GitNode.Domain.Platforms;
 using GitNode.Infrastructure.ExternalAPIs.Common;
 
 namespace GitNode.Infrastructure.ExternalAPIs.Bitbucket

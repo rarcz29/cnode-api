@@ -1,4 +1,4 @@
-﻿namespace GitNode.Application.Common.Models
+﻿namespace GitNode.Domain.Platforms
 {
     public class PlatformUser
     {
