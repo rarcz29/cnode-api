@@ -3,7 +3,7 @@ using GitNode.Application.Common.Base;
 
 namespace GitNode.Application.Platforms.Commands.AddAccount
 {
-    public class AddAccountCommandValidator : ValidatorBase<AddAccountCommand>
+    public class AddAccountCommandValidator : ValidatorBase<AddAccountExtendedCommand>
     {
         public AddAccountCommandValidator()
         {
