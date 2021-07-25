@@ -2,7 +2,7 @@
 {
     public interface IGitLabOAuthOptions
     {
-        string ApplicationID { get; }
+        string ApplicationId { get; }
 
         string Secret { get; }
     }

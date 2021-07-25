@@ -20,35 +20,21 @@ namespace GitNode.Persistence
             RefreshTokens ??= new RefreshTokenRepository(db);
         }
 
-        public IAccountRepository Accounts { get; private set; }
-        public IPlatformRepository Platforms { get; private set; }
-        public IRepositoryRepository Repositories { get; private set; }
-        public ITechnologyRepository Technologies { get; private set; }
-        public IUserRepository Users { get; private set; }
-        public IRefreshTokenRepository RefreshTokens { get; private set; }
+        public IAccountRepository Accounts { get; }
+        public IPlatformRepository Platforms { get; }
+        public IRepositoryRepository Repositories { get; }
+        public ITechnologyRepository Technologies { get; }
+        public IUserRepository Users { get; }
+        public IRefreshTokenRepository RefreshTokens { get; }
 
         public int SaveChanges()
         {
-            try
-            {
-                return _db.SaveChanges();
-            }
-            catch
-            {
-                throw;
-            }
+            return _db.SaveChanges();
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            try
-            {
-                return await _db.SaveChangesAsync();
-            }
-            catch
-            {
-                throw;
-            }
+            return await _db.SaveChangesAsync();
         }
 
         public void Dispose()

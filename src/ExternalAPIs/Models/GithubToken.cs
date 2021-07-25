@@ -1,11 +1,10 @@
-﻿namespace GitNode.ExternalAPIs.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GitNode.ExternalAPIs.Models
 {
-    public class GithubToken
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public abstract class GithubToken
     {
-#pragma warning disable IDE1006 // Naming Styles
-
-        public string access_token { get; set; }
-
-#pragma warning restore IDE1006 // Naming Styles
+        public string access_token { get; } = "";
     }
 }

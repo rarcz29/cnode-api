@@ -25,7 +25,7 @@ namespace GitNode.WebAPI
             services.InstallServicesInAssembly(Configuration);
 
             services
-                .AddExteranlAPIs()
+                .AddExteranlApIs()
                 .AddApplication()
                 .AddInfrastructure()
                 .AddPersistence(Configuration);

@@ -5,6 +5,6 @@ namespace GitNode.WebAPI.Options
     public class GitHubOAuth : IGitHubOAuthOptions
     {
         public string ClientSecret { get; set; }
-        public string ClientID { get; set; }
+        public string ClientId { get; set; }
     }
 }

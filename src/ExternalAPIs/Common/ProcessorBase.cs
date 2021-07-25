@@ -4,11 +4,11 @@ namespace GitNode.ExternalAPIs.Common
 {
     internal abstract class ProcessorBase
     {
-        protected readonly IAppHttpClient _client;
+        protected readonly IAppHttpClient Client;
 
         public ProcessorBase(IAppHttpClient client)
         {
-            _client = client;
+            Client = client;
         }
     }
 }

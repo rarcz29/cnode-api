@@ -5,11 +5,11 @@ namespace GitNode.ExternalAPIs.Common
 {
     class BitbucketBase : ProcessorBase
     {
-        protected IBitbucketMapper _mapper;
+        protected readonly IBitbucketMapper Mapper;
 
         public BitbucketBase(IAppHttpClient client) : base(client)
         {
-            _mapper = MapperFactory.CreateBitbucketMapper();
+            Mapper = MapperFactory.CreateBitbucketMapper();
         }
     }
 }

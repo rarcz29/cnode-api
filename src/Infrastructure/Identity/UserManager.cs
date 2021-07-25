@@ -31,29 +31,26 @@ namespace GitNode.Infrastructure.Identity
 
         public async Task<AuthenticationResult> AuthenticateAsync(string usernameOrEmail, string password)
         {
-            var users = await _unitOfWork.Users.FindAsync(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
+            var users = (await _unitOfWork.Users.FindAsync(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail)).ToList();
 
-            if (users != null && users.Count() == 1)
-            {
-                var user = users.First();
+            if (users == null || users.Count() != 1)
+                throw new AuthenticationException("You have entered an invalid username or email.");
+            
+            var user = users.First();
 
-                if (_passwordHasher.ValidatePassword(password, user.Password))
-                {
-                    var jwt = _jwt.CreateJwt(user);
-                    var validatedToken = GetPrincipalFromToken(jwt);
-                    var jti = validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
-                    var refreshToken = await SaveNewRefreshTokenAsync(user.Id, jti);
-                    return new AuthenticationResult
-                    {
-                        Token = jwt,
-                        RefreshToken = refreshToken
-                    };
-                }
-
+            if (!_passwordHasher.ValidatePassword(password, user.Password))
                 throw new AuthenticationException("You have entered an invalid password.");
-            }
+            
+            var jwt = _jwt.CreateJwt(user);
+            var validatedToken = GetPrincipalFromToken(jwt);
+            var jti = validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+            var refreshToken = await SaveNewRefreshTokenAsync(user.Id, jti);
+            return new AuthenticationResult
+            {
+                Token = jwt,
+                RefreshToken = refreshToken
+            };
 
-            throw new AuthenticationException("You have entered an invalid username or email.");
         }
 
         public async Task<AuthenticationResult> RefreshAsync(string token, string refreshToken)

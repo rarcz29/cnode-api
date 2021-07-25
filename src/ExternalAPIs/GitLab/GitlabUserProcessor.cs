@@ -25,30 +25,22 @@ namespace GitNode.ExternalAPIs.GitLab
         {
             using var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://gitlab.com/api/v4/user");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _client.ApiClient.SendAsync(requestMessage);
+            var response = await Client.ApiClient.SendAsync(requestMessage);
 
-            var x = await response.Content.ReadAsStringAsync();
-
-            if (response.IsSuccessStatusCode)
-            {
-                var model = await response.Content.ReadAsAsync<GitlabUser>();
-                return _mapper.Map(model);
-            }
-
-            throw new ExternalApiException(response.ReasonPhrase);
+            if (!response.IsSuccessStatusCode) throw new ExternalApiException(response.ReasonPhrase);
+            
+            var model = await response.Content.ReadAsAsync<GitlabUser>();
+            return Mapper.Map(model);
         }
 
         public async Task<PlatformUser> GetUserByUsernameAsync(string username)
         {
-            using var response = await _client.ApiClient.GetAsync($"https://gitlab.com/api/v4/users?username={username}");
+            using var response = await Client.ApiClient.GetAsync($"https://gitlab.com/api/v4/users?username={username}");
 
-            if (response.IsSuccessStatusCode)
-            {
-                var model = await response.Content.ReadAsAsync<GitlabUser>();
-                return _mapper.Map(model);
-            }
-
-            throw new ExternalApiException(response.StatusCode.ToString());
+            if (!response.IsSuccessStatusCode) throw new ExternalApiException(response.StatusCode.ToString());
+            
+            var model = await response.Content.ReadAsAsync<GitlabUser>();
+            return Mapper.Map(model);
         }
 
         public async Task<PlatformToken> GetTokenAsync(string code)
@@ -58,21 +50,18 @@ namespace GitNode.ExternalAPIs.GitLab
             {
                 code,
                 client_secret = _gitlab.Options.Secret,
-                client_id = _gitlab.Options.ApplicationID,
+                client_id = _gitlab.Options.ApplicationId,
                 grant_type = "authorization_code",
                 redirect_uri = "https://localhost:3000"
             });
 
             using var data = new StringContent(json, Encoding.UTF8, "application/json");
-            using var response = await _client.ApiClient.PostAsync("https://gitlab.com/oauth/token", data);
+            using var response = await Client.ApiClient.PostAsync("https://gitlab.com/oauth/token", data);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var model = await response.Content.ReadAsAsync<GitlabToken>();
-                return _mapper.Map(model);
-            }
-
-            throw new ExternalApiException(response.ReasonPhrase);
+            if (!response.IsSuccessStatusCode) throw new ExternalApiException(response.ReasonPhrase);
+            
+            var model = await response.Content.ReadAsAsync<GitlabToken>();
+            return Mapper.Map(model);
         }
     }
 }

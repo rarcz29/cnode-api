@@ -24,12 +24,12 @@ namespace GitNode.ExternalAPIs.GitHub
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = data;
 
-            var response = await _client.ApiClient.SendAsync(requestMessage);
+            var response = await Client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<GithubRepository>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.ReasonPhrase);

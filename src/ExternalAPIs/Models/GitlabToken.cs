@@ -1,9 +1,11 @@
-﻿namespace GitNode.ExternalAPIs.Models
-{
-    internal class GitlabToken
-    {
-        public string access_token { get; set; }
+﻿using System.Diagnostics.CodeAnalysis;
 
-        public string refresh_token { get; set; }
+namespace GitNode.ExternalAPIs.Models
+{
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    internal abstract class GitlabToken
+    {
+        public string access_token { get; } = "";
+        public string refresh_token { get; } = "";
     }
 }

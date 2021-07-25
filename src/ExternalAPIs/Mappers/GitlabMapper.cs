@@ -6,7 +6,7 @@ namespace GitNode.ExternalAPIs.Mappers
 {
     internal class GitlabMapper : IGitlabMapper
     {
-        public PlatformRepository Map(GitlabRepository model) => new()
+        public PlatformRepository Map(GitlabRepository model) => new PlatformRepository()
         {
             Id = model.id,
             Name = model.path,
@@ -15,12 +15,12 @@ namespace GitNode.ExternalAPIs.Mappers
             Private = model.visibility == "private"
         };
 
-        public PlatformToken Map(GitlabToken model) => new()
+        public PlatformToken Map(GitlabToken model) => new PlatformToken()
         {
             AccessToken = model.access_token
         };
 
-        public PlatformUser Map(GitlabUser model) => new()
+        public PlatformUser Map(GitlabUser model) => new PlatformUser()
         {
             Id = model.id.ToString(),
             Login = model.username,

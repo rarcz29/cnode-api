@@ -6,7 +6,7 @@ namespace GitNode.ExternalAPIs
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddExteranlAPIs(this IServiceCollection services)
+        public static IServiceCollection AddExteranlApIs(this IServiceCollection services)
         {
             services.AddSingleton<IAppHttpClient, AppHttpClient>();
             services.AddSingleton<IProcessorsProvider, ProcessorsProvider>();

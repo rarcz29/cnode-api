@@ -24,18 +24,14 @@ namespace GitNode.ExternalAPIs.Bitbucket
 
         public async Task<PlatformUser> GetUserAsync(string token)
         {
-            //throw new NotImplementedException(); // TODO: implement
-
             using var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.bitbucket.org/2.0/user");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _client.ApiClient.SendAsync(requestMessage);
-
-            var x = await response.Content.ReadAsStringAsync();
+            var response = await Client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<BitbucketUser>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.ReasonPhrase);
@@ -43,12 +39,12 @@ namespace GitNode.ExternalAPIs.Bitbucket
 
         public async Task<PlatformUser> GetUserByUsernameAsync(string username)
         {
-            using var response = await _client.ApiClient.GetAsync($"https://api.bitbucket.org/2.0/user");
+            using var response = await Client.ApiClient.GetAsync($"https://api.bitbucket.org/2.0/user");
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<BitbucketUser>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.StatusCode.ToString());
@@ -63,12 +59,12 @@ namespace GitNode.ExternalAPIs.Bitbucket
             dict.Add("code", code);
             dict.Add("grant_type", "authorization_code");
             requestMessage.Content = new FormUrlEncodedContent(dict);
-            var response = await _client.ApiClient.SendAsync(requestMessage);
+            var response = await Client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<BitbucketToken>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.ReasonPhrase);

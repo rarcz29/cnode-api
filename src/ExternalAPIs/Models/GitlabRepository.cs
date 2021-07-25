@@ -1,11 +1,14 @@
-﻿namespace GitNode.ExternalAPIs.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GitNode.ExternalAPIs.Models
 {
-    internal class GitlabRepository
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    internal abstract class GitlabRepository
     {
-        public int id { get; set; }
-        public string path { get; set; }
-        public string description { get; set; }
-        public string web_url { get; set; }
-        public string visibility { get; set; }
+        public int id { get; } = 0;
+        public string path { get; } = "";
+        public string description { get; } = "";
+        public string web_url { get; } = "";
+        public string visibility { get; } = "";
     }
 }

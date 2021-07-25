@@ -1,11 +1,10 @@
-﻿namespace GitNode.ExternalAPIs.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GitNode.ExternalAPIs.Models
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class BitbucketToken
     {
-#pragma warning disable IDE1006 // Naming Styles
-
-        public string access_token { get; set; }
-
-#pragma warning restore IDE1006 // Naming Styles
+        public string access_token { get; } = "";
     }
 }

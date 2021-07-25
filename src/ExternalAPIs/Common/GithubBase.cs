@@ -5,11 +5,11 @@ namespace GitNode.ExternalAPIs.Common
 {
     internal class GithubBase : ProcessorBase
     {
-        protected IGithubMapper _mapper;
+        protected readonly IGithubMapper Mapper;
 
         public GithubBase(IAppHttpClient client) : base (client)
         {
-            _mapper = MapperFactory.CreateGithubMapper();
+            Mapper = MapperFactory.CreateGithubMapper();
         }
     }
 }
