@@ -1,10 +1,10 @@
-﻿using CNode.Application.Common.Behaviours;
+﻿using System.Reflection;
 using FluentValidation;
+using GitNode.Application.Common.Behaviours;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
-namespace CNode.Application
+namespace GitNode.Application
 {
     public static class DependencyInjection
     {

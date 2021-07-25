@@ -1,26 +1,26 @@
-﻿using CNode.Application.Common.Interfaces;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
+using GitNode.Application.Common.Interfaces;
 
-namespace CNode.Infrastructure.Cryptography
+namespace GitNode.Infrastructure.Cryptography
 {
     internal class PasswordHasher : IPasswordHasher
     {
         private const int SaltByteSize = 24;
         private const int HashByteSize = 24;
-        private const int PBKDF2Iterations = 1000;
+        private const int Pbkdf2Iterations = 1000;
         private const int IterationIndex = 0;
         private const int SaltIndex = 1;
-        private const int PBKDF2Index = 2;
+        private const int Pbkdf2Index = 2;
 
         public string CreateHash(string password)
         {
-            RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
-            byte[] salt = new byte[SaltByteSize];
-            csprng.GetBytes(salt);
-
-            byte[] hash = PBKDF2(password, salt, PBKDF2Iterations, HashByteSize);
-            return PBKDF2Iterations + ":" +
+            var cryptoServiceProvider = new RNGCryptoServiceProvider();
+            var salt = new byte[SaltByteSize];
+            cryptoServiceProvider.GetBytes(salt);
+            var hash = Pbkdf2(password, salt, Pbkdf2Iterations, HashByteSize);
+            return Pbkdf2Iterations + ":" +
                 Convert.ToBase64String(salt) + ":" +
                 Convert.ToBase64String(hash);
         }
@@ -28,27 +28,25 @@ namespace CNode.Infrastructure.Cryptography
         public bool ValidatePassword(string password, string correctHash)
         {
             char[] delimiter = { ':' };
-            string[] split = correctHash.Split(delimiter);
-            int iterations = int.Parse(split[IterationIndex]);
-            byte[] salt = Convert.FromBase64String(split[SaltIndex]);
-            byte[] hash = Convert.FromBase64String(split[PBKDF2Index]);
-
-            byte[] testHash = PBKDF2(password, salt, iterations, hash.Length);
+            var split = correctHash.Split(delimiter);
+            var iterations = int.Parse(split[IterationIndex]);
+            var salt = Convert.FromBase64String(split[SaltIndex]);
+            var hash = Convert.FromBase64String(split[Pbkdf2Index]);
+            var testHash = Pbkdf2(password, salt, iterations, hash.Length);
             return SlowEquals(hash, testHash);
         }
 
-        private byte[] PBKDF2(string password, byte[] salt, int iterations, int outputBytes)
+        private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int outputBytes)
         {
-            Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt);
-            pbkdf2.IterationCount = iterations;
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt) {IterationCount = iterations};
             return pbkdf2.GetBytes(outputBytes);
         }
 
-        private bool SlowEquals(byte[] a, byte[] b)
+        private static bool SlowEquals(IReadOnlyList<byte> a, IReadOnlyList<byte> b)
         {
-            uint diff = (uint)a.Length ^ (uint)b.Length;
+            var diff = (uint)a.Count ^ (uint)b.Count;
 
-            for (int i = 0; i < a.Length && i < b.Length; i++)
+            for (var i = 0; i < a.Count && i < b.Count; i++)
             {
                 diff |= (uint)(a[i] ^ b[i]);
             }

@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
+using GitNode.Application.Common.Data.ExternalAPIs;
 
-namespace CNode.ExternalAPIs.Common
+namespace GitNode.ExternalAPIs.Common
 {
     internal class AppHttpClient : IAppHttpClient
     {

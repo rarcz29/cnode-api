@@ -1,15 +1,15 @@
-using CNode.Application;
-using CNode.ExternalAPIs;
-using CNode.Infrastructure;
-using CNode.Persistence;
-using CNode.WebAPI.Installers;
+using GitNode.Application;
+using GitNode.ExternalAPIs;
+using GitNode.Infrastructure;
+using GitNode.Persistence;
+using GitNode.WebAPI.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace CNode.WebAPI
+namespace GitNode.WebAPI
 {
     public class Startup
     {
@@ -25,7 +25,7 @@ namespace CNode.WebAPI
             services.InstallServicesInAssembly(Configuration);
 
             services
-                .AddExteranlAPIs()
+                .AddExteranlApIs()
                 .AddApplication()
                 .AddInfrastructure()
                 .AddPersistence(Configuration);

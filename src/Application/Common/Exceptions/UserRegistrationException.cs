@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CNode.Application.Common.Exceptions
+namespace GitNode.Application.Common.Exceptions
 {
     public class UserRegistrationException : Exception
     {

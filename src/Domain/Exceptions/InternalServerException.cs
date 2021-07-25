@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CNode.Domain.Exceptions
+namespace GitNode.Domain.Exceptions
 {
     public class InternalServerException : Exception
     {

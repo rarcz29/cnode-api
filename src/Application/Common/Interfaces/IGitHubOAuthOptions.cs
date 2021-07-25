@@ -1,8 +1,8 @@
-﻿namespace CNode.Application.Common.Interfaces
+﻿namespace GitNode.Application.Common.Interfaces
 {
     public interface IGitHubOAuthOptions
     {
         string ClientSecret { get; }
-        string ClientID { get; }
+        string ClientId { get; }
     }
 }

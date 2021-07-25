@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using CNode.Application.Common.Base;
-using CNode.Application.Common.Data.Database;
-using CNode.Application.Common.Dtos;
-using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Interfaces;
-using CNode.Application.Platforms.Queries.GetAll;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using GitNode.Application.Common.Base;
+using GitNode.Application.Common.Data.Database;
+using GitNode.Application.Common.Dtos;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Platforms.Queries.GetAll;
+using MediatR;
 
-namespace CNode.Application.Platforms.Handlers.QueryHandlers
+namespace GitNode.Application.Platforms.Handlers.QueryHandlers
 {
     public class GetAllQueryHandler : PlatformHandlerBase,
         IRequestHandler<GetAllQuery, IEnumerable<PlatformAccountDto>>

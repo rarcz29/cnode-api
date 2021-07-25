@@ -1,10 +1,10 @@
-﻿using CNode.Application.Auth.Commands.Register;
-using CNode.Application.Common.Interfaces;
-using MediatR;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using GitNode.Application.Auth.Commands.Register;
+using GitNode.Application.Common.Interfaces;
+using MediatR;
 
-namespace CNode.Application.Auth.Handlers.CommandHandlers
+namespace GitNode.Application.Auth.Handlers.CommandHandlers
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
     {

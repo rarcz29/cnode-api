@@ -1,15 +1,15 @@
-﻿using AutoMapper;
-using CNode.Application.Common.Dtos;
-using CNode.Application.Platforms.Commands.AddAccount;
-using CNode.Application.Platforms.Commands.CreateRepository;
-using CNode.Application.Platforms.Queries.GetAll;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
+using GitNode.Application.Common.Dtos;
+using GitNode.Application.Platforms.Commands.AddAccount;
+using GitNode.Application.Platforms.Commands.CreateRepository;
+using GitNode.Application.Platforms.Queries.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace CNode.WebAPI.Controllers
+namespace GitNode.WebAPI.Controllers
 {
     [Authorize]
     [ApiController]

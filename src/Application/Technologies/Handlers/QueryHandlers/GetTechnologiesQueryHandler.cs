@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using CNode.Application.Common.Data.Database;
-using CNode.Application.Common.Dtos;
-using CNode.Application.Technologies.Queries.GetTechnologies;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using GitNode.Application.Common.Data.Database;
+using GitNode.Application.Common.Dtos;
+using GitNode.Application.Technologies.Queries.GetTechnologies;
+using MediatR;
 
-namespace CNode.Application.Technologies.Handlers.QueryHandlers
+namespace GitNode.Application.Technologies.Handlers.QueryHandlers
 {
     class GetTechnologiesQueryHandler : IRequestHandler<GetTechnologiesQuery, IEnumerable<TechnologyDto>>
     {

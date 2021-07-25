@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CNode.Application.Auth.Commands.Refresh
+namespace GitNode.Application.Auth.Commands.Refresh
 {
     public class RefreshCommand : IRequest<RefreshTokenDto>
     {

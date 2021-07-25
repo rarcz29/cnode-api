@@ -1,14 +1,14 @@
-﻿using CNode.Application.Common.Interfaces;
-using CNode.Domain.Entities;
-using CNode.WebAPI.Options;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Domain.Entities;
+using GitNode.WebAPI.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
-namespace CNode.WebAPI.Services
+namespace GitNode.WebAPI.Services
 {
     public class JwtService : IJwtService
     {
@@ -30,7 +30,7 @@ namespace CNode.WebAPI.Services
             var tokenKey = Encoding.ASCII.GetBytes(key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("id", user.Id.ToString()),

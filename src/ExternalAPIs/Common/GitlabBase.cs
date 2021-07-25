@@ -1,15 +1,15 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.ExternalAPIs.Interfaces;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.ExternalAPIs.Interfaces;
 
-namespace CNode.ExternalAPIs.Common
+namespace GitNode.ExternalAPIs.Common
 {
     internal abstract class GitlabBase : ProcessorBase
     {
-        protected IGitlabMapper _mapper;
+        protected readonly IGitlabMapper Mapper;
 
         public GitlabBase(IAppHttpClient client) : base(client)
         {
-            _mapper = MapperFactory.CreateGitlabMapper();
+            Mapper = MapperFactory.CreateGitlabMapper();
         }
     }
 }

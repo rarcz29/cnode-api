@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Base;
-using FluentValidation;
+﻿using FluentValidation;
+using GitNode.Application.Common.Base;
 
-namespace CNode.Application.Platforms.Commands.CreateRepository
+namespace GitNode.Application.Platforms.Commands.CreateRepository
 {
     public class CreateRepositoryCommandValidator : ValidatorBase<CreateRepositoryCommand>
     {

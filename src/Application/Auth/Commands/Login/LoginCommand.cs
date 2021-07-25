@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CNode.Application.Auth.Commands.Login
+namespace GitNode.Application.Auth.Commands.Login
 {
     public class LoginCommand : IRequest<AuthTokenDto>
     {

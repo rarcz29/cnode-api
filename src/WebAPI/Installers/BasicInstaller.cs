@@ -1,9 +1,9 @@
-﻿using CNode.WebAPI.Filters;
+﻿using GitNode.WebAPI.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace CNode.WebAPI.Installers
+namespace GitNode.WebAPI.Installers
 {
     public class BasicInstaller : IInstaller
     {

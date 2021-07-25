@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Base;
-using FluentValidation;
+﻿using FluentValidation;
+using GitNode.Application.Common.Base;
 
-namespace CNode.Application.Platforms.Commands.AddAccount
+namespace GitNode.Application.Platforms.Commands.AddAccount
 {
     public class AddAccountCommandValidator : ValidatorBase<AddAccountCommand>
     {

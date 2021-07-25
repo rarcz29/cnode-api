@@ -1,10 +1,10 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Interfaces;
-using CNode.ExternalAPIs.Bitbucket;
-using CNode.ExternalAPIs.GitHub;
-using CNode.ExternalAPIs.GitLab;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Interfaces;
+using GitNode.ExternalAPIs.Bitbucket;
+using GitNode.ExternalAPIs.GitHub;
+using GitNode.ExternalAPIs.GitLab;
 
-namespace CNode.ExternalAPIs
+namespace GitNode.ExternalAPIs
 {
     internal class ProcessorsProvider : IProcessorsProvider
     {

@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using GitNode.Application.Common.Models;
 
-namespace CNode.Application.Common.Data.ExternalAPIs.GitHub
+namespace GitNode.Application.Common.Data.ExternalAPIs
 {
     public interface IUserProcessor
     {

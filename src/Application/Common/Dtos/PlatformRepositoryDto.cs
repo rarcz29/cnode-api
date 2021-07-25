@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Mappings;
-using CNode.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GitNode.Application.Common.Mappings;
+using GitNode.Domain.Entities;
 
-namespace CNode.Application.Common.Dtos
+namespace GitNode.Application.Common.Dtos
 {
     public class PlatformRepositoryDto : IMapFrom<Repository>
     {

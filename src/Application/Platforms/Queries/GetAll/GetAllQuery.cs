@@ -1,9 +1,9 @@
-﻿using CNode.Application.Common.Dtos;
-using CNode.Application.Common.Interfaces;
+﻿using System.Collections.Generic;
+using GitNode.Application.Common.Dtos;
+using GitNode.Application.Common.Interfaces;
 using MediatR;
-using System.Collections.Generic;
 
-namespace CNode.Application.Platforms.Queries.GetAll
+namespace GitNode.Application.Platforms.Queries.GetAll
 {
     public class GetAllQuery : IRequest<IEnumerable<PlatformAccountDto>>, IPlatform
     {

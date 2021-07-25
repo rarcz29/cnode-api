@@ -1,4 +1,4 @@
-﻿namespace CNode.Domain.Entities
+﻿namespace GitNode.Domain.Entities
 {
     // TODO: move to the application layer
     public class AuthenticationResult

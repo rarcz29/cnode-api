@@ -1,12 +1,12 @@
-﻿using CNode.Application.Common.Data.Database.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Data.Database.Repositories;
+using Microsoft.EntityFrameworkCore;
 
-namespace CNode.Persistence.Repositories
+namespace GitNode.Persistence.Repositories
 {
     internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

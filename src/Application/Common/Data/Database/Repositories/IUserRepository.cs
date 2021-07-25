@@ -1,6 +1,6 @@
-﻿using CNode.Domain.Entities;
+﻿using GitNode.Domain.Entities;
 
-namespace CNode.Application.Common.Data.Database.Repositories
+namespace GitNode.Application.Common.Data.Database.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {

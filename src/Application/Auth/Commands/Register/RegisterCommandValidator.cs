@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CNode.Application.Auth.Commands.Register
+namespace GitNode.Application.Auth.Commands.Register
 {
     public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {

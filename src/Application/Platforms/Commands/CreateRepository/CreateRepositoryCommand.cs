@@ -1,9 +1,9 @@
-﻿using CNode.Application.Common.Dtos;
-using CNode.Application.Common.Interfaces;
-using CNode.Application.Common.Mappings;
+﻿using GitNode.Application.Common.Dtos;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Common.Mappings;
 using MediatR;
 
-namespace CNode.Application.Platforms.Commands.CreateRepository
+namespace GitNode.Application.Platforms.Commands.CreateRepository
 {
     public class CreateRepositoryCommand : CreateRepository,
                                            IRequest<PlatformRepositoryDto>,

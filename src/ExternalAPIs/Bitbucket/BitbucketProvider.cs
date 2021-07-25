@@ -1,8 +1,7 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Data.ExternalAPIs.GitHub;
-using CNode.Application.Common.Interfaces;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Interfaces;
 
-namespace CNode.ExternalAPIs.Bitbucket
+namespace GitNode.ExternalAPIs.Bitbucket
 {
     internal class BitbucketProvider : IPlatformProvider
     {

@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Exceptions;
-using CNode.Domain.Exceptions;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Domain.Exceptions;
 
-namespace CNode.Application.Common.Base
+namespace GitNode.Application.Common.Base
 {
     public abstract class PlatformHandlerBase
     {

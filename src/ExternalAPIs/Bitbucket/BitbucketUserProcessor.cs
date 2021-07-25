@@ -1,19 +1,17 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Data.ExternalAPIs.GitHub;
-using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Interfaces;
-using CNode.Application.Common.Models;
-using CNode.ExternalAPIs.Common;
-using CNode.ExternalAPIs.Models;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Common.Models;
+using GitNode.ExternalAPIs.Common;
+using GitNode.ExternalAPIs.Models;
 
-namespace CNode.ExternalAPIs.Bitbucket
+namespace GitNode.ExternalAPIs.Bitbucket
 {
     internal class BitbucketUserProcessor : BitbucketBase, IUserProcessor
     {
@@ -26,18 +24,14 @@ namespace CNode.ExternalAPIs.Bitbucket
 
         public async Task<PlatformUser> GetUserAsync(string token)
         {
-            //throw new NotImplementedException(); // TODO: implement
-
             using var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.bitbucket.org/2.0/user");
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _client.ApiClient.SendAsync(requestMessage);
-
-            var x = await response.Content.ReadAsStringAsync();
+            var response = await Client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<BitbucketUser>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.ReasonPhrase);
@@ -45,12 +39,12 @@ namespace CNode.ExternalAPIs.Bitbucket
 
         public async Task<PlatformUser> GetUserByUsernameAsync(string username)
         {
-            using var response = await _client.ApiClient.GetAsync($"https://api.bitbucket.org/2.0/user");
+            using var response = await Client.ApiClient.GetAsync($"https://api.bitbucket.org/2.0/user");
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<BitbucketUser>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.StatusCode.ToString());
@@ -65,12 +59,12 @@ namespace CNode.ExternalAPIs.Bitbucket
             dict.Add("code", code);
             dict.Add("grant_type", "authorization_code");
             requestMessage.Content = new FormUrlEncodedContent(dict);
-            var response = await _client.ApiClient.SendAsync(requestMessage);
+            var response = await Client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<BitbucketToken>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.ReasonPhrase);

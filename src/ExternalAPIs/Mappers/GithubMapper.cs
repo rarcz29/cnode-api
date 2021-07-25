@@ -1,12 +1,12 @@
-﻿using CNode.Application.Common.Models;
-using CNode.ExternalAPIs.Interfaces;
-using CNode.ExternalAPIs.Models;
+﻿using GitNode.Application.Common.Models;
+using GitNode.ExternalAPIs.Interfaces;
+using GitNode.ExternalAPIs.Models;
 
-namespace CNode.ExternalAPIs.Mappers
+namespace GitNode.ExternalAPIs.Mappers
 {
     internal class GithubMapper : IGithubMapper
     {
-        public PlatformUser Map(GithubUser model) => new()
+        public PlatformUser Map(GithubUser model) => new PlatformUser()
         {
             Id = model.id.ToString(),
             Login = model.login,
@@ -15,7 +15,7 @@ namespace CNode.ExternalAPIs.Mappers
             //Email = model.email // TODO: remove
         };
 
-        public PlatformRepository Map(GithubRepository model) => new()
+        public PlatformRepository Map(GithubRepository model) => new PlatformRepository()
         {
             Id = model.id,
             Name = model.name,
@@ -24,7 +24,7 @@ namespace CNode.ExternalAPIs.Mappers
             Private = model.@private
         };
 
-        public PlatformToken Map(GithubToken model) => new()
+        public PlatformToken Map(GithubToken model) => new PlatformToken()
         {
             AccessToken = model.access_token
         };

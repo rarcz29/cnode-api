@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace CNode.Application.Common.Mappings
+namespace GitNode.Application.Common.Mappings
 {
     public interface IMapFrom<T>
     {

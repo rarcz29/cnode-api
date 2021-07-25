@@ -1,10 +1,10 @@
-﻿using CNode.Application.Common.Dtos;
-using CNode.Application.Technologies.Queries.GetTechnologies;
+﻿using System.Threading.Tasks;
+using GitNode.Application.Common.Dtos;
+using GitNode.Application.Technologies.Queries.GetTechnologies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
-namespace CNode.WebAPI.Controllers
+namespace GitNode.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

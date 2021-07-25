@@ -1,12 +1,12 @@
-﻿using CNode.Application.Common.Data.Database;
-using CNode.Application.Common.Interfaces;
-using CNode.Application.Users.Commands.RemoveUser;
-using CNode.Domain.Entities;
-using MediatR;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Data.Database;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Users.Commands.RemoveUser;
+using GitNode.Domain.Entities;
+using MediatR;
 
-namespace CNode.Application.Users.Handlers.CommandHandlers
+namespace GitNode.Application.Users.Handlers.CommandHandlers
 {
     public class RemoveUserCommandHandler : IRequestHandler<RemoveUserCommand>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CNode.Domain.Entities
+namespace GitNode.Domain.Entities
 {
     public class User
     {

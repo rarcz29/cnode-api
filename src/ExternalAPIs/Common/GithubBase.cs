@@ -1,15 +1,15 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.ExternalAPIs.Interfaces;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.ExternalAPIs.Interfaces;
 
-namespace CNode.ExternalAPIs.Common
+namespace GitNode.ExternalAPIs.Common
 {
     internal class GithubBase : ProcessorBase
     {
-        protected IGithubMapper _mapper;
+        protected readonly IGithubMapper Mapper;
 
         public GithubBase(IAppHttpClient client) : base (client)
         {
-            _mapper = MapperFactory.CreateGithubMapper();
+            Mapper = MapperFactory.CreateGithubMapper();
         }
     }
 }

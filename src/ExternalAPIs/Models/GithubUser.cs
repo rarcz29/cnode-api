@@ -1,15 +1,14 @@
-﻿namespace CNode.ExternalAPIs.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GitNode.ExternalAPIs.Models
 {
-    public class GithubUser
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public abstract class GithubUser
     {
-#pragma warning disable IDE1006 // Naming Styles
-
-        public int id { get; set; }
-        public string login { get; set; }
-        public string html_url { get; set; }
-        public string name { get; set; }
+        public int id { get; } = 0;
+        public string login { get; } = "";
+        public string html_url { get; } = "";
+        public string name { get; } = "";
         //public string email { get; set; } // TODO: remove
-
-#pragma warning restore IDE1006 // Naming Styles
     }
 }

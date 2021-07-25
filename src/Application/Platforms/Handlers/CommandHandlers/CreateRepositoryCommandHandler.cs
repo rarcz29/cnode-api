@@ -1,19 +1,19 @@
-﻿using AutoMapper;
-using CNode.Application.Common.Base;
-using CNode.Application.Common.Data.Database;
-using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Dtos;
-using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Interfaces;
-using CNode.Application.Platforms.Commands.CreateRepository;
-using CNode.Domain.Entities;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using GitNode.Application.Common.Base;
+using GitNode.Application.Common.Data.Database;
+using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Dtos;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Platforms.Commands.CreateRepository;
+using GitNode.Domain.Entities;
+using MediatR;
 
-namespace CNode.Application.Platforms.Handlers.CommandHandlers
+namespace GitNode.Application.Platforms.Handlers.CommandHandlers
 {
     class CreateRepositoryCommandHandler : PlatformHandlerBase,
         IRequestHandler<CreateRepositoryCommand, PlatformRepositoryDto>

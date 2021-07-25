@@ -1,8 +1,8 @@
-﻿namespace CNode.Application.Common.Interfaces
+﻿namespace GitNode.Application.Common.Interfaces
 {
     public interface IGitLabOAuthOptions
     {
-        string ApplicationID { get; }
+        string ApplicationId { get; }
 
         string Secret { get; }
     }

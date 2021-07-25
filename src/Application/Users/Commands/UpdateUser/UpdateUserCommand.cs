@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CNode.Application.Users.Commands.UpdateUser
+namespace GitNode.Application.Users.Commands.UpdateUser
 {
     public class UpdateUserCommand : IRequest
     {

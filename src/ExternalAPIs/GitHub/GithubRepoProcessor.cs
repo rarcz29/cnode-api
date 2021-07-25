@@ -1,16 +1,15 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Data.ExternalAPIs.GitHub;
-using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Models;
-using CNode.ExternalAPIs.Common;
-using CNode.ExternalAPIs.Models;
-using Newtonsoft.Json;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Models;
+using GitNode.ExternalAPIs.Common;
+using GitNode.ExternalAPIs.Models;
+using Newtonsoft.Json;
 
-namespace CNode.ExternalAPIs.GitHub
+namespace GitNode.ExternalAPIs.GitHub
 {
     internal class GithubRepoProcessor : GithubBase, IRepoProcessor
     {
@@ -25,12 +24,12 @@ namespace CNode.ExternalAPIs.GitHub
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             requestMessage.Content = data;
 
-            var response = await _client.ApiClient.SendAsync(requestMessage);
+            var response = await Client.ApiClient.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
             {
                 var model = await response.Content.ReadAsAsync<GithubRepository>();
-                return _mapper.Map(model);
+                return Mapper.Map(model);
             }
 
             throw new ExternalApiException(response.ReasonPhrase);

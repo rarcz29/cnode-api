@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CNode.ExternalAPIs.Common
+namespace GitNode.ExternalAPIs.Common
 {
     internal static class HttpContentExtensions
     {
