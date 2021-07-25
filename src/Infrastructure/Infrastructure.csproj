@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>CNode.Infrastructure</RootNamespace>
+    <RootNamespace>GitNode.Infrastructure</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

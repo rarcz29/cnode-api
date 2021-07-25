@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>CNode.Persistence</RootNamespace>
+    <RootNamespace>GitNode.Persistence</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
