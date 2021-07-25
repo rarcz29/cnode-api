@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
+using AutoMapper;
 
-namespace CNode.Application.Common.Mappings
+namespace GitNode.Application.Common.Mappings
 {
     public class MappingProfile : Profile
     {

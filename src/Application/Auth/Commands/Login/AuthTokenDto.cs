@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Mappings;
-using CNode.Domain.Entities;
+﻿using GitNode.Application.Common.Mappings;
+using GitNode.Domain.Entities;
 
-namespace CNode.Application.Auth.Commands.Login
+namespace GitNode.Application.Auth.Commands.Login
 {
     public class AuthTokenDto : IMapFrom<AuthenticationResult>
     {

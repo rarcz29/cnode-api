@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CNode.WebAPI.Installers
+namespace GitNode.WebAPI.Installers
 {
     interface IInstaller
     {

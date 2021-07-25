@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Interfaces;
+﻿using System.Security.Claims;
+using GitNode.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 
-namespace CNode.WebAPI.Services
+namespace GitNode.WebAPI.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

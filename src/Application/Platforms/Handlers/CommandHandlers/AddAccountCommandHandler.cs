@@ -1,17 +1,16 @@
-﻿using AutoMapper;
-using CNode.Application.Common.Base;
-using CNode.Application.Common.Data.Database;
-using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Dtos;
-using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Interfaces;
-using CNode.Application.Platforms.Commands.AddAccount;
-using CNode.Domain.Entities;
-using MediatR;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Base;
+using GitNode.Application.Common.Data.Database;
+using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Dtos;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Application.Platforms.Commands.AddAccount;
+using GitNode.Domain.Entities;
+using MediatR;
 
-namespace CNode.Application.Platforms.Handlers.CommandHandlers
+namespace GitNode.Application.Platforms.Handlers.CommandHandlers
 {
     public class AddAccountCommandHandler : PlatformHandlerBase,
         IRequestHandler<AddAccountCommand, PlatformNewAccountDto>

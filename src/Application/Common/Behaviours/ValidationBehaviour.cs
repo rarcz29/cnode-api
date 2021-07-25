@@ -1,12 +1,12 @@
-﻿using CNode.Application.Common.Exceptions;
-using FluentValidation;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
+using GitNode.Application.Common.Exceptions;
+using MediatR;
 
-namespace CNode.Application.Common.Behaviours
+namespace GitNode.Application.Common.Behaviours
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Models;
-using CNode.ExternalAPIs.Models;
+﻿using GitNode.Application.Common.Models;
+using GitNode.ExternalAPIs.Models;
 
-namespace CNode.ExternalAPIs.Interfaces
+namespace GitNode.ExternalAPIs.Interfaces
 {
     internal interface IBitbucketMapper
     {

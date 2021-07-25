@@ -1,10 +1,10 @@
-﻿using CNode.Application.Common.Data.Database.Repositories;
-using CNode.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Data.Database.Repositories;
+using GitNode.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace CNode.Persistence.Repositories
+namespace GitNode.Persistence.Repositories
 {
     internal class RefreshTokenRepository : Repository<RefreshToken>, IRefreshTokenRepository
     {

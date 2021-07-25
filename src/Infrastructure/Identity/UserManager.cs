@@ -1,17 +1,17 @@
-﻿using CNode.Application.Common.Data.Database;
-using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Interfaces;
-using CNode.Domain.Entities;
-using CNode.Domain.Exceptions;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Authentication;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Data.Database;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Interfaces;
+using GitNode.Domain.Entities;
+using GitNode.Domain.Exceptions;
+using Microsoft.IdentityModel.Tokens;
 
-namespace CNode.Infrastructure.Identity
+namespace GitNode.Infrastructure.Identity
 {
     internal class UserManager : IUserManager
     {

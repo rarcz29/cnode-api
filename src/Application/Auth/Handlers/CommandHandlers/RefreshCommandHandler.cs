@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using CNode.Application.Auth.Commands.Refresh;
-using CNode.Application.Common.Interfaces;
-using MediatR;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using GitNode.Application.Auth.Commands.Refresh;
+using GitNode.Application.Common.Interfaces;
+using MediatR;
 
-namespace CNode.Application.Auth.Handlers.CommandHandlers
+namespace GitNode.Application.Auth.Handlers.CommandHandlers
 {
     public class RefreshCommandHandler : IRequestHandler<RefreshCommand, RefreshTokenDto>
     {

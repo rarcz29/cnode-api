@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Mappings;
-using CNode.Application.Common.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GitNode.Application.Common.Mappings;
+using GitNode.Application.Common.Models;
 
-namespace CNode.Application.Common.Dtos
+namespace GitNode.Application.Common.Dtos
 {
     public class PlatformAccountDto : PlatformNewAccountDto, IMapFrom<PlatformUser>
     {

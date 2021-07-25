@@ -1,10 +1,10 @@
-﻿using CNode.Application.Common.Interfaces;
-using CNode.WebAPI.Options;
+﻿using GitNode.Application.Common.Interfaces;
+using GitNode.WebAPI.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace CNode.WebAPI.Installers
+namespace GitNode.WebAPI.Installers
 {
     public class ProvidersInstaller : IInstaller
     {

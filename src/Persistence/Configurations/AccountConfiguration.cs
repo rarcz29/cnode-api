@@ -1,8 +1,8 @@
-﻿using CNode.Domain.Entities;
+﻿using GitNode.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CNode.Persistence.Configurations
+namespace GitNode.Persistence.Configurations
 {
     internal class AccountConfiguration : IEntityTypeConfiguration<Account>
     {

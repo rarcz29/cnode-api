@@ -1,4 +1,4 @@
-﻿namespace CNode.Application.Common.Models
+﻿namespace GitNode.Application.Common.Models
 {
     public class PlatformToken
     {

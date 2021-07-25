@@ -1,10 +1,10 @@
-﻿using CNode.Application.Common.Data.Database;
+﻿using GitNode.Application.Common.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace CNode.Persistence
+namespace GitNode.Persistence
 {
     public static class DependencyInjection
     {

@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Interfaces;
-using FluentValidation;
+﻿using FluentValidation;
+using GitNode.Application.Common.Interfaces;
 
-namespace CNode.Application.Common.Base
+namespace GitNode.Application.Common.Base
 {
     public abstract class ValidatorBase<T> : AbstractValidator<T> where T : IPlatform
     {

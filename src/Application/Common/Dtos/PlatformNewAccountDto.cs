@@ -1,4 +1,4 @@
-﻿namespace CNode.Application.Common.Dtos
+﻿namespace GitNode.Application.Common.Dtos
 {
     public class PlatformNewAccountDto
     {

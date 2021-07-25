@@ -1,4 +1,4 @@
-﻿namespace CNode.ExternalAPIs.Models
+﻿namespace GitNode.ExternalAPIs.Models
 {
     internal class GitlabUser
     {

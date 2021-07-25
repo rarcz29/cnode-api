@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CNode.WebAPI.Options
+namespace GitNode.WebAPI.Options
 {
     public class JwtOptions
     {

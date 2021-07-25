@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.ExternalAPIs.Common;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.ExternalAPIs.Common;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CNode.ExternalAPIs
+namespace GitNode.ExternalAPIs
 {
     public static class DependencyInjection
     {

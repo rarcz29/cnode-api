@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CNode.Application.Platforms.Commands.CreateRepository
+namespace GitNode.Application.Platforms.Commands.CreateRepository
 {
     public class CreateRepository
     {

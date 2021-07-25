@@ -1,6 +1,6 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
 
-namespace CNode.ExternalAPIs.Common
+namespace GitNode.ExternalAPIs.Common
 {
     internal abstract class ProcessorBase
     {

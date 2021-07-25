@@ -1,8 +1,8 @@
-﻿using CNode.Domain.Entities;
+﻿using System.Reflection;
+using GitNode.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
-namespace CNode.Persistence
+namespace GitNode.Persistence
 {
     internal class AppDbContext : DbContext
     {

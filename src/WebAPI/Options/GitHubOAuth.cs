@@ -1,6 +1,6 @@
-﻿using CNode.Application.Common.Interfaces;
+﻿using GitNode.Application.Common.Interfaces;
 
-namespace CNode.WebAPI.Options
+namespace GitNode.WebAPI.Options
 {
     public class GitHubOAuth : IGitHubOAuthOptions
     {

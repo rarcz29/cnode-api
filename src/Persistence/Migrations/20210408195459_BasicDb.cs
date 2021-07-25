@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace CNode.Persistence.Migrations
+namespace GitNode.Persistence.Migrations
 {
     public partial class BasicDb : Migration
     {

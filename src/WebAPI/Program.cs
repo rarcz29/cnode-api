@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace CNode.WebAPI
+namespace GitNode.WebAPI
 {
     public class Program
     {

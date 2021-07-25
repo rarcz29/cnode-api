@@ -1,8 +1,8 @@
-﻿using CNode.Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GitNode.Domain.Entities;
 
-namespace CNode.Application.Common.Data.Database.Repositories
+namespace GitNode.Application.Common.Data.Database.Repositories
 {
     public interface ITechnologyRepository : IRepository<Technology>
     {

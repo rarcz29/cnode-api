@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CNode.Domain.Entities
+namespace GitNode.Domain.Entities
 {
     public class RefreshToken
     {

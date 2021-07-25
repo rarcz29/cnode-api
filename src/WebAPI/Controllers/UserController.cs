@@ -1,12 +1,12 @@
-﻿using CNode.Application.Auth.Commands.Login;
-using CNode.Application.Users.Commands.RemoveUser;
-using CNode.Application.Users.Commands.UpdateUser;
+﻿using System.Threading.Tasks;
+using GitNode.Application.Auth.Commands.Login;
+using GitNode.Application.Users.Commands.RemoveUser;
+using GitNode.Application.Users.Commands.UpdateUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
-namespace CNode.WebAPI.Controllers
+namespace GitNode.WebAPI.Controllers
 {
     [Authorize]
     [ApiController]

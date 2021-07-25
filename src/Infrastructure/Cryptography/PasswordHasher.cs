@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Interfaces;
-using System;
+﻿using System;
 using System.Security.Cryptography;
+using GitNode.Application.Common.Interfaces;
 
-namespace CNode.Infrastructure.Cryptography
+namespace GitNode.Infrastructure.Cryptography
 {
     internal class PasswordHasher : IPasswordHasher
     {

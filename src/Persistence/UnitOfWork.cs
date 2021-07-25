@@ -1,10 +1,9 @@
-﻿using CNode.Application.Common.Data.Database;
-using CNode.Application.Common.Data.Database.Repositories;
-using CNode.Persistence.Repositories;
-using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using GitNode.Application.Common.Data.Database;
+using GitNode.Application.Common.Data.Database.Repositories;
+using GitNode.Persistence.Repositories;
 
-namespace CNode.Persistence
+namespace GitNode.Persistence
 {
     internal class UnitOfWork : IUnitOfWork
     {

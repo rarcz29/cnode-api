@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CNode.Persistence.Migrations
+namespace GitNode.Persistence.Migrations
 {
     public partial class AccountUrl : Migration
     {

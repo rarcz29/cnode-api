@@ -1,11 +1,11 @@
-﻿using CNode.Application.Auth.Commands.Login;
-using CNode.Application.Auth.Commands.Refresh;
-using CNode.Application.Auth.Commands.Register;
+﻿using System.Threading.Tasks;
+using GitNode.Application.Auth.Commands.Login;
+using GitNode.Application.Auth.Commands.Refresh;
+using GitNode.Application.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
-namespace CNode.WebAPI.Controllers
+namespace GitNode.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

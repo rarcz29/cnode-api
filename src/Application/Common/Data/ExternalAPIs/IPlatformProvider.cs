@@ -1,6 +1,4 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs.GitHub;
-
-namespace CNode.Application.Common.Data.ExternalAPIs
+﻿namespace GitNode.Application.Common.Data.ExternalAPIs
 {
     public interface IPlatformProvider
     {

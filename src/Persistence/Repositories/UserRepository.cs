@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Data.Database.Repositories;
-using CNode.Domain.Entities;
+﻿using GitNode.Application.Common.Data.Database.Repositories;
+using GitNode.Domain.Entities;
 
-namespace CNode.Persistence.Repositories
+namespace GitNode.Persistence.Repositories
 {
     internal class UserRepository : Repository<User>, IUserRepository
     {

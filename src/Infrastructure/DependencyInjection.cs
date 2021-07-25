@@ -1,9 +1,9 @@
-﻿using CNode.Application.Common.Interfaces;
-using CNode.Infrastructure.Cryptography;
-using CNode.Infrastructure.Identity;
+﻿using GitNode.Application.Common.Interfaces;
+using GitNode.Infrastructure.Cryptography;
+using GitNode.Infrastructure.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CNode.Infrastructure
+namespace GitNode.Infrastructure
 {
     public static class DependencyInjection
     {

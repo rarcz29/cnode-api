@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CNode.Application.Auth.Commands.Login
+namespace GitNode.Application.Auth.Commands.Login
 {
     public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {

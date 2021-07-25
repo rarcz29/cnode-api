@@ -1,6 +1,6 @@
-﻿using CNode.Application.Common.Base;
+﻿using GitNode.Application.Common.Base;
 
-namespace CNode.Application.Platforms.Queries.GetAll
+namespace GitNode.Application.Platforms.Queries.GetAll
 {
     public class GetAllQueryValidator : ValidatorBase<GetAllQuery>
     {

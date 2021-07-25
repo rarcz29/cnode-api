@@ -1,13 +1,13 @@
-﻿using CNode.Application.Common.Exceptions;
-using CNode.Domain.Exceptions;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Authentication;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Security.Authentication;
 
-namespace CNode.WebAPI.Filters
+namespace GitNode.WebAPI.Filters
 {
     public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     {

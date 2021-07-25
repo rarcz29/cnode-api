@@ -1,7 +1,7 @@
-﻿using CNode.ExternalAPIs.Interfaces;
-using CNode.ExternalAPIs.Mappers;
+﻿using GitNode.ExternalAPIs.Interfaces;
+using GitNode.ExternalAPIs.Mappers;
 
-namespace CNode.ExternalAPIs.Common
+namespace GitNode.ExternalAPIs.Common
 {
     internal class MapperFactory
     {

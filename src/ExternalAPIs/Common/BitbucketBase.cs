@@ -1,7 +1,7 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.ExternalAPIs.Interfaces;
+﻿using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.ExternalAPIs.Interfaces;
 
-namespace CNode.ExternalAPIs.Common
+namespace GitNode.ExternalAPIs.Common
 {
     class BitbucketBase : ProcessorBase
     {

@@ -1,8 +1,8 @@
-﻿using CNode.Application.Common.Models;
-using CNode.ExternalAPIs.Interfaces;
-using CNode.ExternalAPIs.Models;
+﻿using GitNode.Application.Common.Models;
+using GitNode.ExternalAPIs.Interfaces;
+using GitNode.ExternalAPIs.Models;
 
-namespace CNode.ExternalAPIs.Mappers
+namespace GitNode.ExternalAPIs.Mappers
 {
     internal class BitbucketMapper : IBitbucketMapper
     {
@@ -11,12 +11,12 @@ namespace CNode.ExternalAPIs.Mappers
             throw new System.NotImplementedException();
         }
 
-        public PlatformToken Map(BitbucketToken model) => new()
+        public PlatformToken Map(BitbucketToken model) => new PlatformToken()
         {
             AccessToken = model.access_token
         };
 
-        public PlatformUser Map(BitbucketUser model) => new()
+        public PlatformUser Map(BitbucketUser model) => new PlatformUser()
         {
             Id = model.account_id,
             Login = model.username,

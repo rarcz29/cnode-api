@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CNode.Application.Users.Commands.UpdateUser
+namespace GitNode.Application.Users.Commands.UpdateUser
 {
     public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
     {

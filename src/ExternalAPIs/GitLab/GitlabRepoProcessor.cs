@@ -1,16 +1,15 @@
-﻿using CNode.Application.Common.Data.ExternalAPIs;
-using CNode.Application.Common.Data.ExternalAPIs.GitHub;
-using CNode.Application.Common.Exceptions;
-using CNode.Application.Common.Models;
-using CNode.ExternalAPIs.Common;
-using CNode.ExternalAPIs.Models;
-using Newtonsoft.Json;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using GitNode.Application.Common.Data.ExternalAPIs;
+using GitNode.Application.Common.Exceptions;
+using GitNode.Application.Common.Models;
+using GitNode.ExternalAPIs.Common;
+using GitNode.ExternalAPIs.Models;
+using Newtonsoft.Json;
 
-namespace CNode.ExternalAPIs.GitLab
+namespace GitNode.ExternalAPIs.GitLab
 {
     internal class GitlabRepoProcessor : GitlabBase, IRepoProcessor
     {

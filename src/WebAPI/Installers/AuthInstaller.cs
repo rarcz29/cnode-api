@@ -1,14 +1,14 @@
-﻿using CNode.Application.Common.Interfaces;
-using CNode.WebAPI.Options;
-using CNode.WebAPI.Services;
+﻿using System;
+using System.Text;
+using GitNode.Application.Common.Interfaces;
+using GitNode.WebAPI.Options;
+using GitNode.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
 
-namespace CNode.WebAPI.Installers
+namespace GitNode.WebAPI.Installers
 {
     public class AuthInstaller : IInstaller
     {
