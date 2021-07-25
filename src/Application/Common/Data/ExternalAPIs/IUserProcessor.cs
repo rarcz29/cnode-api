@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using GitNode.Application.Common.Models;
+using GitNode.Domain.Platforms;
 
 namespace GitNode.Application.Common.Data.ExternalAPIs
 {

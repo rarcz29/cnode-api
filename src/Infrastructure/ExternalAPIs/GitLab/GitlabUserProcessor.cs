@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using GitNode.Application.Common.Data.ExternalAPIs;
 using GitNode.Application.Common.Exceptions;
 using GitNode.Application.Common.Interfaces;
-using GitNode.Application.Common.Models;
+using GitNode.Domain.Platforms;
 using GitNode.Infrastructure.ExternalAPIs.Common;
 using GitNode.Infrastructure.ExternalAPIs.Models;
 using Newtonsoft.Json;

@@ -1,4 +1,4 @@
-﻿using GitNode.Application.Common.Models;
+﻿using GitNode.Domain.Platforms;
 using GitNode.Infrastructure.ExternalAPIs.Interfaces;
 using GitNode.Infrastructure.ExternalAPIs.Models;
 
