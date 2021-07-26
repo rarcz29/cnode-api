@@ -1,5 +1,4 @@
-﻿using GitNode.Application.Common.Interfaces;
-using GitNode.Application.Common.Interfaces.Data.ExternalAPIs;
+﻿using GitNode.Application.Common.Interfaces.Data.ExternalAPIs;
 using GitNode.Application.Common.Interfaces.OAuth;
 using GitNode.Infrastructure.ExternalAPIs.Bitbucket;
 using GitNode.Infrastructure.ExternalAPIs.GitHub;
