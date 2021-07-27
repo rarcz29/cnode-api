@@ -61,7 +61,7 @@ namespace GitNode.Application.Platforms.Queries.GetAll
                     reposDto.Add(tmpRepo);
                 }
 
-                // Automapper
+                // TODO: Automapper
                 dto.Add(new PlatformAccountDto
                 {
                     Login = account.Username,

@@ -1,5 +1,4 @@
-﻿using GitNode.Application.Common.Interfaces;
-using GitNode.Application.Common.Interfaces.OAuth;
+﻿using GitNode.Application.Common.Interfaces.OAuth;
 using GitNode.WebAPI.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

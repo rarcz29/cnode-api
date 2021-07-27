@@ -8,9 +8,9 @@ namespace GitNode.Application.Common.Base
     {
         private readonly IProcessorsProvider _processors;
 
-        public PlatformHandlerBase() { }
+        protected PlatformHandlerBase() { }
 
-        public PlatformHandlerBase(IProcessorsProvider processors)
+        protected PlatformHandlerBase(IProcessorsProvider processors)
         {
             _processors = processors;
         }

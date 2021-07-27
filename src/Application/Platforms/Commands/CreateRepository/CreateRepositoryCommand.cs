@@ -2,7 +2,7 @@
 
 namespace GitNode.Application.Platforms.Commands.CreateRepository
 {
-    public class CreateRepository
+    public class CreateRepositoryCommand
     {
         public string Username { get; set; }
         public string RepoName { get; set; }

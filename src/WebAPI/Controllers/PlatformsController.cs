@@ -26,11 +26,10 @@ namespace GitNode.WebAPI.Controllers
         }
 
         [HttpPost("{platform}")]
-        public async Task<ActionResult<PlatformNewAccountDto>> AddAccountAsync([FromBody] AddAccount request,
-                                                                               [FromRoute] string platform)
+        public async Task<ActionResult<PlatformNewAccountDto>> AddAccountAsync(
+            [FromBody] AddAccountCommand request, [FromRoute] string platform)
         {
-            var command = _mapper.Map<AddAccountCommand>(request);
-            command.Platform = platform;
+            var command = AddAccountExtendedCommand.FromCommand(request, platform, _mapper);
             var result = await _mediator.Send(command);
             return Ok(result);
         }
@@ -43,11 +42,10 @@ namespace GitNode.WebAPI.Controllers
         }
 
         [HttpPost("{platform}/repository")]
-        public async Task<ActionResult<PlatformRepositoryDto>> CreateRepositoryAsync([FromBody] CreateRepository request,
-                                                                                     [FromRoute] string platform)
+        public async Task<ActionResult<PlatformRepositoryDto>> CreateRepositoryAsync(
+            [FromBody] CreateRepositoryCommand request, [FromRoute] string platform)
         {
-            var command = _mapper.Map<CreateRepositoryCommand>(request);
-            command.Platform = platform;
+            var command = CreateRepositoryExtendedCommand.FromCommand(request, platform, _mapper);
             var result = await _mediator.Send(command);
             return Ok(result);
         }

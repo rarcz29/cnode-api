@@ -15,40 +15,39 @@ using MediatR;
 
 namespace GitNode.Application.Platforms.Commands.CreateRepository
 {
-    public class CreateRepositoryCommand : CreateRepository,
-                                           IRequest<PlatformRepositoryDto>,
-                                           IMapFrom<CreateRepository>,
-                                           IPlatform
+    public class CreateRepositoryExtendedCommand :
+        CreateRepositoryCommand, IRequest<PlatformRepositoryDto>,
+        IMapFrom<CreateRepositoryCommand>, IPlatform
     {
-        public CreateRepositoryCommand() { }
-
-        public CreateRepositoryCommand(string platform)
-        {
-            Platform = platform;
-        }
-
         public string Platform { get; set; }
+        
+        public static CreateRepositoryExtendedCommand FromCommand(
+            CreateRepositoryCommand command, string platform, IMapper mapper)
+        {
+            var extendedCommand = mapper.Map<CreateRepositoryExtendedCommand>(command);
+            extendedCommand.Platform = platform;
+            return extendedCommand;
+        }
     }
     
     public class CreateRepositoryCommandHandler : PlatformHandlerBase,
-        IRequestHandler<CreateRepositoryCommand, PlatformRepositoryDto>
+        IRequestHandler<CreateRepositoryExtendedCommand, PlatformRepositoryDto>
     {
         private readonly ICurrentUserService _currentUser;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public CreateRepositoryCommandHandler(ICurrentUserService currentUser,
-                                              IUnitOfWork unitOfWork,
-                                              IProcessorsProvider processors,
-                                              IMapper mapper)
-                                              : base(processors)
+            IUnitOfWork unitOfWork, IProcessorsProvider processors,
+            IMapper mapper) : base(processors)
         {
             _currentUser = currentUser;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<PlatformRepositoryDto> Handle(CreateRepositoryCommand request, CancellationToken cancellationToken)
+        public async Task<PlatformRepositoryDto> Handle(CreateRepositoryExtendedCommand request,
+            CancellationToken cancellationToken)
         {
             var processor = GetProcessor(request.Platform);
             var userId = int.Parse(_currentUser.UserId);
@@ -60,8 +59,10 @@ namespace GitNode.Application.Platforms.Commands.CreateRepository
             }
 
             var account = await _unitOfWork.Accounts.Get(userId, request.Username, platform.Id);
-            var repository = await processor.Repositories.CreateNewRepoAsync(request.RepoName, request.Description, request.Private, account.Token);
-            var technologies = await _unitOfWork.Technologies.GetTechnologiesAsync(request.Technologies);
+            var repository = await processor.Repositories.CreateNewRepoAsync(request.RepoName,
+                request.Description,request.Private, account.Token);
+            var technologies =
+                await _unitOfWork.Technologies.GetTechnologiesAsync(request.Technologies);
 
             var newRepo = new Repository
             {

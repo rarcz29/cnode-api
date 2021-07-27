@@ -3,7 +3,7 @@ using GitNode.Application.Common.Base;
 
 namespace GitNode.Application.Platforms.Commands.CreateRepository
 {
-    public class CreateRepositoryCommandValidator : ValidatorBase<CreateRepositoryCommand>
+    public class CreateRepositoryCommandValidator : ValidatorBase<CreateRepositoryExtendedCommand>
     {
         public CreateRepositoryCommandValidator()
         {

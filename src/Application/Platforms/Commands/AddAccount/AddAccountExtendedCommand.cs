@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using GitNode.Application.Common.Base;
 using GitNode.Application.Common.Dtos;
 using GitNode.Application.Common.Exceptions;
@@ -12,37 +13,35 @@ using MediatR;
 
 namespace GitNode.Application.Platforms.Commands.AddAccount
 {
-    public class AddAccountCommand : AddAccount,
-                                     IRequest<PlatformNewAccountDto>,
-                                     IMapFrom<AddAccount>,
-                                     IPlatform
+    public class AddAccountExtendedCommand : AddAccountCommand,
+        IRequest<PlatformNewAccountDto>, IMapFrom<AddAccountCommand>, IPlatform
     {
-        public AddAccountCommand() { }
-
-        public AddAccountCommand(string platform)
-        {
-            Platform = platform;
-        }
-
         public string Platform { get; set; }
+
+        public static AddAccountExtendedCommand FromCommand(AddAccountCommand command,
+            string platform, IMapper mapper)
+        {
+            var extendedCommand = mapper.Map<AddAccountExtendedCommand>(command);
+            extendedCommand.Platform = platform;
+            return extendedCommand;
+        }
     }
     
     public class AddAccountCommandHandler : PlatformHandlerBase,
-        IRequestHandler<AddAccountCommand, PlatformNewAccountDto>
+        IRequestHandler<AddAccountExtendedCommand, PlatformNewAccountDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUser;
 
         public AddAccountCommandHandler(IUnitOfWork unitOfWork,
-            ICurrentUserService currentUser,
-            IProcessorsProvider processors)
+            ICurrentUserService currentUser, IProcessorsProvider processors)
             : base(processors)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
         }
 
-        public async Task<PlatformNewAccountDto> Handle(AddAccountCommand request,
+        public async Task<PlatformNewAccountDto> Handle(AddAccountExtendedCommand request,
             CancellationToken cancellationToken)
         {
             var processor = GetProcessor(request.Platform);
